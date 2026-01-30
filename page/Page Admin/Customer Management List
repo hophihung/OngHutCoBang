@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Management List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#169c1d",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#112112",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Side Navigation -->
+<aside class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+<div class="flex h-full flex-col justify-between p-6">
+<div class="flex flex-col gap-8">
+<!-- Brand -->
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 shadow-sm" data-alt="Green Joy logo abstract green leaf pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDySDMeW7eEL5QJv8XiwL-RAEeXxU7tIY2TAe104DkjH5SVwWA9CrNffti4kjNIvcPOeHe4KABwG6cafgOtrKfMWcHXTBWyUJ33YC9BlL0a1Pe67NjeZPZ4tPVlsJ8srhK6mV_aNy2vyRqGhiRImjYJS2Acx2viIKN1UJ_AQ4x7KUsKUUh3FxwOeAk7TGaNy2p-NeYD4kajYrnwOlhrQfA19WesNyJqTr-9UBOvd038j3x7TRRArSK2n2xDBpUcP57byvaY8VZfq1E");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Green Joy Admin</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Management Portal</p>
+</div>
+</div>
+<!-- Menu -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">grid_view</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined fill-current">group</span>
+<span class="text-sm font-bold">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">shopping_bag</span>
+<span class="text-sm font-medium">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">inventory_2</span>
+<span class="text-sm font-medium">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<!-- User Profile -->
+<div class="flex items-center gap-3 px-3 py-2 border-t border-slate-100 dark:border-slate-800 pt-6">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-9 w-9 ring-2 ring-white dark:ring-slate-800" data-alt="Admin user profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfs8azVAgLcdsHaa4lgJzxKJ_7fcbdNRROsm9HerOue255deNMy4TMezl8yI9vfaDFYv6lICaEvftjtUm4HepwDR_evctfBeFCf5S6JJBhS5uI6IyaCL5B5t1M8-NNe-RDoZGQp0q8qIxJmMB8mETj-guT7QOmGy27tWlS7SeMkt-5tWuTuuFuR5jZQVvthi2jtA1U9CJAGvwRpAXUP1IZZ1bJ-DNwZl55lreBZhjNumttOVcZ9qcmrTrbeUPxLR_flCoR78AS_M0");'></div>
+<div class="flex flex-col">
+<p class="text-slate-900 dark:text-white text-sm font-medium">Admin User</p>
+<p class="text-slate-500 dark:text-slate-500 text-xs">admin@greenjoy.com</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Header & Actions -->
+<div class="flex-none p-6 pb-2 md:p-10 md:pb-4 space-y-6">
+<!-- Title Section -->
+<div class="flex flex-col gap-2">
+<h1 class="text-slate-900 dark:text-white text-3xl font-black tracking-tight">Customers</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base">Manage customer relationships, track spending, and view purchase history.</p>
+</div>
+<!-- Toolbar: Search & Filter -->
+<div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+<!-- Search Bar -->
+<div class="relative w-full sm:max-w-md">
+<label class="relative flex w-full items-center">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+<span class="material-symbols-outlined text-slate-400">search</span>
+</div>
+<input class="w-full h-11 pl-10 pr-4 rounded-lg bg-white dark:bg-slate-800 border-none ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary text-slate-900 dark:text-white placeholder-slate-400 shadow-sm text-sm transition-all" placeholder="Search name, email, or phone..." type="text"/>
+</label>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 h-11 px-5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 h-11 px-5 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-green-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                            Add Customer
+                        </button>
+</div>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto px-6 py-4 md:px-10">
+<!-- Table Card -->
+<div class="w-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden mb-10">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Customer</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Contact Info</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Order History</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Spent</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Join Date</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center ring-2 ring-white dark:ring-slate-800" data-alt="Portrait of Nguyen Van A" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDfAUzXZIWj-yvcNFNK3qdtS9hKlKAALVVLn-XmouLG4_97WyPhACPTHbOEp4kkyo6uafNz-WsrlvMO-xYeM08BAusmLb5Z6RUoxy_sX05N0BpMCs0xlGhmpIK1ONHxu7h5H4Q1--UyCeKNTc1iPSFRaHnBHt6-zGknpA0QHHDF91NLTS-BkXm_GZzikvbVq4fDj5Rhx_Za9nNs85NbMG4x2Mz1PrtSfmEh21R1A_VCM_VoIXHxAOpao3WteFAfrS7H5OfnLxyIyR8");'></div>
+<div>
+<div class="font-semibold text-slate-900 dark:text-white">Nguyen Van A</div>
+<div class="text-xs text-slate-500 dark:text-slate-500">ID: #CUS-001</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm text-slate-900 dark:text-slate-200">nguyen.a@example.com</span>
+<span class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">+84 90 123 4567</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                                            12 orders
+                                        </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm font-bold text-primary font-mono tracking-tight">5,200,000 VND</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Oct 24, 2023</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg border border-primary/30 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary hover:text-white dark:border-primary/50 dark:hover:bg-primary transition-all duration-200">
+                                            View Profile
+                                        </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center ring-2 ring-white dark:ring-slate-800" data-alt="Portrait of Tran Thi B" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxEUpiTs0ibqJm5KY_Kcb2V5U3XDwTCPWFV6hVvpDd7mC2Wux87eGaJJcixVjZk3OcyNszXq5Wv99mI9NGMHKz08D6bXzrvTIeG2-mnXjuGxMOx_MvZfbpChOBm7UAzQ_fYJGuJwffyG9YSZPqybWIsPMX1qpjSBsYHY-KpAmrB-k-n9OM9RR2ap965Op8smSpIBMOsD7Po8V0EsUfq88zrZFVNSdLPOI007UO3vm37E-I_-0IP0HnZG1ZSFQDCklgQ5o2Lf5idpc");'></div>
+<div>
+<div class="font-semibold text-slate-900 dark:text-white">Tran Thi B</div>
+<div class="text-xs text-slate-500 dark:text-slate-500">ID: #CUS-002</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm text-slate-900 dark:text-slate-200">tran.b@example.com</span>
+<span class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">+84 91 234 5678</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                                            8 orders
+                                        </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm font-bold text-primary font-mono tracking-tight">3,150,000 VND</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Sep 15, 2023</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg border border-primary/30 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary hover:text-white dark:border-primary/50 dark:hover:bg-primary transition-all duration-200">
+                                            View Profile
+                                        </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold ring-2 ring-white dark:ring-slate-800">
+                                                LV
+                                            </div>
+<div>
+<div class="font-semibold text-slate-900 dark:text-white">Le Van C</div>
+<div class="text-xs text-slate-500 dark:text-slate-500">ID: #CUS-003</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm text-slate-900 dark:text-slate-200">le.c@example.com</span>
+<span class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">+84 93 456 7890</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                                            5 orders
+                                        </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm font-bold text-primary font-mono tracking-tight">2,500,000 VND</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Nov 02, 2023</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg border border-primary/30 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary hover:text-white dark:border-primary/50 dark:hover:bg-primary transition-all duration-200">
+                                            View Profile
+                                        </button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center ring-2 ring-white dark:ring-slate-800" data-alt="Portrait of Pham Thi D" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD7ykDFLt9EgN6VkxnRG3z87py0tUAJTSYkFP2cbSDQqR5mbUvLK4ZSAKZ1EvcV5Q-eBwYQYYZaTWi1nF-QSVSm-KtT1NzalKcBZzIFoCzA3cw0pmjtXeSEcakq916GYFnQb0KIQOKUekMYXf1TGRykZbDTXNGi9aV_3iXRKkRRIcWMqQQixF5VKmwWdrMLuTWGiVYefh2lF7p3T70KGGKLw-FYUF0m7n-qibxbzbe2nIjfB774JQtKyVDDMjKroLlUbjy0shGPpxs");'></div>
+<div>
+<div class="font-semibold text-slate-900 dark:text-white">Pham Thi D</div>
+<div class="text-xs text-slate-500 dark:text-slate-500">ID: #CUS-004</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm text-slate-900 dark:text-slate-200">pham.d@example.com</span>
+<span class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">+84 98 765 4321</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                                            3 orders
+                                        </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm font-bold text-primary font-mono tracking-tight">1,200,000 VND</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Dec 10, 2023</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg border border-primary/30 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary hover:text-white dark:border-primary/50 dark:hover:bg-primary transition-all duration-200">
+                                            View Profile
+                                        </button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold ring-2 ring-white dark:ring-slate-800">
+                                                HE
+                                            </div>
+<div>
+<div class="font-semibold text-slate-900 dark:text-white">Hoang Van E</div>
+<div class="text-xs text-slate-500 dark:text-slate-500">ID: #CUS-005</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm text-slate-900 dark:text-slate-200">hoang.e@example.com</span>
+<span class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">+84 96 111 2222</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                                            1 order
+                                        </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm font-bold text-primary font-mono tracking-tight">450,000 VND</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Jan 05, 2024</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg border border-primary/30 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary hover:text-white dark:border-primary/50 dark:hover:bg-primary transition-all duration-200">
+                                            View Profile
+                                        </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="flex items-center justify-between px-6 py-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/30">
+<div class="text-sm text-slate-500 dark:text-slate-400">
+                            Showing <span class="font-medium text-slate-900 dark:text-white">1</span> to <span class="font-medium text-slate-900 dark:text-white">5</span> of <span class="font-medium text-slate-900 dark:text-white">128</span> customers
+                        </div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

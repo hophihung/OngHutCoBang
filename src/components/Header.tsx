@@ -1,103 +1,310 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+
+const SHOP_LINKS = [
+  { label: "Ống hút cỏ", href: "/cua-hang?category=ong-hut-co" },
+  { label: "Sản phẩm thủ công (Túi, nón...)", href: "/cua-hang?category=thu-cong" },
+  { label: "Dụng cụ ăn uống", href: "/cua-hang?category=dung-cu-an-uong" },
+];
 
 export default function Header() {
+  const [isShopOpen, setIsShopOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const shopRef = useRef<HTMLDivElement>(null);
+
+  const cartCount = 2; // TODO: from context/Supabase
+
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 50);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (shopRef.current && !shopRef.current.contains(e.target as Node)) {
+        setIsShopOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <header className="bg-surface dark:bg-surface shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center gap-2 group"
-        >
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl group-hover:scale-105 transition-transform">
-            <span className="material-icons">eco</span>
+    <>
+      <header
+        className={`sticky top-0 z-50 w-full border-b border-[#eaf0ea] bg-white/95 dark:bg-[#141e15]/95 backdrop-blur-sm px-4 py-3 lg:px-10 shadow-sm transition-all duration-300 ${
+          scrolled ? "py-2 shadow-md" : ""
+        }`}
+      >
+        <div className="mx-auto flex max-w-7xl items-center">
+          {/* A. Trái - Logo (nền trong suốt) */}
+          <div className="flex-shrink-0">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-[#2f7f34] cursor-pointer"
+              aria-label="Về Trang chủ"
+            >
+              <div className="size-8 flex items-center justify-center">
+                <span className="material-symbols-outlined text-4xl">eco</span>
+              </div>
+              <h2 className="text-xl font-bold leading-tight tracking-tight text-[#2f7f34]">
+                Green Joy Straw
+              </h2>
+            </Link>
           </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-bold text-primary leading-none">
-              Green Joy
-            </span>
-            <span className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-widest">
-              Sống xanh
-            </span>
-          </div>
-        </Link>
-        <nav className="hidden lg:flex items-center space-x-8 text-sm font-medium">
-          <Link href="/" className="text-primary font-semibold">
-            Trang chủ
-          </Link>
-          <Link
-            href="#"
-            className="hover:text-primary transition-colors flex items-center"
-          >
-            Về chúng tôi{" "}
-            <span className="material-icons text-base ml-1">expand_more</span>
-          </Link>
-          <Link href="#" className="hover:text-primary transition-colors">
-            Phát triển bền vững
-          </Link>
-          <Link
-            href="/ong-hut-co"
-            className="hover:text-primary transition-colors flex items-center"
-          >
-            Sản phẩm{" "}
-            <span className="material-icons text-base ml-1">expand_more</span>
-          </Link>
-          <Link href="#" className="hover:text-primary transition-colors">
-            Blog
-          </Link>
-          <Link href="#" className="hover:text-primary transition-colors">
-            Liên hệ
-          </Link>
-        </nav>
-        <div className="flex items-center space-x-4">
-          <button
-            type="button"
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
-            aria-label="Tìm kiếm"
-          >
-            <span className="material-icons text-gray-600 dark:text-gray-300">
-              search
-            </span>
-          </button>
-          <button
-            type="button"
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
-            aria-label="Tài khoản"
-          >
-            <span className="material-icons text-gray-600 dark:text-gray-300">
-              person
-            </span>
-          </button>
-          <button
-            type="button"
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors relative"
-            aria-label="Giỏ hàng"
-          >
-            <span className="material-icons text-gray-600 dark:text-gray-300">
-              shopping_bag
-            </span>
-            <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full">
-              0
-            </span>
-          </button>
-          <div className="flex items-center gap-2 ml-2 border-l pl-4 border-gray-200 dark:border-gray-700">
-            <Image
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVefaO-l5VFLvNSNioIs2-3GHrsJgitw1IykLRFxHXuLGT9yAQ4jCPOZtoRCOg3tWgDeTQZJ-rGr9_7MZF-6IQzGFGbBJ3p_X5D1ayKy3-0r6RDy1MBWcE8pnppH4Tmem7r-Aw7CyNklahMaB36A8EJg4k6WEKRpa8ImwGWlbLQ90EyCOtFZSO_NMIs-zGZhj9yhTBNt0wjVDnKOAHoUq0CFvMT4MGCoA4jCl918cqjE210IMCNXAry0dFYY1NTZQdfBY7nzj2b9o"
-              alt="English"
-              width={20}
-              height={20}
-              className="w-5 h-auto cursor-pointer opacity-50 hover:opacity-100"
-            />
-            <Image
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdGbe2PNR3Hvac8Ob8cDCIhg_llP3Ftp4VODeAKQC_6pan7FKLwoKCMykNoF1VSwi-iTGBDMMbONaB1ipQqCGJxQoGiXB-AI8JptPnAbUEgGUt0CV6tUXF0Xx_rJz3bFjrdlDXuHus8xrpEKF8I3tA1j-tHFTrmafQbIoWsA9r6G2vqMx5xLlILOtdetKmLEWSyrxI6VN2-zR96sHfxQMn3kymLxMN1e1D1Y1fdSxaofln5qbvB0Y7G6CtYEqYsFOJmLzkx73rNXY"
-              alt="Tiếng Việt"
-              width={20}
-              height={20}
-              className="w-5 h-auto cursor-pointer shadow-sm"
-            />
+
+          {/* B. Giữa - Menu (desktop) */}
+          <nav className="hidden md:flex flex-1 justify-center items-center gap-7 lg:gap-8">
+            <Link
+              href="/"
+              className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
+            >
+              Trang chủ
+            </Link>
+
+            {/* Cửa hàng dropdown */}
+            <div className="relative" ref={shopRef}>
+              <button
+                type="button"
+                onClick={() => setIsShopOpen((o) => !o)}
+                className="flex items-center gap-0.5 text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
+              >
+                Cửa hàng
+                <span
+                  className={`material-symbols-outlined text-lg transition-transform ${isShopOpen ? "rotate-180" : ""}`}
+                >
+                  expand_more
+                </span>
+              </button>
+              {isShopOpen && (
+                <div className="absolute left-0 top-full mt-1 min-w-[220px] rounded-lg border border-[#eaf0ea] dark:border-white/10 bg-white dark:bg-[#1a261b] shadow-lg py-1 z-50">
+                  {SHOP_LINKS.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block px-4 py-2 text-sm text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 hover:text-[#2f7f34] transition-colors"
+                      onClick={() => setTimeout(() => setIsShopOpen(false), 0)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
+              href="/ve-chung-toi"
+              className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
+            >
+              Về chúng tôi
+            </Link>
+            <Link
+              href="/blog"
+              className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/#contact"
+              className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
+            >
+              Liên hệ
+            </Link>
+          </nav>
+
+          {/* C. Phải - Action Icons */}
+          <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
+            {/* Tìm kiếm - desktop */}
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="hidden md:flex h-9 w-9 items-center justify-center rounded-full text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 transition-colors"
+              aria-label="Tìm kiếm"
+            >
+              <span className="material-symbols-outlined text-[22px]">search</span>
+            </button>
+
+            {/* Giỏ hàng - luôn hiện (desktop + mobile) */}
+            <Link
+              href="/gio-hang"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#2f7f34] text-white hover:bg-[#256629] transition-colors"
+              aria-label="Giỏ hàng"
+            >
+              <span className="material-symbols-outlined text-[20px]">
+                shopping_cart
+              </span>
+              {cartCount > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 min-w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Tài khoản - desktop */}
+            <Link
+              href="/tai-khoan"
+              className="hidden md:flex h-9 w-9 items-center justify-center rounded-full text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 transition-colors"
+              aria-label="Tài khoản"
+            >
+              <span className="material-symbols-outlined text-[22px]">person</span>
+            </Link>
+
+            {/* Ngôn ngữ VN | EN - desktop */}
+            <button
+              type="button"
+              className="hidden sm:flex h-9 items-center justify-center rounded-full bg-[#eaf0ea] dark:bg-white/10 px-3 text-xs font-bold text-[#111811] dark:text-gray-200 hover:bg-[#d5e0d5] dark:hover:bg-white/20 transition-colors"
+            >
+              VN | EN
+            </button>
+
+            {/* Hamburger - chỉ mobile: gom menu, Cart đã ở ngoài */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              className="md:hidden flex h-9 w-9 items-center justify-center rounded-full bg-[#eaf0ea] dark:bg-white/10 text-[#111811] dark:text-gray-200"
+              aria-label="Menu"
+            >
+              <span className="material-symbols-outlined">menu</span>
+            </button>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile menu drawer */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-[100] md:hidden"
+          aria-modal
+          role="dialog"
+        >
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden
+          />
+          <div className="absolute right-0 top-0 h-full w-[280px] max-w-[85vw] bg-white dark:bg-[#141e15] shadow-xl flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-[#eaf0ea] dark:border-white/10">
+              <span className="font-bold text-[#111811] dark:text-white">Menu</span>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                aria-label="Đóng"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <nav className="flex flex-col overflow-y-auto p-4 gap-1">
+              <Link
+                href="/"
+                className="px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Trang chủ
+              </Link>
+              <div className="py-2">
+                <span className="px-3 text-xs font-semibold text-[#4c9a66] uppercase tracking-wider">
+                  Cửa hàng
+                </span>
+                {SHOP_LINKS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="block px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/ve-chung-toi"
+                className="px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Về chúng tôi
+              </Link>
+              <Link
+                href="/blog"
+                className="px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/#contact"
+                className="px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Liên hệ
+              </Link>
+              <div className="border-t border-[#eaf0ea] dark:border-white/10 mt-4 pt-4 flex flex-col gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchOpen(true);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                >
+                  <span className="material-symbols-outlined">search</span>
+                  Tìm kiếm
+                </button>
+                <Link
+                  href="/tai-khoan"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="material-symbols-outlined">person</span>
+                  Tài khoản
+                </Link>
+                <button
+                  type="button"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                >
+                  VN | EN
+                </button>
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
+
+      {/* Search overlay - giai đoạn 1: modal đơn giản */}
+      {searchOpen && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/50 flex items-start justify-center pt-20 px-4"
+          aria-modal
+          role="dialog"
+        >
+          <div className="w-full max-w-xl bg-white dark:bg-[#1a261b] rounded-xl shadow-xl p-4 relative">
+            <div className="flex items-center gap-2 border border-[#eaf0ea] dark:border-white/10 rounded-lg px-3 py-2">
+              <span className="material-symbols-outlined text-[#4c9a66]">search</span>
+              <input
+                type="search"
+                placeholder="Tìm kiếm (vd: ống hút size lớn)..."
+                className="flex-1 bg-transparent text-[#111811] dark:text-white placeholder:text-gray-500 focus:outline-none text-sm"
+                autoFocus
+              />
+            </div>
+            <button
+              type="button"
+              onClick={() => setSearchOpen(false)}
+              className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+              aria-label="Đóng"
+            >
+              <span className="material-symbols-outlined text-lg">close</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

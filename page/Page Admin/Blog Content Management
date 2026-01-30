@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Blog Content Management - Green Joy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0fbd1e",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102212",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#111812] dark:text-gray-100 antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col group/design-root">
+<!-- Main Layout -->
+<div class="flex h-full grow flex-col">
+<!-- Navigation -->
+<div class="flex flex-1 justify-center bg-surface-light dark:bg-surface-dark border-b border-[#f0f4f0] dark:border-[#2a3c2e]">
+<div class="layout-content-container flex flex-col w-full max-w-[1200px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap px-6 lg:px-10 py-4">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Green Joy Admin</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-primary text-sm font-semibold leading-normal" href="#">Dashboard</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Analytics</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Media</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Settings</a>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjxYFY8NsG5FcNmAs20cHuxQFad-QgBRJHtnS5x4aYvTvSk4wvVN3dlNMmWDLkrRjCUsQqCIDt51lxJb8kGiiI0vFlUBHjMNANHiosbj7wvNV5jH5_mhXZijQ5L4XS4mTKdDcfe3GeGE3VFAcOlgd_IobLk1iONRPdSjhGnlcxJ1gAwOnLjRqQTf3gdrbyDDLSwWU_4kmYjv4pDY4GhslgzSOEzpssq6h2JlGv536dyLsIvj4sow5elb6qsNvwIWXfBYmg112SVag");'></div>
+</div>
+</header>
+</div>
+</div>
+<!-- Page Content -->
+<div class="flex flex-1 justify-center py-8 px-4 sm:px-8">
+<div class="layout-content-container flex flex-col w-full max-w-[960px] flex-1">
+<!-- Page Header & Action -->
+<div class="flex flex-col sm:flex-row flex-wrap justify-between items-start sm:items-center gap-4 p-4 mb-2">
+<h1 class="text-3xl font-black leading-tight tracking-tight min-w-72">Blog Posts</h1>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-green-600 transition-colors text-white h-11 px-6 text-sm font-bold leading-normal tracking-wide shadow-md shadow-green-900/10">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Write New Post</span>
+</button>
+</div>
+<!-- Filter & Search Section -->
+<div class="flex flex-col md:flex-row gap-4 px-4 py-2 mb-6 items-center">
+<!-- Search Bar -->
+<div class="w-full md:flex-1">
+<label class="flex flex-col h-11 w-full relative">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all shadow-sm">
+<div class="text-gray-400 dark:text-gray-500 flex items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg bg-transparent text-sm text-gray-900 dark:text-white focus:outline-0 focus:ring-0 border-none h-full placeholder:text-gray-400 px-3 font-normal leading-normal" placeholder="Search articles by title or author..." value=""/>
+</div>
+</label>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/10 border border-primary/20 px-5 transition-colors hover:bg-primary/20">
+<p class="text-primary text-sm font-semibold leading-normal">All Posts</p>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 px-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
+<p class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal">Published</p>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 px-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
+<p class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal">Drafts</p>
+</button>
+</div>
+</div>
+<!-- Content List -->
+<div class="flex flex-col gap-4 px-4 pb-12">
+<!-- Item 1: Published -->
+<div class="group flex flex-col sm:flex-row gap-5 bg-white dark:bg-surface-dark p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-200">
+<!-- Thumbnail -->
+<div class="shrink-0">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg h-48 sm:h-32 w-full sm:w-48 shadow-inner" data-alt="Close up of green grass straws in a glass" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDayEdrwDbEGccO6nsPTBz6nAz33vBe_dZWXF1t_kGn9kpXo_9XA7Fs0yBLoFu-IL1WAbhNW3XewvFC1Ye2a3HD23afIix-9xSZIAhC-09FRbPOqKMspIHwd8Gf9srng4Nmw_66Ctt-gHzXArchqOXa381R60G_NyZBADVlIBUmHzufR6mS2nrg_EkGzK6p85ub1eoyGkLUtbgI-YWBLKB7lmakSbIRL8vf6BaDGFsAVei6BTAa1LE3v2mENkcOzC-AS3JEdm2-d4s");'></div>
+</div>
+<!-- Content -->
+<div class="flex flex-1 flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white leading-tight group-hover:text-primary transition-colors cursor-pointer">5 Ways to use Grass Straws</h3>
+<!-- Mobile Status/Action visible on large screens -->
+<div class="hidden sm:flex items-center gap-3 shrink-0 ml-4">
+<span class="inline-flex items-center rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                                Published
+                                            </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2 mb-3">
+                                        Discover the versatility of natural grass straws in your daily beverages. From iced coffee to smoothies, learn how this eco-friendly alternative is changing the game.
+                                    </p>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 font-medium">
+<span class="text-gray-700 dark:text-gray-300">Sarah Green</span>
+<span>•</span>
+<span>Oct 24, 2023</span>
+</div>
+</div>
+<!-- Mobile Status/Action (visible on small screens only) -->
+<div class="flex sm:hidden items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800 mt-2">
+<span class="inline-flex items-center rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                    Published
+                                </span>
+<button class="flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-primary">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                                    Edit
+                                </button>
+</div>
+</div>
+<!-- Item 2: Draft -->
+<div class="group flex flex-col sm:flex-row gap-5 bg-white dark:bg-surface-dark p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-200">
+<!-- Thumbnail -->
+<div class="shrink-0">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg h-48 sm:h-32 w-full sm:w-48 shadow-inner" data-alt="Field of green grass under sunlight" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDxNK6a7uI23_pcFWhS84zV0-F7IqZzAEBbX8Pu1lK0WRiPFdii4XEXvEcXO2EowY8BzCwzdkku4oq-Hmel5AjF1CHPDKu0JeDaghZ-V6E7eHP4C1Djv7TrIMC9oAKBtwmDt1XyXLMGrEpuureY4xUB457XyidMqWbCBLPxiXzREmc2udPX3hd9v35xRHyMCnswp1CLt_ABD8mxfWQeY0CbbMyW04aTOOX5z6pxvQq_NjJFq0D2RXoRCDkqQsw1ZWjj9Yo14qjh9z0");'></div>
+</div>
+<!-- Content -->
+<div class="flex flex-1 flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white leading-tight group-hover:text-primary transition-colors cursor-pointer">The Future of Sustainable Dining</h3>
+<div class="hidden sm:flex items-center gap-3 shrink-0 ml-4">
+<span class="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-semibold text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                                                Draft
+                                            </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2 mb-3">
+                                        How restaurants are shifting towards zero-waste policies and what it means for the consumer experience. We explore the latest trends in green hospitality.
+                                    </p>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 font-medium">
+<span class="text-gray-700 dark:text-gray-300">John Doe</span>
+<span>•</span>
+<span>Last edited 2 days ago</span>
+</div>
+</div>
+<div class="flex sm:hidden items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800 mt-2">
+<span class="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-semibold text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                                    Draft
+                                </span>
+<button class="flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-primary">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                                    Edit
+                                </button>
+</div>
+</div>
+<!-- Item 3: Published -->
+<div class="group flex flex-col sm:flex-row gap-5 bg-white dark:bg-surface-dark p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-200">
+<!-- Thumbnail -->
+<div class="shrink-0">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg h-48 sm:h-32 w-full sm:w-48 shadow-inner" data-alt="Reusable bamboo cutlery set on a table" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAHzZoUxRYE4wG22kfME9R8RTJ5joAC0orfZjWZeqW73TakyAiw9IGpArpjQuBFYOps_hI7wa4GXSG8ko862Yo-kTOQzovSC4oS0NC3VaBo1lsUaljPWxJjIBYJoQCa7WpDbTZH3-VM9yvSqzu0sBd7jd5vE7OnjdSaqtBRQjgH6GrrAOVZcuJ72kN5cOH6iNvVbLp2rhDWj3vRWuR0aGLn01tnIH5UG-FZrvxG0NnlK6aTsNxJmcsyEKoi7BjXM68nFBFH2ZHgvAg");'></div>
+</div>
+<!-- Content -->
+<div class="flex flex-1 flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white leading-tight group-hover:text-primary transition-colors cursor-pointer">Why Bamboo is Not Just for Pandas</h3>
+<div class="hidden sm:flex items-center gap-3 shrink-0 ml-4">
+<span class="inline-flex items-center rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                                Published
+                                            </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2 mb-3">
+                                        Exploring the rapid growth rate of bamboo and its potential to replace single-use plastics in the kitchen and beyond.
+                                    </p>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 font-medium">
+<span class="text-gray-700 dark:text-gray-300">Michael Chen</span>
+<span>•</span>
+<span>Oct 15, 2023</span>
+</div>
+</div>
+<div class="flex sm:hidden items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800 mt-2">
+<span class="inline-flex items-center rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                    Published
+                                </span>
+<button class="flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-primary">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                                    Edit
+                                </button>
+</div>
+</div>
+<!-- Item 4: Published -->
+<div class="group flex flex-col sm:flex-row gap-5 bg-white dark:bg-surface-dark p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-200">
+<!-- Thumbnail -->
+<div class="shrink-0">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg h-48 sm:h-32 w-full sm:w-48 shadow-inner" data-alt="Recycling symbol made of green leaves" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBMJKh2IrEejr0Uzfg-IueY7-8Xn7a7kyC5LbNwm_FC08kZFjE8gLs7kV6YLT-iMlwwTwiV09EW0kR__aIFMPkNWM-xzLNNh6DJWIeFpmp390Mgg09Q9plTH2VkPqzgbKrxcFY6W04hbvY5Ttf1KZDbfoKf3gPNJgdHDKZ27hXzIo8ZMS8GWbctnKqWeWlMEU1X1oOnLijufuni6T4AHgfYJClxUYa136Udnm7thoS-2v2KA2cxcP6sl_l_s2OHVrMJr-XxzYu5yRE");'></div>
+</div>
+<!-- Content -->
+<div class="flex flex-1 flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white leading-tight group-hover:text-primary transition-colors cursor-pointer">Understanding Biodegradability Standards</h3>
+<div class="hidden sm:flex items-center gap-3 shrink-0 ml-4">
+<span class="inline-flex items-center rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                                Published
+                                            </span>
+<button class="text-gray-400 hover:text-primary transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-relaxed line-clamp-2 mb-3">
+                                        Not all 'green' labels are created equal. We break down what certifications really matter when choosing sustainable products.
+                                    </p>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 font-medium">
+<span class="text-gray-700 dark:text-gray-300">Emma Watson</span>
+<span>•</span>
+<span>Sep 02, 2023</span>
+</div>
+</div>
+<div class="flex sm:hidden items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800 mt-2">
+<span class="inline-flex items-center rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                    Published
+                                </span>
+<button class="flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-primary">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                                    Edit
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

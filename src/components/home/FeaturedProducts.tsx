@@ -1,113 +1,129 @@
-import Link from "next/link";
-import Image from "next/image";
+"use client";
 
-const FEATURED = [
+import Image from "next/image";
+import Link from "next/link";
+
+const PRODUCTS = [
   {
-    title: "Grass Drinking Straws",
-    description:
-      "100% natural, biodegradable, and durable. The perfect alternative to plastic.",
-    price: "$12.99",
+    id: "1",
+    title: "Hộp 50 Ống",
+    desc: "Ống hút cỏ khô (20cm)",
+    price: "65.000đ",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAl_8F7uvQWS-lZHbtcaX0uOkpQnQVU0sAm39DDCO41chGdQQAxY7UosCpRmxun_xz0bUrlmpjqwm5CXsHepnEX9Y-kZRzLx-7GDcoAeXiS56JZUdZHD9_OPthKOQ6QWG4FiNPBdIy2bS3zZlgtI3IErXNi_w4U6LIFeJGBv9Qqt7U9rUqbMXPITmt-7vkOsO_Z0H7y36C-8LFiB-R3FBrFvBAWAwbEYI4btG3hJQYa-dmoyLbF_Yj7e24isNlS02PhKgDqvCc3Ivs",
-    imageAlt: "Stack of sustainable grass straws",
-    bestseller: true,
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuArFKL2mB92ZxZi4LGKjJ3RsA-qfYnCM9QSiXrE6oHtQERg7OM8PA9p61sjDAGYzfB-ikMI1oLvE0NUQD4wkYdWC0bPi9WfrWpQLRDaFPmWLMksREiFPE3rWSOcSzdAu-g8NCyETyyoiUuyGUJEwCvSa8VLprsA-T1HcIn3LMVJKDIFAXbNycd57EAvVGV9QoaFuOZokywRqyOVZXTvK3owZuM91_KMTZpD8iRgoujxS32vgN1Xz_z2h4-TfJ5Qm1LQjkieHznZoJU",
+    alt: "Hộp 50 ống hút cỏ bàng khô tự nhiên",
+    badge: "Best Seller",
+    badgeClass: "bg-[#2f7f34]",
   },
   {
-    title: "Eco Takeaway Box",
-    description:
-      "Sturdy, compostable containers for hot and cold food.",
-    price: "$24.00",
+    id: "2",
+    title: "Hộp 100 Ống",
+    desc: "Gói tiết kiệm gia đình",
+    price: "120.000đ",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAh628ZMToiRdW1q3OJMyonEj6ls59mxHyoyjDjTRrZwsG854FlD8P4u_u-TcMuD_jTEIEjs1ZbORnu1yel4TQGgXFJnd2WROazSLCbXwkHJ8pkrxal6HroWtlnRBaW9BP6IbIoGVJEjqK8CD32wytmdcN0OLdwYHgHWORhVVm86bbGRzaFmwFK-tSc1UmgdeQxIPD16k63pqeOxqxZeavdlu-IvuAcs9PpOhoN7M9UCe2APUvHpDVdqiOaYeCapk-K-kU8xFcgijc",
-    imageAlt: "Bamboo takeaway containers",
-    bestseller: false,
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDs_ZH9K9Bt9tmyEZnqJ64W8wgyJRrpOCarmm2I23G7CbL2DvLBDUBPWUDfeE8SYxSSSIoANysKYAu6rP_EYXfZRTF05O0LqizuyENhw8BowXTKq8O7wFDYQ5TfJXyrsk0ceGo9u61ppRpP7d2ApNOKpF6kdG2aiygotY5ve7vRe0pp85670J4S7kDKAf92_xT_DWwMal-hIE6iwVQtN2VH_dglUNaAq439OynFk4diEixvnbosnFVZ9IehMSWzQuH71Ylq6xqqOzE",
+    alt: "Hộp 100 ống hút cỏ bàng khô tiết kiệm",
+    badge: "-10%",
+    badgeClass: "bg-orange-500",
   },
   {
-    title: "Grass Fiber Tote",
-    description: "Durable woven bag for your daily grocery needs.",
-    price: "$18.50",
+    id: "3",
+    title: "Ống Hút Tươi",
+    desc: "Giữ nguyên màu xanh (bảo quản lạnh)",
+    price: "80.000đ",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDk3XvgKmrfZgcC5kcB6-tfpNG77u1Ltnpic9ynJp8XIHeR_zo-whatNoMsil6S5aWwGtQ0HR1BokySIS_b8VrfDpceAm_DNmrrZvTCuOiD23bN6el6JJlAHSgXZ73sTp5XeveqGjvVWh3gk6esXURzMqzDKxtCTsqnmAGsM6iEJHJHFIE8qhfYlOexQv0MveDY7XreNJJdV_pO2XAUny06vdnowWl_HXV6OtJExR6Cea09bnN8-3CWQokF6q9ikqToH8kKdQoxtdE",
-    imageAlt: "Reusable shopping tote bag",
-    bestseller: false,
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAmEzkfb69Pt8B519HMcosWo8r4y35LKK_S0pNX6EpoW0St_rekGqRDOnoFUTCeTwS17uvPoJ5ZrMsae8bXGfhLX7szomoUUSz8764UQyyB_fzSsivbwxQrSauUzpmfavg3Eec4ELJXUmDgkkGCkwB45w433DwZRs6rHTU9XYOoMuG1OLz9H8_1HzRF42zgyD2why9rW6tO2OPK8DLbFjFxg4pwfXDxX3ZAoXw7zVEU3SeVET80NYQZljjcE1zvSsI_YNY5JY_3Kx0",
+    alt: "Ống hút cỏ bàng tươi, màu xanh tự nhiên",
+    badge: "Mới",
+    badgeClass: "bg-green-600",
+  },
+  {
+    id: "4",
+    title: "Combo Quà Tặng",
+    desc: "Ống hút + Cọ rửa + Túi vải",
+    price: "150.000đ",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDmVNSRU-N7ZkRG1VmLuJ4uCGGSdz_l5m20Ltk6fjeY0H1YXuqPrSwVgG57cOTfeL7I2KsXhcXCp0a42xJO4a60ClAIlJ2CNCJXnBeDpl1oxd-Catv3-1J6G3cDwhdO65AvrJPCmmiA3tR_FcWOPsb6PnTOMJEj0nKcTVbmGD7R1sKxtB7WWMpSty5rnKmERXeVF6P6hqchBZs7Z0JYHMUucJ5WISKgfJ9_SYivdF-BFmlhvt3d9mbH8fM-jdMYWvFq57ksPG3du3Y",
+    alt: "Combo quà tặng xanh ống hút và cọ rửa",
+    badge: null,
+    badgeClass: "",
   },
 ];
 
 export default function FeaturedProducts() {
   return (
-    <div className="bg-brand-beige py-24 px-6 md:px-20 lg:px-40">
-      <div className="max-w-[1280px] mx-auto flex flex-col gap-10">
-        <div className="flex items-center justify-between">
-          <h2 className="text-[#141514] text-3xl font-bold tracking-tight">
-            Top Sustainable Products
-          </h2>
+    <section
+      id="shop"
+      className="w-full py-20 bg-[#f6f8f6] dark:bg-[#141e15]"
+    >
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+          <div>
+            <h2 className="text-3xl font-bold text-[#111811] dark:text-white mb-2">
+              Sản phẩm nổi bật
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Những lựa chọn được yêu thích nhất.
+            </p>
+          </div>
           <Link
-            href="/ong-hut-co"
-            className="hidden sm:flex items-center gap-1 text-brand-forest font-bold hover:underline"
+            href="#"
+            className="text-[#2f7f34] font-bold hover:underline flex items-center gap-1"
           >
-            View all products{" "}
-            <span className="material-symbols-outlined text-lg">
+            Xem tất cả{" "}
+            <span className="material-symbols-outlined text-sm">
               arrow_forward
             </span>
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {FEATURED.map((item) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {PRODUCTS.map((p) => (
             <div
-              key={item.title}
-              className="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
+              key={p.id}
+              className="group flex flex-col overflow-hidden rounded-xl bg-white dark:bg-[#1a261b] shadow-sm transition-all hover:shadow-lg border border-gray-100 dark:border-gray-800"
             >
-              <div className="h-64 overflow-hidden bg-gray-100 relative">
+              <div className="relative aspect-square overflow-hidden bg-gray-100">
                 <Image
-                  src={item.image}
-                  alt={item.imageAlt}
+                  src={p.image}
+                  alt={p.alt}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
-                {item.bestseller && (
-                  <div className="absolute top-4 left-4 bg-brand-forest text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                    Bestseller
+                {p.badge && (
+                  <div
+                    className={`absolute top-3 left-3 rounded-full px-2 py-1 text-xs font-bold text-white ${p.badgeClass}`}
+                  >
+                    {p.badge}
                   </div>
                 )}
               </div>
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-[#141514]">
-                  {item.title}
+              <div className="flex flex-1 flex-col p-4">
+                <h3 className="mb-1 text-lg font-bold text-[#111811] dark:text-white group-hover:text-[#2f7f34] transition-colors">
+                  {p.title}
                 </h3>
-                <p className="text-[#727a71] text-sm mt-2 mb-4">
-                  {item.description}
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  {p.desc}
                 </p>
                 <div className="mt-auto flex items-center justify-between">
-                  <span className="text-lg font-bold text-[#141514]">
-                    {item.price}
+                  <span className="text-lg font-bold text-[#2f7f34]">
+                    {p.price}
                   </span>
-                  <Link
-                    href="/ong-hut-co"
-                    className="w-10 h-10 rounded-full bg-[#f2f3f2] hover:bg-primary hover:text-white flex items-center justify-center transition-colors"
-                    aria-label={`Add ${item.title} to cart`}
+                  <button
+                    type="button"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-[#eaf0ea] text-[#2f7f34] hover:bg-[#2f7f34] hover:text-white transition-all"
+                    aria-label={`Thêm ${p.title} vào giỏ`}
                   >
-                    <span className="material-symbols-outlined text-xl">
+                    <span className="material-symbols-outlined text-lg">
                       add_shopping_cart
                     </span>
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="flex justify-center sm:hidden mt-4">
-          <Link
-            href="/ong-hut-co"
-            className="flex items-center gap-1 text-brand-forest font-bold hover:underline"
-          >
-            View all products{" "}
-            <span className="material-symbols-outlined text-lg">
-              arrow_forward
-            </span>
-          </Link>
-        </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add New Product - Green Joy</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "primary-dark": "#0eb80e",
+                        "forest": "#1b4d2e",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                        "card-light": "#ffffff",
+                        "card-dark": "#162e16",
+                        "border-light": "#dbe6db",
+                        "border-dark": "#2a422a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for nicer look in textareas/tables */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #2a422a;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #3a523a;
+        }
+        
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #13ec13;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #13ec13;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111811] dark:text-[#ecfcec] font-display min-h-screen flex flex-col">
+<div class="flex-1 flex flex-col w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex mb-6">
+<ol class="inline-flex items-center space-x-1 md:space-x-3">
+<li class="inline-flex items-center">
+<a class="inline-flex items-center text-sm font-medium text-[#618961] hover:text-primary dark:text-[#8ba88b] dark:hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] mr-2">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[#618961] dark:text-[#8ba88b] text-[20px]">chevron_right</span>
+<a class="ml-1 text-sm font-medium text-[#618961] hover:text-primary dark:text-[#8ba88b] dark:hover:text-primary transition-colors md:ml-2" href="#">Products</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[#618961] dark:text-[#8ba88b] text-[20px]">chevron_right</span>
+<span class="ml-1 text-sm font-medium text-[#111811] dark:text-white md:ml-2">Add New</span>
+</div>
+</li>
+</ol>
+</nav>
+<!-- Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl font-black tracking-tight text-[#111811] dark:text-white">Add New Product</h1>
+<p class="text-[#618961] dark:text-[#8ba88b] text-base">Create a new eco-friendly product listing.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-[#111811] dark:text-white font-semibold text-sm hover:bg-gray-50 dark:hover:bg-[#1f3f1f] transition-colors">
+                    Cancel
+                </button>
+<button class="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-primary hover:bg-primary-dark text-black font-bold text-sm transition-colors shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                    Save Product
+                </button>
+</div>
+</div>
+<!-- Main Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: Product Details -->
+<div class="lg:col-span-2 space-y-6">
+<!-- General Info Card -->
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark p-6">
+<h2 class="text-xl font-bold mb-6 text-[#111811] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+                        General Information
+                    </h2>
+<div class="space-y-6">
+<!-- Product Name -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-[#111811] dark:text-[#ecfcec]" for="product-name">Product Name</label>
+<input class="w-full h-12 px-4 rounded-lg bg-white dark:bg-background-dark border border-border-light dark:border-border-dark focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-[#618961] dark:placeholder-[#4a6b4a] text-[#111811] dark:text-white" id="product-name" placeholder="e.g. Grass Straws Standard Box" type="text"/>
+</div>
+<!-- Category -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-[#111811] dark:text-[#ecfcec]" for="category">Category</label>
+<div class="relative">
+<select class="w-full h-12 px-4 appearance-none rounded-lg bg-white dark:bg-background-dark border border-border-light dark:border-border-dark focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-[#111811] dark:text-white cursor-pointer" id="category">
+<option disabled="" selected="" value="">Select category...</option>
+<option value="straws">Straws</option>
+<option value="handicrafts">Handicrafts</option>
+<option value="utensils">Utensils</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#618961] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Rich Text Description -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-[#111811] dark:text-[#ecfcec]" for="description">Description</label>
+<div class="rounded-lg border border-border-light dark:border-border-dark overflow-hidden bg-white dark:bg-background-dark focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<!-- Toolbar -->
+<div class="flex items-center gap-1 p-2 border-b border-border-light dark:border-border-dark bg-gray-50 dark:bg-[#1a2e1a]">
+<button class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#2a422a] text-[#618961] dark:text-[#8ba88b]">
+<span class="material-symbols-outlined text-[20px]">format_bold</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#2a422a] text-[#618961] dark:text-[#8ba88b]">
+<span class="material-symbols-outlined text-[20px]">format_italic</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#2a422a] text-[#618961] dark:text-[#8ba88b]">
+<span class="material-symbols-outlined text-[20px]">format_underlined</span>
+</button>
+<div class="w-px h-6 bg-gray-300 dark:bg-[#2a422a] mx-1"></div>
+<button class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#2a422a] text-[#618961] dark:text-[#8ba88b]">
+<span class="material-symbols-outlined text-[20px]">format_list_bulleted</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#2a422a] text-[#618961] dark:text-[#8ba88b]">
+<span class="material-symbols-outlined text-[20px]">link</span>
+</button>
+</div>
+<textarea class="w-full min-h-[240px] p-4 bg-transparent border-none outline-none resize-y text-[#111811] dark:text-white placeholder-[#618961] dark:placeholder-[#4a6b4a]" id="description" placeholder="Enter full product description including materials, dimensions, and usage instructions..."></textarea>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Media & Meta -->
+<div class="lg:col-span-1 space-y-6">
+<!-- Media Card -->
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark p-6">
+<h2 class="text-xl font-bold mb-4 text-[#111811] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">image</span>
+                        Media
+                    </h2>
+<div class="w-full">
+<label class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-primary/40 rounded-lg cursor-pointer bg-background-light dark:bg-background-dark hover:bg-gray-50 dark:hover:bg-[#1a2e1a] transition-colors group">
+<div class="flex flex-col items-center justify-center pt-5 pb-6">
+<span class="material-symbols-outlined text-4xl text-[#618961] group-hover:text-primary mb-2 transition-colors">cloud_upload</span>
+<p class="mb-2 text-sm text-[#111811] dark:text-[#ecfcec] font-medium">Click to upload or drag and drop</p>
+<p class="text-xs text-[#618961] dark:text-[#8ba88b]">SVG, PNG, JPG or WEBP</p>
+</div>
+<input class="hidden" type="file"/>
+</label>
+</div>
+<!-- Previews -->
+<div class="grid grid-cols-3 gap-2 mt-4">
+<div class="relative aspect-square rounded-md overflow-hidden border border-border-light dark:border-border-dark group">
+<img class="object-cover w-full h-full" data-alt="Close up of green grass straws" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx8r0amNYsH2gVyaY7_JqX0TTAay9i72f8Pwi2ykoboKH3HReguOA_XQpc7ZDiTqRKcy4cGaNgcnYCF_ngPRZHZ8FJVZqyNET0EyEYiOO2rq_PQk1Wm1T3grJ5lfvv52A8naJhOSyB4qHArYDhUfzB3J0tvqhhmAHBsd0WgwtfqP7FLKKCnNON9qbdDssl5QoaemEZvC_CRi1eNeoUhcUfEI4-AmA6Pb2afaVYFoEGyn0T1-dAdhT9Fw8vVxoWk2Wtqz7Ipjf-NNA"/>
+<button class="absolute top-1 right-1 bg-black/50 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="relative aspect-square rounded-md overflow-hidden border border-border-light dark:border-border-dark group">
+<img class="object-cover w-full h-full" data-alt="Eco friendly product packaging" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRBYzjozuctFm5PVwoDioJJWlN0XYFBvmYcw_Ak719AtX_F62eKsvhrf1FbjiZWJk2oocaaWucqLxeN8sgpsDtDjvhGNnJrauysEgYK-hz-OJY4t7XMogfYMg9vTRAXzjNq9yyPQlNUXA-b0426xNAzh8I9h14rZ22jgt64zJRiYp0P_A4UWWXn9rvcFsItRBUhdq232Rp9FxOEj9Kf_u2F4tBTun0_45CawbZ5FKuzmO54XAWcg05n7MeLwAfECShgVIV_Ujyjzk"/>
+<button class="absolute top-1 right-1 bg-black/50 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="aspect-square rounded-md border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark flex items-center justify-center text-[#618961]">
+<span class="material-symbols-outlined">add</span>
+</div>
+</div>
+</div>
+<!-- Availability Card -->
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark p-6">
+<h2 class="text-xl font-bold mb-4 text-[#111811] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">public</span>
+                        Availability
+                    </h2>
+<div class="flex items-center justify-between p-4 bg-background-light dark:bg-background-dark rounded-lg border border-border-light dark:border-border-dark">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#111811] dark:text-white">Product Status</span>
+<span class="text-xs text-[#618961] dark:text-[#8ba88b]">Visible in store</span>
+</div>
+<!-- Toggle -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-300 appearance-none cursor-pointer transition-all duration-300" id="toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-300" for="toggle"></label>
+</div>
+</div>
+<div class="mt-4 flex flex-col gap-2">
+<label class="text-sm font-semibold text-[#111811] dark:text-[#ecfcec]">Publish Date</label>
+<div class="relative">
+<input class="w-full h-10 px-4 rounded-lg bg-white dark:bg-background-dark border border-border-light dark:border-border-dark focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[#111811] dark:text-white text-sm" type="date"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Variants (Full Width) -->
+<div class="lg:col-span-3">
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark p-6">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+<h2 class="text-xl font-bold text-[#111811] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">inventory_2</span>
+                            Product Variants
+                        </h2>
+<button class="flex items-center gap-2 px-4 py-2 bg-forest hover:bg-[#25663d] text-white rounded-lg text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            Add another variant
+                        </button>
+</div>
+<div class="overflow-x-auto rounded-lg border border-border-light dark:border-border-dark">
+<table class="w-full text-left border-collapse">
+<thead class="bg-gray-50 dark:bg-[#1a2e1a] text-[#111811] dark:text-white">
+<tr>
+<th class="p-4 text-xs uppercase tracking-wider font-bold border-b border-border-light dark:border-border-dark min-w-[200px]">Variant Name</th>
+<th class="p-4 text-xs uppercase tracking-wider font-bold border-b border-border-light dark:border-border-dark min-w-[140px]">SKU</th>
+<th class="p-4 text-xs uppercase tracking-wider font-bold border-b border-border-light dark:border-border-dark min-w-[120px]">Price ($)</th>
+<th class="p-4 text-xs uppercase tracking-wider font-bold border-b border-border-light dark:border-border-dark min-w-[100px]">Stock</th>
+<th class="p-4 text-xs uppercase tracking-wider font-bold border-b border-border-light dark:border-border-dark w-[80px] text-center">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark">
+<!-- Row 1 -->
+<tr class="bg-white dark:bg-card-dark hover:bg-gray-50 dark:hover:bg-[#1f3f1f] transition-colors group">
+<td class="p-3">
+<input class="w-full h-10 px-3 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-0 text-sm text-[#111811] dark:text-white" type="text" value="Box of 50"/>
+</td>
+<td class="p-3">
+<input class="w-full h-10 px-3 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-0 text-sm text-[#618961] dark:text-[#8ba88b] font-mono" type="text" value="GJS-001"/>
+</td>
+<td class="p-3">
+<input class="w-full h-10 px-3 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-0 text-sm text-[#111811] dark:text-white font-medium" type="number" value="5.00"/>
+</td>
+<td class="p-3">
+<input class="w-full h-10 px-3 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-0 text-sm text-[#111811] dark:text-white" type="number" value="100"/>
+</td>
+<td class="p-3 text-center">
+<button class="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-white dark:bg-card-dark hover:bg-gray-50 dark:hover:bg-[#1f3f1f] transition-colors group">
+<td class="p-3">
+<input class="w-full h-10 px-3 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-0 text-sm text-[#111811] dark:text-white" type="text" value="Box of 100"/>
+</td>
+<td class="p-3">
+<input class="w-full h-10 px-3 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-0 text-sm text-[#618961] dark:text-[#8ba88b] font-mono" type="text" value="GJS-002"/>
+</td>
+<td class="p-3">
+<input class="w-full h-10 px-3 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-0 text-sm text-[#111811] dark:text-white font-medium" type="number" value="9.50"/>
+</td>
+<td class="p-3">
+<input class="w-full h-10 px-3 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-0 text-sm text-[#111811] dark:text-white" type="number" value="45"/>
+</td>
+<td class="p-3 text-center">
+<button class="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Details - Green Joy Admin</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec22",
+                        "primary-dark": "#0eb51a",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102212",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111811] font-display min-h-screen flex flex-col">
+<!-- Top Navbar -->
+<header class="sticky top-0 z-50 bg-white border-b border-[#f0f4f0] dark:bg-[#1a2e1d] dark:border-[#2a402d] px-6 py-3">
+<div class="max-w-[1400px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-[#111811] dark:text-white">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined !text-[32px]">eco</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Green Joy Admin</h2>
+</div>
+<div class="hidden md:flex items-center bg-[#f0f4f0] dark:bg-[#233625] rounded-lg h-10 px-3 min-w-[300px]">
+<span class="material-symbols-outlined text-[#618964] mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder-[#618964] text-[#111811] dark:text-white" placeholder="Search orders, products..."/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-[#111811] dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-medium" href="#">Orders</a>
+<a class="text-[#111811] dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">Products</a>
+<a class="text-[#111811] dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">Customers</a>
+</nav>
+<div class="flex items-center gap-3 pl-6 border-l border-[#f0f4f0] dark:border-[#2a402d]">
+<button class="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#233625]">
+<span class="material-symbols-outlined text-[#111811] dark:text-white">notifications</span>
+<span class="absolute top-1.5 right-1.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-[#1a2e1d]"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-gray-200" data-alt="Admin user profile picture showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBW8tq7LDQHO_FmQsUhgcZQkYmFh1v-O0aEiNOoxLxWBEOAZx1DkrmSXdszcDAAV-qG2jktkZaC3IHMhl75cnEAt-FDAFPJXx1jtXgE6JKEIE2uivTboycXkPMAJqxfvYF4DzTo6RZl547hriRpUGphrwKnTzeQmzQSpgpq8ovzQ5LXLG8MZkXwG6_j5xCPXNvUV20r5rLBkkG_62vU7vsfxL7h27Q5We4qAIfcz1WTR98qeDoSsf-_gv6DAXthw_kgFVWmbijHl8M");'></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 p-6 md:px-10 py-8 max-w-[1400px] mx-auto w-full">
+<!-- Page Heading & Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div class="flex flex-col gap-2">
+<a class="inline-flex items-center text-sm font-medium text-[#618964] hover:text-[#111811] dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] mr-1">arrow_back</span>
+                    Back to Orders
+                </a>
+<div class="flex items-center gap-3 flex-wrap">
+<h1 class="text-3xl font-bold text-[#111811] dark:text-white tracking-tight">Order #ORD-2025-001</h1>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
+                        Pending
+                    </span>
+<span class="text-sm text-gray-500 dark:text-gray-400 ml-1">Oct 24, 2025 at 10:34 AM</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center h-10 px-4 rounded-lg border border-[#dbe6dc] bg-white dark:bg-[#233625] dark:border-[#3a503d] text-[#111811] dark:text-white font-medium hover:bg-gray-50 dark:hover:bg-[#2a402d] transition-colors gap-2">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span class="hidden sm:inline">Print Invoice</span>
+</button>
+<button class="flex items-center justify-center h-10 px-6 rounded-lg bg-primary hover:bg-primary-dark text-[#102212] font-bold transition-colors shadow-sm gap-2">
+<span>Update Status</span>
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: Order Items & Totals -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Items Table Card -->
+<div class="bg-white dark:bg-[#1a2e1d] rounded-xl border border-[#dbe6dc] dark:border-[#2a402d] overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-[#f0f4f0] dark:border-[#2a402d] flex justify-between items-center bg-gray-50/50 dark:bg-[#233625]/50">
+<h3 class="font-semibold text-[#111811] dark:text-white">Order Items</h3>
+<span class="text-sm text-gray-500">3 Items</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-xs text-gray-500 dark:text-gray-400 border-b border-[#f0f4f0] dark:border-[#2a402d]">
+<th class="px-6 py-3 font-medium uppercase tracking-wider w-[50%]">Product</th>
+<th class="px-6 py-3 font-medium uppercase tracking-wider text-right">Price</th>
+<th class="px-6 py-3 font-medium uppercase tracking-wider text-center">Qty</th>
+<th class="px-6 py-3 font-medium uppercase tracking-wider text-right">Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#f0f4f0] dark:divide-[#2a402d]">
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#233625] transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 bg-center bg-cover flex-shrink-0" data-alt="Box of natural grass straws" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9x4WKS__z5Mq04VDb_mP5JxNfifnWMEEmRGmm3raM70OMAuSGzvlXg3TqHON0t7350THwxuxPJdQA5RUBsswdtQRaUGxNRWXptkeENGN830lIuPZ1eGCI6R9lwVrMCGVQH_m2Mzi0Au-YbkLKJ1bQmGE7gG6_rFnEEHJxEKUnbJGCt_esYQgefpbloxX1V9wIqMuuGh9pIbM8d9HBXwGdw8KDOzWLvsdof5vu87n0p1bd-xUka6on9vYuEYvJx0WpIl4j-seHKIc');"></div>
+<div>
+<p class="font-medium text-[#111811] dark:text-white">Grass Straws - Box 50</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">SKU: GS-50-BX</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right text-gray-600 dark:text-gray-300">$5.00</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">10</td>
+<td class="px-6 py-4 text-right font-medium text-[#111811] dark:text-white">$50.00</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#233625] transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 bg-center bg-cover flex-shrink-0" data-alt="Reusable bamboo cutlery set" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpVy9pjhsCGYbQNezFjRBgYPA5x5Ga3UJjkUziWaIjOwXQDFpHSoT-bns_75QwYgTq2TgDJnqHlChuHhNla-21gKN1VP8BjEPZWyeO-KYPxZodjA00Nb62qB7e0Y4DmYQkMd37lJax2OU3Z-gHQ0VZ5_sw_tJrtwvUNW4ZrO_1mlh_P4_M6oQyrZaQsW4Cvwmj1oco7iwD_EHAW-CGKvcC8Yjo-meXG_5eZCTJk08b96JvXn_Tqh1AXd8z3isIVvSeiCGA129ULOI');"></div>
+<div>
+<p class="font-medium text-[#111811] dark:text-white">Bamboo Cutlery Set</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">SKU: BAM-CUT-01</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right text-gray-600 dark:text-gray-300">$12.00</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">2</td>
+<td class="px-6 py-4 text-right font-medium text-[#111811] dark:text-white">$24.00</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#233625] transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 bg-center bg-cover flex-shrink-0" data-alt="Coconut fiber cleaning brush" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCKT3BmmcDXRb1kuYf76DHPeXT7Hf1VISeLbVUizQWCl4M8T-3IVcBc7Kj56fGzG24JaPEQEwucve_RYT9F4uSlyburO0HkRaYlZoM9vU85L21je1ghbtVlxsSwFSmnTf3ErULo_QIZ6jkgZ2qQuBh-1noiC_XIQalD7mBL_cV4_nWzZoeakr-DbGXQcm7wmR5VpWMDxyAL_IqJYjLQy1Vs4DJawNhA4aPHocEGjH7H95eJh4m8zQS5SuB9TnfTUByxguc7zpX9K9k');"></div>
+<div>
+<p class="font-medium text-[#111811] dark:text-white">Coconut Cleaning Brush</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">SKU: COCO-BR-01</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right text-gray-600 dark:text-gray-300">$3.50</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">1</td>
+<td class="px-6 py-4 text-right font-medium text-[#111811] dark:text-white">$3.50</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Summary Footer -->
+<div class="bg-gray-50 dark:bg-[#233625]/30 p-6 border-t border-[#f0f4f0] dark:border-[#2a402d]">
+<div class="flex flex-col gap-3 ml-auto max-w-xs w-full">
+<div class="flex justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Subtotal</span>
+<span class="font-medium text-[#111811] dark:text-white">$77.50</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Shipping</span>
+<span class="font-medium text-[#111811] dark:text-white">$5.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-gray-500 dark:text-gray-400">Discount</span>
+<span class="font-medium text-[#111811] dark:text-white">-$0.00</span>
+</div>
+<div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
+<div class="flex justify-between items-center">
+<span class="font-bold text-[#111811] dark:text-white">Total</span>
+<span class="text-xl font-bold text-primary dark:text-primary">$82.50</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Notes / Additional Info (Optional) -->
+<div class="bg-white dark:bg-[#1a2e1d] rounded-xl border border-[#dbe6dc] dark:border-[#2a402d] p-6 shadow-sm">
+<h3 class="font-semibold text-[#111811] dark:text-white mb-2">Order Notes</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Customer requested minimal packaging. Please include a recycling guide flyer.</p>
+</div>
+</div>
+<!-- Right Column: Context & Metadata -->
+<div class="space-y-6">
+<!-- Customer Card -->
+<div class="bg-white dark:bg-[#1a2e1d] rounded-xl border border-[#dbe6dc] dark:border-[#2a402d] p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-semibold text-[#111811] dark:text-white">Customer</h3>
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<div class="size-12 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg">AJ</div>
+<div>
+<p class="font-semibold text-[#111811] dark:text-white">Alex Johnson</p>
+<p class="text-xs text-gray-500">Regular Customer</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-start gap-3 text-sm">
+<span class="material-symbols-outlined text-gray-400 text-[20px] mt-0.5">mail</span>
+<a class="text-primary hover:underline truncate" href="mailto:alex.j@example.com">alex.j@example.com</a>
+</div>
+<div class="flex items-start gap-3 text-sm">
+<span class="material-symbols-outlined text-gray-400 text-[20px] mt-0.5">call</span>
+<span class="text-[#111811] dark:text-gray-300">+1 (555) 012-3456</span>
+</div>
+</div>
+</div>
+<!-- Shipping Address -->
+<div class="bg-white dark:bg-[#1a2e1d] rounded-xl border border-[#dbe6dc] dark:border-[#2a402d] p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-semibold text-[#111811] dark:text-white">Shipping Address</h3>
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center flex-shrink-0 text-gray-400">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div class="text-sm text-[#111811] dark:text-gray-300 leading-relaxed">
+<p>123 Eco Lane</p>
+<p>Portland, OR 97204</p>
+<p>United States</p>
+</div>
+</div>
+<div class="mt-4 h-24 w-full rounded-lg bg-gray-100 bg-center bg-cover border border-gray-200" data-alt="Map view of Portland, Oregon showing delivery area" data-location="Portland, OR map" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAQ8b4ZJN_IuPhWfwM1r4DPIk2Bqd9-kJwl2RBOgzsaN6VkLE1UM03Fg5TafDlqkwIPZj_CoSej4o8Moj4YPeFsVVq_NczzHGbHnRyHpKEN-83agko0du8bpg5bBnZuY_WFv7bxvV_iBr4IrChwPsywkRKpPhNGUsLGPLqQE_vQMyBhN_Q0paIyTAB3BQagYcBO4fvmzcvPf6Cq3bXJZJk-4T2AAa5-933OR3KsxkrdvvsN2IYD-zGxDXSiSo4R9acPOXcTQF-O80');"></div>
+</div>
+<!-- Payment Info -->
+<div class="bg-white dark:bg-[#1a2e1d] rounded-xl border border-[#dbe6dc] dark:border-[#2a402d] p-6 shadow-sm">
+<h3 class="font-semibold text-[#111811] dark:text-white mb-4">Payment Info</h3>
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400">payments</span>
+<span class="text-sm text-[#111811] dark:text-gray-300">Cash on Delivery</span>
+</div>
+<span class="text-sm font-medium text-[#111811] dark:text-white">$82.50</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-500">Status</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 border border-red-200">
+                            Unpaid
+                        </span>
+</div>
+</div>
+<!-- Timeline -->
+<div class="bg-white dark:bg-[#1a2e1d] rounded-xl border border-[#dbe6dc] dark:border-[#2a402d] p-6 shadow-sm">
+<h3 class="font-semibold text-[#111811] dark:text-white mb-6">Order History</h3>
+<div class="relative pl-4 border-l-2 border-gray-100 dark:border-[#2a402d] space-y-8">
+<!-- Step 1: Completed -->
+<div class="relative">
+<div class="absolute -left-[23px] top-0 size-4 rounded-full bg-primary border-4 border-white dark:border-[#1a2e1d] flex items-center justify-center"></div>
+<div class="flex flex-col -mt-1.5">
+<p class="text-sm font-medium text-[#111811] dark:text-white">Order Placed</p>
+<p class="text-xs text-gray-500 mt-0.5">Oct 24, 10:34 AM</p>
+</div>
+</div>
+<!-- Step 2: Current/Pending -->
+<div class="relative">
+<div class="absolute -left-[23px] top-0 size-4 rounded-full bg-yellow-400 border-4 border-white dark:border-[#1a2e1d]"></div>
+<div class="flex flex-col -mt-1.5">
+<p class="text-sm font-medium text-[#111811] dark:text-white">Payment Pending</p>
+<p class="text-xs text-gray-500 mt-0.5">Awaiting COD</p>
+</div>
+</div>
+<!-- Step 3: Future -->
+<div class="relative opacity-50">
+<div class="absolute -left-[23px] top-0 size-4 rounded-full bg-gray-200 dark:bg-gray-700 border-4 border-white dark:border-[#1a2e1d]"></div>
+<div class="flex flex-col -mt-1.5">
+<p class="text-sm font-medium text-[#111811] dark:text-white">Processing</p>
+<p class="text-xs text-gray-500 mt-0.5">Estimated Oct 25</p>
+</div>
+</div>
+<!-- Step 4: Future -->
+<div class="relative opacity-50">
+<div class="absolute -left-[23px] top-0 size-4 rounded-full bg-gray-200 dark:bg-gray-700 border-4 border-white dark:border-[#1a2e1d]"></div>
+<div class="flex flex-col -mt-1.5">
+<p class="text-sm font-medium text-[#111811] dark:text-white">Shipped</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

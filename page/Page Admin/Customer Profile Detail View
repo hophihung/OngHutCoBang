@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Profile Detail View</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0fbd1e",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102212",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111812] font-display min-h-screen flex flex-col overflow-x-hidden transition-colors duration-200">
+<!-- Header / Navbar placeholder (simplified for context) -->
+<header class="bg-white dark:bg-[#1a2c1e] border-b border-gray-200 dark:border-gray-800 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Green Joy Straw <span class="text-gray-400 font-normal text-sm ml-2">/ Admin</span></h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-gray-200 bg-cover bg-center" data-alt="Admin user avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBOwr2ecoG_JHM2FXj_QdbPGPHsFd1sHDa4e_yaRUJWrUZb9zNDaxVFaGfCr2KgxwhIBBtGG7wqeB476yYRZw9FlJeT4-r9YsdkKxs-Wwix2w9BX_up-DFYoen0NbSny93DlsBa0ZojSZ0R_XJu3a8_-u-YwSsmelQjdMgVpLDovmwZDR5ABUdhOmPitc902ok_cTlfxqssoy_GX2TnQo8IlALfcUTdtAFBvPcg5dqG-si1220EvhJfwXw7uxqKoaosxojhbCZ8XK8')"></div>
+</div>
+</header>
+<div class="flex flex-1 max-w-[1400px] w-full mx-auto p-6 gap-6 flex-col lg:flex-row">
+<!-- Left Sidebar: Profile Card -->
+<aside class="w-full lg:w-1/3 flex flex-col gap-6">
+<!-- Main Profile Card -->
+<div class="bg-white dark:bg-[#1a2c1e] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+<div class="p-6 flex flex-col items-center border-b border-gray-100 dark:border-gray-800 relative">
+<div class="absolute top-4 right-4 cursor-pointer text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</div>
+<div class="w-32 h-32 rounded-full ring-4 ring-primary/10 mb-4 bg-cover bg-center shadow-lg" data-alt="Profile picture of Nguyen Van A" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCm2Cugc9YndXQ9SQ2vrFRln8Ury2JpPtqOJ7qbmG3-jvU3zFzVx4p3nF33ZXOA-jJL6XW5uhqTeXv1XHeN1apRKODvCadHXlZT9Zsg0wdrpCTra0gUGLZdfmpJ_wwQMSYQ4GEjgYcA2EK0t0cw6KqkQ4aADwpMV-mOJ9k59A7oiT7NtDUk5qEuf7Gvwf4LMZacLXKjZHIF8_r3Zd3_wUWrH6qZgOp4GdcGOzlVMFJlM4SbkmLOicxxyrBvnB9uQokZVRYDTo92RXs');">
+</div>
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Nguyen Van A</h2>
+<p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Customer ID: #CUST-8829</p>
+<div class="flex flex-wrap gap-2 justify-center mb-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[16px]">stars</span> VIP
+                        </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[16px]">loyalty</span> Loyal
+                        </span>
+</div>
+<!-- Contact Details List -->
+<div class="w-full flex flex-col gap-4 text-sm">
+<div class="flex items-center gap-3 p-3 rounded-lg bg-background-light dark:bg-[#152317]">
+<span class="material-symbols-outlined text-gray-400">mail</span>
+<div class="flex flex-col">
+<span class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Email</span>
+<span class="text-gray-900 dark:text-gray-200 font-medium">nguyen.vana@example.com</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-background-light dark:bg-[#152317]">
+<span class="material-symbols-outlined text-gray-400">call</span>
+<div class="flex flex-col">
+<span class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Phone</span>
+<span class="text-gray-900 dark:text-gray-200 font-medium">+84 90 123 4567</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-background-light dark:bg-[#152317]">
+<span class="material-symbols-outlined text-gray-400">location_on</span>
+<div class="flex flex-col">
+<span class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Shipping Address</span>
+<span class="text-gray-900 dark:text-gray-200 font-medium">123 Green Street, District 1, HCMC</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 divide-x divide-gray-100 dark:divide-gray-800">
+<div class="p-4 text-center">
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Spent</p>
+<p class="text-xl font-bold text-primary">5,000,000₫</p>
+</div>
+<div class="p-4 text-center">
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Orders</p>
+<p class="text-xl font-bold text-gray-900 dark:text-white">12</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="bg-white dark:bg-[#1a2c1e] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-4 flex flex-col gap-3">
+<button class="w-full py-2.5 px-4 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">lock_reset</span>
+                    Reset Password
+                </button>
+<button class="w-full py-2.5 px-4 rounded-lg border border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 font-medium hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">block</span>
+                    Block Customer
+                </button>
+</div>
+</aside>
+<!-- Right Content: Order History & Notes -->
+<main class="w-full lg:w-2/3 flex flex-col gap-6">
+<!-- Order History Section -->
+<div class="bg-white dark:bg-[#1a2c1e] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-full">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+                        Order History
+                    </h3>
+<button class="text-sm text-primary font-medium hover:text-green-700 dark:hover:text-green-400 transition-colors">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-gray-50 dark:bg-[#152317] text-gray-500 dark:text-gray-400">
+<tr>
+<th class="px-6 py-4 font-medium">Order ID</th>
+<th class="px-6 py-4 font-medium">Date</th>
+<th class="px-6 py-4 font-medium">Items</th>
+<th class="px-6 py-4 font-medium text-right">Amount</th>
+<th class="px-6 py-4 font-medium text-center">Status</th>
+<th class="px-6 py-4 font-medium"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#152317] transition-colors">
+<td class="px-6 py-4 text-primary font-medium">#ORD-001</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Oct 24, 2023</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Bamboo Straws (x50)</td>
+<td class="px-6 py-4 text-right font-medium text-gray-900 dark:text-white">450,000₫</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                        Delivered
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#152317] transition-colors">
+<td class="px-6 py-4 text-primary font-medium">#ORD-002</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Sep 12, 2023</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Grass Straws (x100)</td>
+<td class="px-6 py-4 text-right font-medium text-gray-900 dark:text-white">850,000₫</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                        Delivered
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#152317] transition-colors">
+<td class="px-6 py-4 text-primary font-medium">#ORD-003</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Aug 05, 2023</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Coconut Bowls (x4)</td>
+<td class="px-6 py-4 text-right font-medium text-gray-900 dark:text-white">320,000₫</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                        Processing
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#152317] transition-colors">
+<td class="px-6 py-4 text-primary font-medium">#ORD-004</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Jul 20, 2023</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Starter Kit</td>
+<td class="px-6 py-4 text-right font-medium text-gray-900 dark:text-white">150,000₫</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400">
+                                        Cancelled
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Private Notes Section -->
+<div class="bg-white dark:bg-[#1a2c1e] rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sticky_note_2</span>
+                        Private Notes
+                    </h3>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<!-- Note Input -->
+<div class="flex flex-col gap-3">
+<label class="sr-only" for="new-note">Add a new note</label>
+<textarea class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#152317] text-gray-900 dark:text-white placeholder-gray-400 focus:border-primary focus:ring-primary p-3 resize-none text-sm" id="new-note" placeholder="Type a private note for admins only..." rows="3"></textarea>
+<div class="flex justify-end">
+<button class="bg-primary hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium text-sm transition-colors flex items-center gap-2">
+                                Save Note
+                            </button>
+</div>
+</div>
+<!-- Note History Feed -->
+<div class="flex flex-col gap-4 pl-4 border-l-2 border-gray-100 dark:border-gray-800">
+<!-- Note Item 1 -->
+<div class="relative">
+<div class="absolute -left-[23px] top-0 size-3 rounded-full bg-primary ring-4 ring-white dark:ring-[#1a2c1e]"></div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-sm font-semibold text-gray-900 dark:text-white">Admin User</span>
+<span class="text-xs text-gray-400">Today at 10:30 AM</span>
+</div>
+<p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    Customer requested eco-friendly packaging for next shipment. Confirmed we can accommodate this request for all future orders.
+                                </p>
+</div>
+</div>
+<!-- Note Item 2 -->
+<div class="relative">
+<div class="absolute -left-[23px] top-0 size-3 rounded-full bg-gray-300 dark:bg-gray-600 ring-4 ring-white dark:ring-[#1a2c1e]"></div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-sm font-semibold text-gray-900 dark:text-white">System</span>
+<span class="text-xs text-gray-400">Oct 25, 2023 at 9:00 AM</span>
+</div>
+<p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    User upgraded to <span class="font-medium text-primary">VIP Status</span> after crossing 5,000,000₫ spend threshold.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,23 +1,25 @@
-import HomeHeader from "@/components/home/HomeHeader";
+import AnnouncementBar from "@/components/AnnouncementBar";
+import Header from "@/components/Header";
 import HomeHero from "@/components/home/HomeHero";
-import QuoteSection from "@/components/home/QuoteSection";
-import CoreValues from "@/components/home/CoreValues";
-import ImpactDashboard from "@/components/home/ImpactDashboard";
+import StatsBar from "@/components/home/StatsBar";
+import WhyCoBang from "@/components/home/WhyCoBang";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
-import NewsletterCTA from "@/components/home/NewsletterCTA";
-import HomeFooter from "@/components/home/HomeFooter";
+import StoryTeaser from "@/components/home/StoryTeaser";
+import Footer from "@/components/home/Footer";
 
 export default function Home() {
   return (
-    <div className="relative flex h-auto min-h-screen w-full flex-col bg-brand-beige overflow-x-hidden">
-      <HomeHeader />
-      <HomeHero />
-      <QuoteSection />
-      <CoreValues />
-      <ImpactDashboard />
-      <FeaturedProducts />
-      <NewsletterCTA />
-      <HomeFooter />
+    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+      <AnnouncementBar />
+      <Header />
+      <main className="flex-1">
+        <HomeHero />
+        <StatsBar />
+        <WhyCoBang />
+        <FeaturedProducts />
+        <StoryTeaser />
+      </main>
+      <Footer />
     </div>
   );
 }

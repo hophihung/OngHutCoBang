@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Management List - Green Joy Straw</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0fbd1e",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102212",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for table if needed */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark flex flex-col transition-all duration-300">
+<div class="flex h-16 items-center px-6 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<span class="font-bold text-lg tracking-tight">Green Joy</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-4 px-3 flex flex-col gap-1">
+<div class="px-3 mb-2">
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Main Menu</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+<span class="text-sm font-medium">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">inventory_2</span>
+<span class="text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">bar_chart</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+</div>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 px-3 py-2">
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="User profile avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBX21PxHDykfeZWD4DI6t1LQNmh6hbiNGbeecpNWAES7HHxkSuunqg0ieA8awQzrwwArBjHDUFRJGURT62CdtStQlQdagkceRcuEMCt_ol504RhuYzcINcXzKBVkxDPOdDnj9cfjMWGrp6FWpqpTpMFV8Hc7TIjHgEk3fjGqdKpEQhTl2ItyYiExohb6Djz6kjNjMuJGWo5lm4Qjpv1UgRQaw0OBnUfNpw7ZMJ7NgRf2WELWqOxivubSRDuN2BoloEH4pGMUlG0Gac');"></div>
+<div class="flex flex-col">
+<p class="text-sm font-medium text-slate-900 dark:text-white">Tom Cook</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Header -->
+<header class="h-16 flex items-center justify-between px-8 bg-surface-light dark:bg-surface-dark border-b border-slate-200 dark:border-slate-800 shrink-0">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Order Management</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/5 text-slate-500 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-surface-dark"></span>
+</button>
+<button class="flex items-center justify-center rounded-lg px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[20px] mr-2">logout</span>
+                        Logout
+                    </button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<!-- Page Controls: Search, Filter, Export -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-1 items-center gap-3">
+<!-- Search -->
+<div class="relative w-full max-w-md">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg bg-white dark:bg-surface-dark text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm text-sm" placeholder="Search Order ID or customer..." type="text"/>
+</div>
+<!-- Filter Dropdown Trigger -->
+<button class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-surface-dark border border-transparent hover:border-slate-200 dark:hover:border-slate-700 rounded-lg shadow-sm text-slate-700 dark:text-slate-200 text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span>Filter</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+</button>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg shadow-md shadow-primary/20 text-sm font-bold transition-all transform hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-[20px]">table_view</span>
+<span>Export Excel</span>
+</button>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-white/5">
+<th class="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Order ID</th>
+<th class="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Customer Name</th>
+<th class="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Date</th>
+<th class="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Total Amount</th>
+<th class="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Payment</th>
+<th class="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Fulfillment</th>
+<th class="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<td class="py-4 px-6 text-sm font-medium text-slate-900 dark:text-white">#ORD-2025-001</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Customer avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACVSFRnHDgOhpWYnuhz19-Kdpg_wIBptlybiLB4TEzDpqgPklepELp1krY31-qhIZVBXuipeJWwBgMM2rG-E_mqpi_ArlIhUBNoJZEnWQbZ98ZIZ7ZtnXaqMOQdyUpbpiSbNJhNYj9bgJUKtf94TYTvDPDM76eYxBwghMJq__LhEhlQ4vNwkC_5xcqpJZKpQ4fpksEbr166TxawuAIedDAP4Bcd03iDlcBD2LqF5yKrssorL6P2Wwc7NWYv9PrL-FhiioDxHQBb34');"></div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Alice Johnson</span>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-slate-600 dark:text-slate-400">Oct 24, 2025</td>
+<td class="py-4 px-6 text-sm font-semibold text-slate-900 dark:text-white">$124.50</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                Paid
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                                Pending
+                                            </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<td class="py-4 px-6 text-sm font-medium text-slate-900 dark:text-white">#ORD-2025-002</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold">
+                                                    MS
+                                                </div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Michael Scott</span>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-slate-600 dark:text-slate-400">Oct 23, 2025</td>
+<td class="py-4 px-6 text-sm font-semibold text-slate-900 dark:text-white">$89.00</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                Paid
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+                                                Shipping
+                                            </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<td class="py-4 px-6 text-sm font-medium text-slate-900 dark:text-white">#ORD-2025-003</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Customer avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmmqnO0PfjgERGR8bR1H1Xk3Nekql3X-1eQ7qp00Jue-4iezFs8GxyV0WS3FouHySDvzj76BxQENb7Zc3FBTbJxJFxWmf9DTg6rpWRAXTPFh6D4Jn7YteheLZlZf2w0HNAR6Yz2ddu3P0G7zQSMUcBaNrvtbre7_YYYEL9p526_A7XSScBiV6mi9VuW49NAZFQh4dam32pv8-QsR2SNu7xV5Y0Sh7QZWKgIUXqEX4qvZr45erhaxCJL8AJkVy9rhGTFs44mYbXpqE');"></div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Sarah Connor</span>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-slate-600 dark:text-slate-400">Oct 23, 2025</td>
+<td class="py-4 px-6 text-sm font-semibold text-slate-900 dark:text-white">$210.25</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">
+                                                Unpaid
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">
+                                                Cancelled
+                                            </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<td class="py-4 px-6 text-sm font-medium text-slate-900 dark:text-white">#ORD-2025-004</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">
+                                                    JB
+                                                </div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">James Bond</span>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-slate-600 dark:text-slate-400">Oct 22, 2025</td>
+<td class="py-4 px-6 text-sm font-semibold text-slate-900 dark:text-white">$450.00</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                Paid
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                Completed
+                                            </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<td class="py-4 px-6 text-sm font-medium text-slate-900 dark:text-white">#ORD-2025-005</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Customer avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBiOxLP3ztKPTyeMsk-WjaQyASuX2Vm1sxFhVhR4HQm6GbxLr5nm2Nw5xQvq9MdH3BiFgcerrj2mdTA0rD087MSMAs6CKOzko-QtFVVFsZMP2TPeSf6qNsG9biYe5OqiyKrhPXb5TO1BG5vs4rbXgEidz9Z7YPBRxDVZQLFmMNLrIcR7nbPrZPmVRHToWtpM_n9iJxXNG4nMptCqBUL5LREMKQqfwz3kMUFB-xoVm9_zElhTVVZodP2QabJIhWd-X8YRV1gSgoLHw');"></div>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Dwight Schrute</span>
+</div>
+</td>
+<td class="py-4 px-6 text-sm text-slate-600 dark:text-slate-400">Oct 21, 2025</td>
+<td class="py-4 px-6 text-sm font-semibold text-slate-900 dark:text-white">$32.50</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                Paid
+                                            </span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                Completed
+                                            </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<span class="text-sm text-slate-500 dark:text-slate-400">
+                                Page <span class="font-medium text-slate-900 dark:text-white">1</span> of <span class="font-medium text-slate-900 dark:text-white">10</span>
+</span>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Previous
+                                </button>
+<button class="px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-sm hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    Next
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
