@@ -6,8 +6,10 @@ import WhyCoBang from "@/components/home/WhyCoBang";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import StoryTeaser from "@/components/home/StoryTeaser";
 import Footer from "@/components/home/Footer";
+import { getFeaturedProducts } from "@/lib/products";
 
-export default function Home() {
+export default async function Home() {
+  const products = await getFeaturedProducts();
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <AnnouncementBar />
@@ -16,7 +18,7 @@ export default function Home() {
         <HomeHero />
         <StatsBar />
         <WhyCoBang />
-        <FeaturedProducts />
+        <FeaturedProducts products={products} />
         <StoryTeaser />
       </main>
       <Footer />

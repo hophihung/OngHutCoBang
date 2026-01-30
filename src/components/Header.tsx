@@ -106,13 +106,19 @@ export default function Header() {
               Về chúng tôi
             </Link>
             <Link
+              href="/cau-chuyen"
+              className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
+            >
+              Câu chuyện
+            </Link>
+            <Link
               href="/blog"
               className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
             >
               Blog
             </Link>
             <Link
-              href="/#contact"
+              href="/lien-he"
               className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
             >
               Liên hệ
@@ -232,6 +238,13 @@ export default function Header() {
                 Về chúng tôi
               </Link>
               <Link
+                href="/cau-chuyen"
+                className="px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Câu chuyện
+              </Link>
+              <Link
                 href="/blog"
                 className="px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
@@ -239,7 +252,7 @@ export default function Header() {
                 Blog
               </Link>
               <Link
-                href="/#contact"
+                href="/lien-he"
                 className="px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >

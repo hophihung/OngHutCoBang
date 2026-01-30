@@ -2,8 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import type { Product } from "@/types/database";
 
-const PRODUCTS = [
+const FALLBACK_PRODUCTS: Array<{
+  id: string;
+  title: string;
+  desc: string;
+  price: string;
+  image: string;
+  alt: string;
+  badge: string | null;
+  badgeClass: string;
+}> = [
   {
     id: "1",
     title: "Hộp 50 Ống",
@@ -50,7 +60,40 @@ const PRODUCTS = [
   },
 ];
 
-export default function FeaturedProducts() {
+function formatPrice(price: number): string {
+  if (price >= 1000) return `${(price / 1000).toFixed(0)}.000đ`;
+  return `${price}đ`;
+}
+
+function productToDisplay(p: Product): {
+  id: string;
+  title: string;
+  desc: string;
+  price: string;
+  image: string;
+  alt: string;
+  badge: string | null;
+  badgeClass: string;
+} {
+  return {
+    id: p.id,
+    title: p.name,
+    desc: p.description ?? "",
+    price: formatPrice(Number(p.price)),
+    image: p.image_url ?? "",
+    alt: p.name,
+    badge: p.is_featured ? "Nổi bật" : null,
+    badgeClass: "bg-[#2f7f34]",
+  };
+}
+
+type FeaturedProductsProps = { products?: Product[] };
+
+export default function FeaturedProducts({ products }: FeaturedProductsProps) {
+  const list =
+    products && products.length > 0
+      ? products.map(productToDisplay)
+      : FALLBACK_PRODUCTS;
   return (
     <section
       id="shop"
@@ -67,7 +110,7 @@ export default function FeaturedProducts() {
             </p>
           </div>
           <Link
-            href="#"
+            href="/cua-hang"
             className="text-[#2f7f34] font-bold hover:underline flex items-center gap-1"
           >
             Xem tất cả{" "}
@@ -77,14 +120,15 @@ export default function FeaturedProducts() {
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {PRODUCTS.map((p) => (
-            <div
+          {list.map((p) => (
+            <Link
               key={p.id}
+              href={`/cua-hang/${p.id}`}
               className="group flex flex-col overflow-hidden rounded-xl bg-white dark:bg-[#1a261b] shadow-sm transition-all hover:shadow-lg border border-gray-100 dark:border-gray-800"
             >
               <div className="relative aspect-square overflow-hidden bg-gray-100">
                 <Image
-                  src={p.image}
+                  src={p.image || "/placeholder-product.png"}
                   alt={p.alt}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -113,6 +157,7 @@ export default function FeaturedProducts() {
                     type="button"
                     className="flex h-9 w-9 items-center justify-center rounded-full bg-[#eaf0ea] text-[#2f7f34] hover:bg-[#2f7f34] hover:text-white transition-all"
                     aria-label={`Thêm ${p.title} vào giỏ`}
+                    onClick={(e) => e.preventDefault()}
                   >
                     <span className="material-symbols-outlined text-lg">
                       add_shopping_cart
@@ -120,7 +165,7 @@ export default function FeaturedProducts() {
                   </button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

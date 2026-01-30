@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Green Living Blog - Green Joy Straw</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#11d411", // Bright Green
+                        "background-light": "#f6f8f6", // Light Beige/Off-white
+                        "background-dark": "#102210", // Deep Forest Green
+                        "forest": "#1a401a", // Custom Forest Green for text/accents
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+        }
+        .sans-text {
+            font-family: 'Noto Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col text-background-dark dark:text-background-light">
+<!-- Top Navigation -->
+<header class="w-full bg-white dark:bg-[#1a2e1a] border-b border-[#e0e6e0] dark:border-[#2a402a] sticky top-0 z-50">
+<div class="max-w-[1280px] mx-auto px-4 md:px-10 h-16 flex items-center justify-between">
+<!-- Logo & Nav -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3 text-background-dark dark:text-white group" href="#">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined !text-[32px]">eco</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Green Joy Straw</h2>
+</a>
+<nav class="hidden md:flex items-center gap-8">
+<a class="sans-text text-sm font-medium text-background-dark/80 hover:text-primary dark:text-white/80 dark:hover:text-primary transition-colors" href="#">Shop</a>
+<a class="sans-text text-sm font-medium text-primary" href="#">Blog</a>
+<a class="sans-text text-sm font-medium text-background-dark/80 hover:text-primary dark:text-white/80 dark:hover:text-primary transition-colors" href="#">About</a>
+</nav>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-[#f0f4f0] dark:bg-[#253825] rounded-full px-3 py-1.5 w-64 border border-transparent focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-forest dark:text-primary/70 !text-[20px]">search</span>
+<input class="bg-transparent border-none text-sm w-full focus:ring-0 placeholder:text-forest/50 dark:placeholder:text-white/40 sans-text text-background-dark dark:text-white" placeholder="Search articles..." type="text"/>
+</div>
+<button class="md:hidden p-2 text-background-dark dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-[1280px] mx-auto px-4 md:px-10 py-8 md:py-12 flex flex-col gap-12 md:gap-16">
+<!-- Page Header -->
+<section class="flex flex-col items-center text-center gap-4 py-4 md:py-8">
+<h1 class="text-4xl md:text-6xl font-black tracking-tight text-background-dark dark:text-white">
+                Green Living Blog
+            </h1>
+<p class="text-lg md:text-xl text-forest/80 dark:text-white/70 italic font-light">
+                Tips for a zero-waste lifestyle
+            </p>
+</section>
+<!-- Featured Post -->
+<section class="w-full">
+<div class="group flex flex-col lg:flex-row bg-white dark:bg-[#1a2e1a] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-[#e0e6e0] dark:border-[#2a402a]">
+<!-- Image -->
+<div class="w-full lg:w-3/5 h-[300px] lg:h-[450px] relative overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Bright, modern kitchen interior with wooden utensils, glass jars, and plants depicting a zero-waste home" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTLN-pf-58wdnXZu7Y_nRNqcNByo-cMZoR-FE0j3vlRdXMWGSC36SV_rpKvaqx8LC2ZeiV2kNrnd_RC36xlGmGslZ8TKDIenZdubutgrkknY08dE9sm-rboIoxL12fmuZDqRsuWpuHIFeONVOcnTu2RBsoMUJgnX9OBjwfvyjZgk7pwAx0Kl2jE5MDFZPEUhC3XdEh7voZUTfoCoDZFOMjKsuW5ADEaHV661FDz6gnDulgtE1sBs1ekaWfp4Xvt3cgXcEXFMx7VLw');">
+</div>
+</div>
+<!-- Content -->
+<div class="w-full lg:w-2/5 p-6 md:p-10 flex flex-col justify-center items-start gap-4 md:gap-6 bg-white dark:bg-[#1a2e1a]">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-[#e0f2e0] dark:bg-primary/20 text-forest dark:text-primary rounded-full text-xs font-bold uppercase tracking-wider sans-text">
+                            Sustainability
+                        </span>
+<span class="text-sm text-forest/60 dark:text-white/60 sans-text">Nov 12, 2023</span>
+</div>
+<h2 class="text-3xl md:text-4xl font-bold leading-tight text-background-dark dark:text-white">
+                        The Ultimate Guide to a Zero-Waste Kitchen
+                    </h2>
+<p class="text-base md:text-lg text-forest/80 dark:text-white/70 leading-relaxed font-light">
+                        Transitioning to a plastic-free kitchen doesn't happen overnight. It’s a journey of small, conscious choices. Here are the first practical steps you can take to reduce waste today...
+                    </p>
+<a class="mt-2 inline-flex items-center justify-center h-12 px-8 rounded-lg bg-primary hover:bg-green-500 text-background-dark font-bold text-sm transition-colors sans-text" href="#">
+                        Read Article
+                    </a>
+</div>
+</div>
+</section>
+<!-- Article Grid -->
+<section class="flex flex-col gap-8">
+<div class="flex items-center justify-between border-b border-[#e0e6e0] dark:border-[#2a402a] pb-4">
+<h3 class="text-2xl font-bold text-background-dark dark:text-white">Latest Articles</h3>
+<div class="flex gap-2">
+<button class="p-2 rounded-full hover:bg-[#f0f4f0] dark:hover:bg-white/10 text-forest dark:text-white transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#f0f4f0] dark:hover:bg-white/10 text-forest dark:text-white transition-colors">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+<!-- Card 1 -->
+<article class="flex flex-col gap-4 group">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Bundle of natural dried grass straws tied with string on a minimal background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBA8lmcGRSJQzdEUGwJI5x0I6ZVka91hFdsJn3JcE38qpDu06NsRzPnWD-EAPsa4KKBfm4_zPsKbE8ehIuGHe6X1BpTq-kJs1lchyLsWqYkfbpepZKKylJD5CaE9sxIJz6B_NOHlw2PE-v_WM8tuiQqrgtEVyAmvckwd-SnfplxJX2wdn9r2WN_0drdX2tmHNAKF9Zk2utqoCBFbc4YPeih11I7KbnF4U0wh4xlSaUptmQdK_i2JpvvHOvpKCdFLsfEqljBMcSGspA');">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-primary text-xs font-bold uppercase tracking-wider sans-text">Tips</span>
+<span class="text-forest/50 dark:text-white/50 text-xs sans-text">Oct 24, 2023</span>
+</div>
+<h3 class="text-xl font-bold leading-snug text-background-dark dark:text-white group-hover:text-primary transition-colors">
+                            5 Creative Ways to Reuse Grass Straws
+                        </h3>
+<p class="text-forest/70 dark:text-white/60 text-sm line-clamp-2">
+                            Don't throw them away! From garden compost to DIY crafts, discover how to give your used straws a second life.
+                        </p>
+<a class="inline-flex items-center gap-1 text-sm font-bold text-background-dark dark:text-white underline decoration-primary decoration-2 underline-offset-4 hover:text-primary transition-colors sans-text mt-2" href="#">
+                            Read More <span class="material-symbols-outlined !text-[16px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="flex flex-col gap-4 group">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Close up of bamboo toothbrush texture comparing it to plastic" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSq9xYNuE8P0LDaTeiC1W2sYvDgWfJZ7YW4_c3tv_BZQ6vOXkeUgBa8cP-rgN22LOxfIu0k-iCluHcFBemjKbO6ad2Q3NBaALu7jTlNKgcCtWRucdOxlTI27tzJIRf55JDbZnQ7nDqlG6DOh34KYjJn_L5mFAqTTRt_KWf3dse3JxK2hTFPAtENeXl37TBX8iau800eUyM6Rz2nVYhgTSxlPNTY53BFLKiEXB68wme-XcPNFVp-Ckg6Ybuliior1AwfoDhBJBRAfs');">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-primary text-xs font-bold uppercase tracking-wider sans-text">Sustainability</span>
+<span class="text-forest/50 dark:text-white/50 text-xs sans-text">Oct 20, 2023</span>
+</div>
+<h3 class="text-xl font-bold leading-snug text-background-dark dark:text-white group-hover:text-primary transition-colors">
+                            Why Bamboo isn't always the answer
+                        </h3>
+<p class="text-forest/70 dark:text-white/60 text-sm line-clamp-2">
+                            While better than plastic, bamboo mono-cropping presents its own environmental challenges. Let's dig deeper into sustainable sourcing.
+                        </p>
+<a class="inline-flex items-center gap-1 text-sm font-bold text-background-dark dark:text-white underline decoration-primary decoration-2 underline-offset-4 hover:text-primary transition-colors sans-text mt-2" href="#">
+                            Read More <span class="material-symbols-outlined !text-[16px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="flex flex-col gap-4 group">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Small composting bin on a kitchen counter with vegetable scraps" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrcnd6U0-7_BXau3LdobgjXr9bRwqfEFI0_gVtoilrawqLMVIViPyzIdK3xPeS3ns5Q3-73YkJ9GD1JawnJwbVe2Ylz3ndPnxdZoFUkF-GJGEAuo_23de49mIKPv5JF8XohfBKD0FWijrlh3piL3SmcaVuimlUrYoztlT3nU1lJX3iDIurLPvjl3ALnV6MFd_r9XpoY3lzcwwPWkxwdsaxdoby3F8Z51nFaOXEhQHhbntOve8SaMsqu-_UIXanAxwH-8kjUe7jTtU');">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-primary text-xs font-bold uppercase tracking-wider sans-text">Guides</span>
+<span class="text-forest/50 dark:text-white/50 text-xs sans-text">Oct 15, 2023</span>
+</div>
+<h3 class="text-xl font-bold leading-snug text-background-dark dark:text-white group-hover:text-primary transition-colors">
+                            Composting 101 for Apartment Dwellers
+                        </h3>
+<p class="text-forest/70 dark:text-white/60 text-sm line-clamp-2">
+                            No backyard? No problem. Learn the basics of vermicomposting and bokashi tailored for small spaces.
+                        </p>
+<a class="inline-flex items-center gap-1 text-sm font-bold text-background-dark dark:text-white underline decoration-primary decoration-2 underline-offset-4 hover:text-primary transition-colors sans-text mt-2" href="#">
+                            Read More <span class="material-symbols-outlined !text-[16px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="flex flex-col gap-4 group">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Travel backpack with reusable water bottle and metal straw container" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCxaPK5TXm9rbwwnsR20sIPBplVbGCOyIhkJ7LrPGSkz0wmyhzR4P9FtQP2JEqiBaJhqc8LWqe_dOPPfSc9oytPY1FCGN1wut0YFkmq9ggHGYYpm_E64QJXyDwEHoLyUzRZINUCbVBoyuCokpPNIFyR8RUO413TF65v09hy72X9tELJkKP5Z7zIWmwrqkil6vCTSQweIvzq5flUWm1vDsM2BhjJ6I9wRt9G9nQZxLeUfM6i8-w7-_B8zMwZq3Td2igfYqHYmWlrg1s');">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-primary text-xs font-bold uppercase tracking-wider sans-text">Travel</span>
+<span class="text-forest/50 dark:text-white/50 text-xs sans-text">Oct 10, 2023</span>
+</div>
+<h3 class="text-xl font-bold leading-snug text-background-dark dark:text-white group-hover:text-primary transition-colors">
+                            Plastic-Free Travel Tips for 2024
+                        </h3>
+<p class="text-forest/70 dark:text-white/60 text-sm line-clamp-2">
+                            Exploring the world doesn't have to cost the earth. Pack these essentials for your next eco-friendly adventure.
+                        </p>
+<a class="inline-flex items-center gap-1 text-sm font-bold text-background-dark dark:text-white underline decoration-primary decoration-2 underline-offset-4 hover:text-primary transition-colors sans-text mt-2" href="#">
+                            Read More <span class="material-symbols-outlined !text-[16px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="flex flex-col gap-4 group">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Minimalist wardrobe rack with neutral colored organic cotton clothing" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZEYHpLf1_pGgZiEP8yJTv4N6dbGpp9UvnMy7C0K__DypgLQ0irWMojE0QTS_M04Ba3WjKNyYWXlgilJeQBj6ZXy-EGl4GLEhcdU9eEBHsvh2CRdbpOK9mFjS84dEK1sKKtdICQbD-PPdqNYJ1rogVxVxF2aFq3oH-XLH8NBqTl-E4Ug6eN3zZSGjVjCbStMU6OD2zGmt0B9tsF2y1UPrZ_7_p4tNNHwzqsuwE2TiPNB_ui2iig6F5O83YIJbaPuZA5u5y5O_3P0Y');">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-primary text-xs font-bold uppercase tracking-wider sans-text">Lifestyle</span>
+<span class="text-forest/50 dark:text-white/50 text-xs sans-text">Oct 05, 2023</span>
+</div>
+<h3 class="text-xl font-bold leading-snug text-background-dark dark:text-white group-hover:text-primary transition-colors">
+                            Minimalist Wardrobe Essentials
+                        </h3>
+<p class="text-forest/70 dark:text-white/60 text-sm line-clamp-2">
+                            Building a capsule wardrobe reduces textile waste and simplifies your morning routine.
+                        </p>
+<a class="inline-flex items-center gap-1 text-sm font-bold text-background-dark dark:text-white underline decoration-primary decoration-2 underline-offset-4 hover:text-primary transition-colors sans-text mt-2" href="#">
+                            Read More <span class="material-symbols-outlined !text-[16px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="flex flex-col gap-4 group">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Lemon slices and vinegar in a glass spray bottle for natural cleaning" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcQ9_Ya_n7TyP7LztcO9qP5JmKlBGm7GXgdmz4pmlb-f4GXJPAW2xAco11CRDI8OIGdynPAsJEXCvV02HLX5hbKNqFWwbeBqPjGBKodAxm8r7h9qJzc-9jqVJEMZQtZkASFT_82kWn5c7TkZP4GwIZ-Nr8WPGA4LrBUmZz684WNdpmyRq-YTfOFdGU5PNp-5QtlQ-Tk59chsRRPKfMpnWXJVJhGUWrTdXFZmha9uj4YFh0P3g-JrRPdRxHhle_sfWZRAez4Gbq1Go');">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-primary text-xs font-bold uppercase tracking-wider sans-text">DIY</span>
+<span class="text-forest/50 dark:text-white/50 text-xs sans-text">Oct 01, 2023</span>
+</div>
+<h3 class="text-xl font-bold leading-snug text-background-dark dark:text-white group-hover:text-primary transition-colors">
+                            DIY Natural Cleaners That Actually Work
+                        </h3>
+<p class="text-forest/70 dark:text-white/60 text-sm line-clamp-2">
+                            Ditch the harsh chemicals. Vinegar, baking soda, and essential oils are all you really need for a sparkling home.
+                        </p>
+<a class="inline-flex items-center gap-1 text-sm font-bold text-background-dark dark:text-white underline decoration-primary decoration-2 underline-offset-4 hover:text-primary transition-colors sans-text mt-2" href="#">
+                            Read More <span class="material-symbols-outlined !text-[16px]">arrow_forward</span>
+</a>
+</div>
+</article>
+</div>
+</section>
+<!-- Pagination -->
+<section class="flex justify-center py-8">
+<div class="flex items-center gap-2 sans-text">
+<a class="flex size-10 items-center justify-center rounded-full hover:bg-[#e0f2e0] dark:hover:bg-white/10 text-background-dark dark:text-white transition-colors disabled:opacity-50" href="#">
+<span class="material-symbols-outlined !text-[20px]">chevron_left</span>
+</a>
+<a class="text-sm font-bold flex size-10 items-center justify-center bg-primary text-background-dark rounded-full shadow-sm" href="#">1</a>
+<a class="text-sm font-medium flex size-10 items-center justify-center text-background-dark dark:text-white hover:bg-[#e0f2e0] dark:hover:bg-white/10 rounded-full transition-colors" href="#">2</a>
+<a class="text-sm font-medium flex size-10 items-center justify-center text-background-dark dark:text-white hover:bg-[#e0f2e0] dark:hover:bg-white/10 rounded-full transition-colors" href="#">3</a>
+<span class="flex items-center justify-center size-10 text-background-dark dark:text-white">...</span>
+<a class="flex size-10 items-center justify-center rounded-full hover:bg-[#e0f2e0] dark:hover:bg-white/10 text-background-dark dark:text-white transition-colors" href="#">
+<span class="material-symbols-outlined !text-[20px]">chevron_right</span>
+</a>
+</div>
+</section>
+</main>
+<!-- Newsletter Footer -->
+<footer class="w-full bg-[#f0f4f0] dark:bg-[#152a15] mt-auto">
+<div class="max-w-[1280px] mx-auto px-4 md:px-10 py-16 md:py-24">
+<div class="w-full max-w-2xl mx-auto flex flex-col items-center text-center gap-6">
+<span class="material-symbols-outlined text-primary !text-[48px]">mail</span>
+<h2 class="text-3xl md:text-4xl font-bold text-background-dark dark:text-white">
+                    Get green tips in your inbox
+                </h2>
+<p class="text-lg text-forest/80 dark:text-white/70">
+                    Join 25,000+ others getting weekly zero-waste guides, sustainable product news, and exclusive offers.
+                </p>
+<form class="flex flex-col sm:flex-row w-full gap-3 mt-4" onsubmit="event.preventDefault();">
+<input class="flex-1 rounded-lg border-0 bg-white dark:bg-[#1a2e1a] px-4 py-3 text-background-dark dark:text-white shadow-sm focus:ring-2 focus:ring-primary sans-text placeholder:text-gray-400" placeholder="your@email.com" required="" type="email"/>
+<button class="bg-primary hover:bg-green-500 text-background-dark font-bold px-8 py-3 rounded-lg shadow-sm transition-colors sans-text whitespace-nowrap" type="submit">
+                        Subscribe
+                    </button>
+</form>
+<p class="text-xs text-forest/50 dark:text-white/40 mt-2 sans-text">
+                    We respect your privacy. Unsubscribe at any time.
+                </p>
+</div>
+<div class="mt-16 pt-8 border-t border-[#dce4dc] dark:border-[#2a402a] flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-forest/60 dark:text-white/50 sans-text">
+<p>© 2023 Green Joy Straw. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

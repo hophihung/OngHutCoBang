@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Green Joy Straw</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#11d411", // Vibrant green as requested in theme config
+                        "primary-dark": "#0ea60e",
+                        "forest-green": "#1b4d2e", // Darker green for sophisticated look
+                        "beige-soft": "#f5f3ef", // Soft beige for the card
+                        "background-light": "#ffffff",
+                        "background-dark": "#102210",
+                        "text-main": "#111811",
+                        "text-muted": "#618961",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main antialiased min-h-screen flex flex-col">
+<!-- Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f0] px-10 py-4 bg-white dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-4 text-text-main dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] font-display">Green Joy Straw</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-text-main dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-text-main dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">About</a>
+<a class="text-text-main dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#f0f4f0] dark:bg-white/10 text-text-main dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#f0f4f0] dark:bg-white/10 text-text-main dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col justify-center">
+<div class="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-20 py-12 lg:py-20">
+<div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
+<!-- Left Column: Contact Info & Map -->
+<div class="flex-1 flex flex-col gap-10">
+<div class="flex flex-col gap-4">
+<span class="text-primary font-bold tracking-wider text-sm uppercase">Contact Us</span>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-forest-green dark:text-white leading-tight">
+                            Get in touch with Green Joy
+                        </h1>
+<p class="text-text-muted dark:text-gray-300 text-lg leading-relaxed max-w-md">
+                            We'd love to hear from you. Whether you have a question about our grass straws, pricing, or anything else, our team is ready to answer all your questions.
+                        </p>
+</div>
+<!-- Contact Details Grid -->
+<div class="grid gap-6">
+<div class="flex items-start gap-4">
+<div class="flex items-center justify-center size-12 rounded-full bg-primary/10 text-forest-green dark:text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">location_on</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-bold text-text-main dark:text-white text-lg">Visit Us</h3>
+<p class="text-text-muted dark:text-gray-400">123 Grass Street, District 1,<br/>Ho Chi Minh City, Vietnam</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex items-center justify-center size-12 rounded-full bg-primary/10 text-forest-green dark:text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">mail</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-bold text-text-main dark:text-white text-lg">Email Us</h3>
+<p class="text-text-muted dark:text-gray-400">hello@greenjoystraw.com</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex items-center justify-center size-12 rounded-full bg-primary/10 text-forest-green dark:text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">call</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-bold text-text-main dark:text-white text-lg">Call Us</h3>
+<p class="text-text-muted dark:text-gray-400">+84 90 123 4567</p>
+</div>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="relative w-full aspect-[16/9] lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-sm mt-auto group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Stylized map of Ho Chi Minh City showing location pin" data-location="Ho Chi Minh City, Vietnam" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDl0uhdqUmSa4IPS81unIPOVyX7Bi88uo6hX-9TMxp_vgijsfgY6LFXHVdZKHu6Z09ixXCYDk4Sll5szEVXkOsceLeumixlvsSmd0DjoahnbTWdY4BWTs8rKZXGP_MHXevfy1G02qRa4PFbIJmqK53bkzdY57OwMGFSBEWc9Z0FjJxCRIuqXY6al01KbvzfMiRGjpr9fj2vtogBlGApnVIr-qVMJ4RRn_SVSZVZxEJPyfFo7nG0smOy6Sj5eGSuB9fzGXu5GGQoego'); filter: grayscale(20%) contrast(90%);">
+</div>
+<div class="absolute inset-0 bg-forest-green/10 pointer-events-none"></div>
+<div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-sm">
+<span class="text-xs font-bold text-forest-green tracking-wide">HEADQUARTERS</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Form -->
+<div class="flex-1 lg:max-w-xl">
+<div class="bg-beige-soft dark:bg-[#1a2e1a] p-8 md:p-10 rounded-2xl shadow-sm border border-[#e6e2da] dark:border-white/5 h-full flex flex-col justify-center">
+<h2 class="text-3xl font-serif font-bold text-forest-green dark:text-white mb-2">Send us a message</h2>
+<p class="text-text-muted dark:text-gray-400 mb-8">Fill out the form below and we'll get back to you as soon as possible.</p>
+<form class="flex flex-col gap-6" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-main dark:text-white" for="name">Full Name</label>
+<input class="w-full h-12 px-4 rounded-lg border border-[#d1d5db] dark:border-white/10 bg-white dark:bg-white/5 text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" id="name" placeholder="ex. Jane Doe" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-main dark:text-white" for="email">Email Address</label>
+<input class="w-full h-12 px-4 rounded-lg border border-[#d1d5db] dark:border-white/10 bg-white dark:bg-white/5 text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" id="email" placeholder="ex. jane@company.com" type="email"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-main dark:text-white" for="subject">Subject</label>
+<div class="relative">
+<select class="w-full h-12 px-4 rounded-lg border border-[#d1d5db] dark:border-white/10 bg-white dark:bg-white/5 text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all appearance-none cursor-pointer" id="subject">
+<option disabled="" selected="" value="">Select a topic</option>
+<option value="order">Order Support</option>
+<option value="partnership">Wholesale / Partnership</option>
+<option value="general">General Inquiry</option>
+</select>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-main dark:text-white" for="message">Message</label>
+<textarea class="w-full p-4 rounded-lg border border-[#d1d5db] dark:border-white/10 bg-white dark:bg-white/5 text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none" id="message" placeholder="How can we help you?" rows="5"></textarea>
+</div>
+<button class="mt-2 w-full h-12 bg-forest-green hover:bg-[#153e24] dark:bg-primary dark:hover:bg-primary-dark text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm" type="submit">
+<span>Send Message</span>
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="bg-white dark:bg-background-dark border-t border-[#f0f4f0] py-8 px-10">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-text-muted">
+<p>© 2023 Green Joy Straw. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="flex gap-4">
+<!-- Social Icons Placeholder -->
+<a aria-label="Facebook" class="text-text-main dark:text-white hover:text-primary transition-colors" href="#">
+<svg aria-hidden="true" class="size-5" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path></svg>
+</a>
+<a aria-label="Instagram" class="text-text-main dark:text-white hover:text-primary transition-colors" href="#">
+<svg aria-hidden="true" class="size-5" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772 4.902 4.902 0 011.772-1.153c.636-.247 1.363-.416 2.427-.465C9.673 2.013 10.03 2 12.488 2h-.173zM12.314 4.88h-.156c-2.316 0-2.64.01-3.66.056-.764.035-1.18.173-1.457.281-.365.14-.627.307-.903.583-.276.276-.443.538-.583.903-.108.277-.246.693-.281 1.457-.047 1.02-.056 1.344-.056 3.66v.156c0 2.316.01 2.64.056 3.66.035.764.173 1.18.281 1.457.14.365.307.627.583.903.276.276.538.443.903.583.277.108.693.246 1.457.281 1.02.047 1.344.056 3.66.056h.156c2.316 0 2.64-.01 3.66-.056.764-.035 1.18-.173 1.457-.281.365-.14.627-.307.903-.583.276-.276.443-.538.583-.903.108-.277.246-.693.281-1.457.047-1.02.056-1.344.056-3.66v-.156c0-2.316-.01-2.64-.056-3.66-.035-.764-.173-1.18-.281-1.457-.14-.365-.307-.627-.583-.903-.276-.276-.538-.443-.903-.583-.277-.108-.693-.246-1.457-.281-1.02-.047-1.344-.056-3.66-.056zM12.488 7.712a4.417 4.417 0 110 8.834 4.417 4.417 0 010-8.834zm0 2.15a2.267 2.267 0 100 4.534 2.267 2.267 0 000-4.534zm5.586-4.586a1.44 1.44 0 110 2.88 1.44 1.44 0 010-2.88z" fill-rule="evenodd"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+</body></html>

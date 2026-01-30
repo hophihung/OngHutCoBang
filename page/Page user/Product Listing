@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shop All Products | Green Joy Straw</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0fbd1e",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102212",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>body {
+    font-family: "Inter", sans-serif
+    }
+.checkbox-custom:checked {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAXGr6VjhEnwE3u35PtRVcRRafJOKDb2NNnNLnky1H1AeLey4m4ig1lAbDuqJhm0eTTWsBBerx_NmcSGrMRoBaHq_3-WUjCErH1m7HyK2mYNAdyIDCdUa9At3Pflhc1dB5CducZrNyIxqsCzXI8PwJLO6v2GxjZuG3XC2grNI1SHCxfBCOgCGwDGE8lOgMOexfv67XSTpP1Cbe3KUbcANfsWu_qDPU7Ou_hUaEceGDOMWfI_qdiedayyn5EKRe5MMdrtI0HNzglh1w)
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111812] dark:text-white transition-colors duration-200">
+<!-- Sticky Header -->
+<header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-[#e2e8e2] dark:border-[#2a3a2a]">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2 group" href="#">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight">Green Joy Straw</span>
+</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Our Story</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Sustainability</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 flex-1 max-w-md justify-center px-4">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">search</span>
+<input class="w-full bg-[#f0f4f0] dark:bg-[#1a2e1d] border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search eco-products..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-[#f0f4f0] dark:hover:bg-[#1a2e1d] rounded-full transition-colors relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1 right-1 size-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full font-bold">2</span>
+</button>
+<div class="size-9 rounded-full bg-cover bg-center border border-gray-200 dark:border-gray-700" data-alt="User profile avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAfsj03tfROYNsBrwnLnGrb437xtmnpTTq0vRGNMwoy96hU7dusptn_SIJIruTK1lgADmi7xt7idUULC3G1eFCZEVxiXpg2hgPRMHX3fHhnyvYH4jQTxLlKi0dNCsUg3s22kchLzYbdf0K2TmlwxlCFuDz25j1bxl1D0_Sd7vUIb3IRhJ8DckOD8MC4RN79xhTU0Pv4F4ZXBtWfzirP6u7vyrcT3LPqWOlzinlL3smAq6Z3wjUXhxl0a_pk0r3D324KyK-8O0QIs3E')"></div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 py-8 flex gap-10">
+<!-- Sidebar Filters -->
+<aside class="w-64 shrink-0 flex flex-col gap-8 sticky top-24 self-start">
+<!-- Categories -->
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-gray-500">Categories</h3>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined text-[20px]">eco</span>
+<span class="text-sm">Grass Straws</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] text-gray-400">palette</span>
+<span class="text-sm">Handicrafts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] text-gray-400">restaurant</span>
+<span class="text-sm">Utensils</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] text-gray-400">inventory_2</span>
+<span class="text-sm">Bundled Sets</span>
+</a>
+</nav>
+</div>
+<!-- Price Slider -->
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-gray-500">Price Range</h3>
+<div class="px-2 pt-6 pb-2">
+<div class="relative h-1.5 w-full bg-gray-200 dark:bg-gray-700 rounded-full">
+<div class="absolute h-full left-[20%] right-[30%] bg-primary rounded-full"></div>
+<div class="absolute -top-2 left-[20%] size-5 bg-white border-2 border-primary rounded-full shadow-md cursor-pointer"></div>
+<div class="absolute -top-2 right-[30%] size-5 bg-white border-2 border-primary rounded-full shadow-md cursor-pointer"></div>
+</div>
+<div class="flex justify-between mt-4 text-xs font-medium text-gray-600 dark:text-gray-400">
+<span>$0</span>
+<span>$100</span>
+</div>
+</div>
+</div>
+<!-- Availability -->
+<div class="flex flex-col gap-4 border-t border-gray-200 dark:border-gray-800 pt-6">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative flex items-center">
+<input checked="" class="checkbox-custom h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0 bg-white transition-all appearance-none border-2 checked:bg-primary checked:border-primary" type="checkbox"/>
+</div>
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">In Stock Only</span>
+</label>
+</div>
+<!-- Sustainability Badge -->
+<div class="mt-4 p-4 rounded-xl bg-primary/5 border border-primary/10">
+<p class="text-[11px] leading-relaxed text-gray-600 dark:text-gray-400">
+<span class="font-bold text-primary block mb-1">Impact Driven</span>
+                    Every purchase contributes to our mission of reducing ocean plastic by 1 million tons by 2030.
+                </p>
+</div>
+</aside>
+<!-- Main Product Area -->
+<section class="flex-1 flex flex-col gap-6">
+<!-- Utility Bar -->
+<div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 pb-4">
+<h2 class="text-lg font-bold">Showing 12 products</h2>
+<div class="flex items-center gap-3">
+<span class="text-sm text-gray-500">Sort by:</span>
+<select class="text-sm font-medium border-none bg-transparent focus:ring-0 cursor-pointer pr-8 py-0">
+<option>Newest Arrivals</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Top Rated</option>
+</select>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product Card 1 -->
+<div class="group bg-white dark:bg-background-dark rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
+<div class="relative aspect-square overflow-hidden bg-gray-50">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Natural Lepironia grass straws in a bunch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFNN1Zkd65vfbBAK3j91xXSXf_pWZt3kuvhzgKtpC1Jp5Alxoe9EFvABETKAVYM9Y1EkFKGQYF94h4GjWaT7oOVjP2EnbjoNV1_hyiJGa7NOE_fffNqGVzFkxUJ2Fp5Xd--N8Xsuwq5_bwUnL_AfrdmHbUon9bh_k5oVHxv92exT-hpwG-lVEfoimA6Ko8kxmLQlOHm5j0k0tAhj2HSDPNmHaUB1ON7PG71pPsl8ZX27CNTtf1VxWQLdRWQ6cTc9HWLbdVKtSsrdw"/>
+<div class="absolute top-3 left-3 bg-white/90 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest text-primary shadow-sm">Bestseller</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<h3 class="font-serif text-xl text-gray-900 dark:text-white mb-2 leading-tight">Hand-Cut Lepironia Grass Straws</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">Directly sourced, completely biodegradable organic straws for everyday use.</p>
+<div class="mt-auto flex items-center justify-between pt-4">
+<span class="text-lg font-bold text-gray-900 dark:text-white">$14.00</span>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-white dark:bg-background-dark rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
+<div class="relative aspect-square overflow-hidden bg-gray-50">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Handcrafted bamboo cutlery set in travel pouch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUCgymuwJZb3Wx1Ghe--5WMvI0n6SA_YVKhR49lapqyQ0g3Xz8QSaSg_zAIjsDJNgBbBYjg0ZjhZx3GTG_UZyALnwLQaPNqjyL4TmHnT_btT0_2V9Mgy0R1X3bNBFDBFWVW_dKVn8uMxDe9TZGdxrY5CN9ENjHeexYalTqXwfs3yGBbTP4t4QsN8o4R4sxUKdKzb2T56yavnWnTSCvHdnZpPJ4YSCA9XVWmeFpTZ2gCXTqJO3oCAByRGcoO6uVAh5zZcCyHjVN9Uc"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<h3 class="font-serif text-xl text-gray-900 dark:text-white mb-2 leading-tight">Artisan Travel Cutlery Kit</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">Compact, reusable bamboo fork, knife, and spoon in a hemp carrying case.</p>
+<div class="mt-auto flex items-center justify-between pt-4">
+<span class="text-lg font-bold text-gray-900 dark:text-white">$22.50</span>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-white dark:bg-background-dark rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
+<div class="relative aspect-square overflow-hidden bg-gray-50">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Beautifully woven wicker picnic basket" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrvLyLMStxmyFMhflUnnavoNNBhi5NnFfMBT-0A6IqFY9RNNesnaLpXTU71pnNOVkA1Ygp1DyamWreJEGYoUVO3XcOCBJwqLxIwHvPVtKn3whTgrU375B4quTpBSA4VQDKdEqaXzLJkya33BeppbM5VOGZI2a8OT3mMxbA0fUgCFVnw3Ac3nem6033SaqnM4X9ytIF2xP1cyqexfL3CiNYL3qHWJ31-lm5PH7h4sj8JQGgxq86Z5kZgBol-xsmAP-TFsbJRypwyyw"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<h3 class="font-serif text-xl text-gray-900 dark:text-white mb-2 leading-tight">The Coastal Picnic Basket</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">Hand-woven by local artisans using sustainable rattan and seagrass materials.</p>
+<div class="mt-auto flex items-center justify-between pt-4">
+<span class="text-lg font-bold text-gray-900 dark:text-white">$45.00</span>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-white dark:bg-background-dark rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
+<div class="relative aspect-square overflow-hidden bg-gray-50">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Biodegradable paper packaging for straws" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiNaR1vP3GYoNVlT4zpgB4Jo3Dd639GXdBr3lhbfjHlx_TDP9IuCT0Wc2-GF10H0JQa4cCM2AepUpxXIegCVRZ5PA2updsS1FIJQs-jkGZDL8S1AIytkTwS5Pp2mfp9GG-L4ery1aCyVeZJTylkSBKWqAavQDh6wFjgFh0jCtPpc4QnS3AH4WfVuyPBORkibp9px_zCwPLzGrz0GFVJtExscea4p-mt2ZebXRM843l8kyUdTLmtnlBzRylyHz3Km02Pn07Zg3Lv88"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<h3 class="font-serif text-xl text-gray-900 dark:text-white mb-2 leading-tight">Bulk Eco-Straw Bundle (250pc)</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">Perfect for events or small businesses looking for plastic-free alternatives.</p>
+<div class="mt-auto flex items-center justify-between pt-4">
+<span class="text-lg font-bold text-gray-900 dark:text-white">$38.00</span>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group bg-white dark:bg-background-dark rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
+<div class="relative aspect-square overflow-hidden bg-gray-50">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Zero waste bathroom accessories" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMFtS3ryX-4ZrEvwdLIbhkmTuZRAG_qdHtkD2tWvinlaXQpNWS_XXHH-JcnmuwyBSexeFDkgTKT3nsTE_b4svtLqF2uoj4jXY2S3LvAPaoQ_dmn-OOBUr18p9y2ZQ4HZc9fedDb266kdi_KY54S_8MEDDgkWCbt1yIccorU4o9-3yBZtzFuubPzW8o0TBaRLQ-MK-qhykyIxtrfD5GqQk-Arc0Aw6eYKE1YyWLI512UPElh4u9qf7UPPKhTJZEAhgRSFxkV37HDJ8"/>
+<div class="absolute top-3 left-3 bg-primary px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest text-white shadow-sm">New</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<h3 class="font-serif text-xl text-gray-900 dark:text-white mb-2 leading-tight">Bamboo Toothbrush Set</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">4-pack of compostable toothbrushes with soft BPA-free bristles.</p>
+<div class="mt-auto flex items-center justify-between pt-4">
+<span class="text-lg font-bold text-gray-900 dark:text-white">$12.00</span>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group bg-white dark:bg-background-dark rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
+<div class="relative aspect-square overflow-hidden bg-gray-50">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Natural loofah and organic sponges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-EF70bTQNhtg-mbHvp67C-lZON4xTUs_kaBO1v3xIap1k7qcDF_Ofo4lnHyyhghVY228f_2mOZ0YeQMRIRCa0wFrArwzpeHTmPcUMG_77NRPlnfSTE5q2A1U5WBfW18yEINRgqCQdPOViMGU5drBat_T_D_DiG2bLxEukAMo2YOO1ALX7gmMirNMucGxCcFRLu9Xu1qaK6_0J4npD3pUvb-GKjTg9VMuinTTwfMqRtdUew7VdDJp8aOnJLc3Bfk4rjYsCAczJ1zg"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<h3 class="font-serif text-xl text-gray-900 dark:text-white mb-2 leading-tight">Natural Kitchen Scrubber</h3>
+<p class="text-sm text-gray-500 mb-4 line-clamp-2">Durable, plant-based loofah scrubbers that replace plastic sponges.</p>
+<div class="mt-auto flex items-center justify-between pt-4">
+<span class="text-lg font-bold text-gray-900 dark:text-white">$8.99</span>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center mt-12 gap-2">
+<button class="size-10 rounded-lg flex items-center justify-center border border-gray-200 hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-10 rounded-lg flex items-center justify-center bg-primary text-white font-bold">1</button>
+<button class="size-10 rounded-lg flex items-center justify-center border border-gray-200 hover:bg-gray-50 transition-colors">2</button>
+<button class="size-10 rounded-lg flex items-center justify-center border border-gray-200 hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<footer class="mt-20 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark">
+<div class="max-w-[1440px] mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-2">
+<div class="flex items-center gap-2 mb-4">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"></path>
+</svg>
+</div>
+<span class="text-lg font-bold">Green Joy Straw</span>
+</div>
+<p class="text-sm text-gray-500 max-w-sm mb-6">Sustainable alternatives for a cleaner planet. We believe every small change leads to a big impact.</p>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-primary" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-gray-400 hover:text-primary" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-gray-400 hover:text-primary" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4 uppercase tracking-wider">Quick Links</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-sm text-gray-500 hover:text-primary" href="#">Shop All</a>
+<a class="text-sm text-gray-500 hover:text-primary" href="#">Wholesale</a>
+<a class="text-sm text-gray-500 hover:text-primary" href="#">Contact Us</a>
+</nav>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4 uppercase tracking-wider">Legal</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-sm text-gray-500 hover:text-primary" href="#">Privacy Policy</a>
+<a class="text-sm text-gray-500 hover:text-primary" href="#">Shipping Info</a>
+<a class="text-sm text-gray-500 hover:text-primary" href="#">Returns</a>
+</nav>
+</div>
+</div>
+<div class="border-t border-gray-100 dark:border-gray-800 py-6 text-center text-xs text-gray-400">
+            © 2024 Green Joy Straw. All rights reserved.
+        </div>
+</footer>
+</body></html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Story: From Farm to Table - Green Joy Straw</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#11d411",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                        "text-main": "#111811",
+                        "text-muted": "#618961",
+                        "accent-green": "#2f5c2f",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main font-display antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/90 backdrop-blur-md border-b border-[#f0f4f0] dark:border-white/10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center gap-2">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">eco</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-text-main dark:text-white">Green Joy Straw</h2>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-300" href="#">Our Story</a>
+<a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-300" href="#">Mission</a>
+<a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-300" href="#">Process</a>
+<a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-300" href="#">Shop</a>
+</nav>
+<!-- CTA -->
+<div class="hidden md:flex">
+<button class="bg-primary hover:bg-green-500 text-black px-5 py-2 rounded-lg text-sm font-bold transition-colors">
+                        Shop Now
+                    </button>
+</div>
+<!-- Mobile Menu Button -->
+<div class="md:hidden">
+<button class="text-text-main dark:text-white p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center bg-no-repeat" data-alt="Wide panoramic shot of lush green grass fields in the Mekong Delta under a bright sky" style='background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAo25qRklbaTclImDfKFyi87wcJj30AtwmIFmyP_eWuUtcOb1s5qG6PjLfM0PrydPAPTLcH8gStcZY3s9R1sQPJhWy0zPlOuTwLSP5E0DJeHYVRvbH7rUUAmHnCQ2mijxGMi6D_I6WMDUtgiExvGuEAiOdE2mT5cz1Srl55Yy9y_xx7vToE_bfVSItF9q4Gq2V7ZJC8SyRCMzJCCzEA3s_jm4S3glal4Zc1m8OtvGzLPbCactZoly0iFgepPSaB6Axup9E9ogO0TYg");'>
+</div>
+</div>
+<!-- Content -->
+<div class="relative z-10 text-center max-w-4xl px-4 flex flex-col items-center gap-6">
+<span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs uppercase tracking-widest font-bold border border-white/30">
+                    Est. 2018
+                </span>
+<h1 class="text-white text-5xl md:text-7xl font-bold leading-tight tracking-tight">
+                    From the Mekong Delta <br/> to your table.
+                </h1>
+<p class="text-white/90 text-lg md:text-xl font-light max-w-2xl mx-auto">
+                    Rooted in nature, crafted for the future. We transform wild grey sedge grass into sustainable solutions.
+                </p>
+<div class="mt-4">
+<button class="bg-primary hover:bg-green-500 text-black px-8 py-3 rounded-lg text-base font-bold transition-transform hover:scale-105">
+                        Discover Our Journey
+                    </button>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/80">
+<span class="material-symbols-outlined text-4xl">keyboard_arrow_down</span>
+</div>
+</section>
+<!-- Mission Section -->
+<section class="py-24 bg-background-light dark:bg-background-dark">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<!-- Image Side -->
+<div class="relative group">
+<div class="absolute -inset-2 bg-primary/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition duration-500"></div>
+<div aria-label="Local farmer" class="relative h-[500px] w-full rounded-xl overflow-hidden shadow-xl" data-alt="Close up portrait of a smiling Vietnamese farmer holding bundles of fresh green grass in a field" role="img" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDonHJ_n-lPZAxKoGiOsAFq2Br_x5Fawid3ijyEYL7ZJulEh5I-SkWLHF2qsTFIZ4YtsM9KbNPBZtpftYjq6Pjyvx-6hfUDxLsI88kSo1qb-Lk6n7-OUzambiyIbAcPdDxtk7tuN54V_QApSJzrrwCDWiY555mQsNmKuI7PexgdfafZeT1Trsab0imIfDsE4_NN3jbQDeoJgm5jL9R6ux3ew7Y8UnQK9gJC3F7VDeXrKhlbE2f_PaSlp7l0oKtO2lMBUERwuN4-6oM");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<p class="text-sm font-medium uppercase tracking-wider mb-1 text-primary">Local Impact</p>
+<p class="font-bold text-xl">Supporting 500+ Farming Families</p>
+</div>
+</div>
+</div>
+<!-- Text Side -->
+<div class="flex flex-col gap-8">
+<div>
+<h2 class="text-4xl font-bold text-text-main dark:text-white mb-6 leading-tight">
+                                Our Mission: <span class="text-primary">Empowerment</span> &amp; Sustainability
+                            </h2>
+<p class="text-text-muted dark:text-gray-300 text-lg leading-relaxed mb-6">
+                                The plastic crisis is real, but so is the power of nature. Our journey began with a simple observation in the wetlands of Vietnam: the Grey Sedge grass, known locally as "Cỏ Bàng," is naturally hollow, durable, and abundant.
+                            </p>
+<p class="text-text-muted dark:text-gray-300 text-lg leading-relaxed">
+                                By harvesting this grass, we not only provide a 100% biodegradable alternative to plastic straws but also create stable jobs for local farmers, preserving traditional crafts while protecting our oceans.
+                            </p>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="p-4 rounded-lg bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm">
+<span class="material-symbols-outlined text-3xl text-primary mb-2">recycling</span>
+<h3 class="font-bold text-lg dark:text-white">Zero Waste</h3>
+<p class="text-sm text-text-muted dark:text-gray-400">100% Compostable products</p>
+</div>
+<div class="p-4 rounded-lg bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm">
+<span class="material-symbols-outlined text-3xl text-primary mb-2">diversity_1</span>
+<h3 class="font-bold text-lg dark:text-white">Fair Trade</h3>
+<p class="text-sm text-text-muted dark:text-gray-400">Ethical wages for artisans</p>
+</div>
+</div>
+<button class="self-start flex items-center gap-2 text-text-main dark:text-white font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors">
+<span>Read Our Full Impact Report</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Timeline Section -->
+<section class="py-24 bg-white dark:bg-[#0a160a]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-primary font-bold tracking-wider uppercase text-sm">Our Process</span>
+<h2 class="text-4xl font-bold mt-2 mb-4 dark:text-white">Farm to Table Transparency</h2>
+<p class="text-text-muted dark:text-gray-400">Every straw tells a story of careful selection and natural processing. No chemicals, just nature.</p>
+</div>
+<!-- Desktop Horizontal Timeline -->
+<div class="hidden lg:grid grid-cols-4 gap-4 relative">
+<!-- Connector Line -->
+<div class="absolute top-8 left-[12%] right-[12%] h-[2px] border-t-2 border-dashed border-gray-200 dark:border-gray-700 -z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-background-light dark:bg-white/10 border-2 border-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white dark:bg-background-dark">
+<span class="material-symbols-outlined text-primary text-3xl">agriculture</span>
+</div>
+<h3 class="text-lg font-bold mb-2 dark:text-white">Harvesting</h3>
+<p class="text-sm text-text-muted dark:text-gray-400 px-4">Hand-picking the finest grey sedge grass from the Delta wetlands.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-background-light dark:bg-white/10 border-2 border-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white dark:bg-background-dark">
+<span class="material-symbols-outlined text-primary text-3xl">water_drop</span>
+</div>
+<h3 class="text-lg font-bold mb-2 dark:text-white">Cleaning &amp; Cutting</h3>
+<p class="text-sm text-text-muted dark:text-gray-400 px-4">Thorough washing with fresh water and cutting to precise lengths.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-background-light dark:bg-white/10 border-2 border-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white dark:bg-background-dark">
+<span class="material-symbols-outlined text-primary text-3xl">wb_sunny</span>
+</div>
+<h3 class="text-lg font-bold mb-2 dark:text-white">Sunlight Drying</h3>
+<p class="text-sm text-text-muted dark:text-gray-400 px-4">Naturally baked under the tropical sun to remove moisture and harden.</p>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-background-light dark:bg-white/10 border-2 border-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-white dark:bg-background-dark">
+<span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+</div>
+<h3 class="text-lg font-bold mb-2 dark:text-white">Quality Control</h3>
+<p class="text-sm text-text-muted dark:text-gray-400 px-4">Rigorous inspection and sterilization before packaging for you.</p>
+</div>
+</div>
+<!-- Mobile Vertical Timeline -->
+<div class="lg:hidden flex flex-col gap-8">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black font-bold">1</div>
+<div class="w-0.5 h-full bg-gray-200 my-2"></div>
+</div>
+<div class="pb-8">
+<h3 class="font-bold text-lg dark:text-white">Harvesting</h3>
+<p class="text-sm text-text-muted dark:text-gray-400">Hand-picking the finest grey sedge grass from the Delta wetlands.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black font-bold">2</div>
+<div class="w-0.5 h-full bg-gray-200 my-2"></div>
+</div>
+<div class="pb-8">
+<h3 class="font-bold text-lg dark:text-white">Cleaning &amp; Cutting</h3>
+<p class="text-sm text-text-muted dark:text-gray-400">Thorough washing with fresh water and cutting to precise lengths.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black font-bold">3</div>
+<div class="w-0.5 h-full bg-gray-200 my-2"></div>
+</div>
+<div class="pb-8">
+<h3 class="font-bold text-lg dark:text-white">Sunlight Drying</h3>
+<p class="text-sm text-text-muted dark:text-gray-400">Naturally baked under the tropical sun to remove moisture and harden.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black font-bold">4</div>
+</div>
+<div class="pb-8">
+<h3 class="font-bold text-lg dark:text-white">Quality Control</h3>
+<p class="text-sm text-text-muted dark:text-gray-400">Rigorous inspection and sterilization before packaging for you.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Circular Economy Section -->
+<section class="py-24 bg-[#e8efe8] dark:bg-background-dark/50 relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="order-2 lg:order-1 flex flex-col gap-6">
+<h2 class="text-4xl font-bold dark:text-white">Circular Economy: Nothing Wasted</h2>
+<p class="text-lg text-text-muted dark:text-gray-300">
+                            We believe in the wisdom of nature where waste does not exist. The Lepironia grass is a gift that keeps giving.
+                        </p>
+<div class="flex flex-col gap-4 mt-4">
+<!-- Feature 1 -->
+<div class="flex gap-4 items-start p-4 bg-white dark:bg-background-dark rounded-xl shadow-sm border border-transparent hover:border-primary/30 transition-colors">
+<div class="p-3 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">grass</span>
+</div>
+<div>
+<h3 class="font-bold text-lg dark:text-white">The Stems</h3>
+<p class="text-sm text-text-muted dark:text-gray-400 mt-1">
+                                        The hollow stems are perfectly shaped by nature to become durable, heat-resistant straws.
+                                    </p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="flex gap-4 items-start p-4 bg-white dark:bg-background-dark rounded-xl shadow-sm border border-transparent hover:border-primary/30 transition-colors">
+<div class="p-3 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<div>
+<h3 class="font-bold text-lg dark:text-white">The Leaves</h3>
+<p class="text-sm text-text-muted dark:text-gray-400 mt-1">
+                                        Remaining leaves and fibers are woven by skilled artisans into bags, hats, and mats.
+                                    </p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="flex gap-4 items-start p-4 bg-white dark:bg-background-dark rounded-xl shadow-sm border border-transparent hover:border-primary/30 transition-colors">
+<div class="p-3 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">compost</span>
+</div>
+<div>
+<h3 class="font-bold text-lg dark:text-white">End of Life</h3>
+<p class="text-sm text-text-muted dark:text-gray-400 mt-1">
+                                        After use, our products return to the earth as compost, nourishing the soil for future growth.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Infographic Visual -->
+<div class="order-1 lg:order-2 flex justify-center items-center">
+<div class="relative w-full max-w-md aspect-square bg-white dark:bg-white/5 rounded-full shadow-2xl p-8 flex items-center justify-center border border-white/50 dark:border-white/10">
+<!-- Central Image representing Grass Plant -->
+<div class="relative z-10 w-48 h-48 rounded-full overflow-hidden border-4 border-primary/20">
+<div class="w-full h-full bg-cover bg-center" data-alt="Close up detailed shot of green sedge grass stems growing vertically" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBY0d_geeinFi85gpS03TU0K4DRpZgiGKJ8LnmPkNQ7wv3zZteZKWqQMGS5sTDYLl9DGDFWaANIxk-XZTnSnf5pAcYI-CKh2GOaKoRlWxBY6SpsZ4vZRPVtfC0a-LRgH40YG7vIWPuTASMyfPHWMArDzd8ZATBwNWtAUKQRccqiX6jf9eN3BaCoi-9FRtrCZD2M72kPrbltNNrWeTP_B5wpcs_fhAha9ie69xO9182uG_GDUttFnji4JkcYklUmg7E0TMhGDum2VzU");'>
+</div>
+</div>
+<!-- Orbiting Elements -->
+<div class="absolute inset-0 animate-[spin_20s_linear_infinite]">
+<div class="absolute top-4 left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_#11d411]"></div>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_#11d411]"></div>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_#11d411]"></div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_#11d411]"></div>
+</div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 px-4 py-2 rounded-lg shadow-lg border border-primary/20">
+<span class="text-sm font-bold text-primary">Handicrafts</span>
+</div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 px-4 py-2 rounded-lg shadow-lg border border-primary/20">
+<span class="text-sm font-bold text-primary">Straws</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Footer -->
+<section class="py-20 bg-background-dark text-white relative overflow-hidden">
+<div class="absolute inset-0 opacity-20" data-alt="Abstract pattern of woven green palm leaves texture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAWlLF4GBtZz7vD3acFvl0vPqrH6xME0DQ-Vfb3oKkTX2xYCvhLLnLu0T4Md8S6egIP86sSMYZ1-1Lm-nM2VgfQvjmfQYDrH47KqEoMXkw_85Z2Ivf8AfXZlPjSy36FxDZUYC65ObKiZbLNd_GlsomQJ2l0zL-GFx_3d8nZigdmmzmB9CTTayY8e6xLrqeX3W4as3JgEfUBfSCBteP0B4zjCQjkG6v90UxWH6ZB1Ra1Co933IZwrqYTjR9pDithRsV5AaXorqHdxhA"); background-size: cover; background-position: center;'>
+</div>
+<div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+<h2 class="text-3xl md:text-5xl font-bold mb-6">Ready to make the switch?</h2>
+<p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+                    Join thousands of conscious businesses and individuals reducing their plastic footprint today.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-primary hover:bg-green-500 text-black px-8 py-4 rounded-lg text-base font-bold transition-all hover:-translate-y-1 shadow-lg shadow-primary/25">
+                        Shop Green Joy Straws
+                    </button>
+<button class="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-lg text-base font-bold transition-all">
+                        Partner With Us
+                    </button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-background-light dark:bg-background-dark py-12 border-t border-gray-200 dark:border-white/10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">eco</span>
+<span class="font-bold text-text-main dark:text-white">Green Joy Straw</span>
+</div>
+<div class="text-sm text-text-muted dark:text-gray-500">
+                    © 2023 Green Joy Straw. All rights reserved.
+                </div>
+<div class="flex gap-4">
+<a class="text-text-muted hover:text-primary transition-colors dark:text-gray-400" href="#">
+<span class="sr-only">Facebook</span>
+<svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg>
+</a>
+<a class="text-text-muted hover:text-primary transition-colors dark:text-gray-400" href="#">
+<span class="sr-only">Instagram</span>
+<svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772 4.902 4.902 0 011.772-1.153c.636-.247 1.363-.416 2.427-.465 1.067-.047 1.407-.06 3.808-.06h.63zm1.516 1.516c-2.33 0-2.625.01-3.665.056-.78.035-1.205.166-1.485.276a3.01 3.01 0 00-1.12.73 3.01 3.01 0 00-.73 1.12c-.11.28-.24.705-.275 1.485-.046 1.04-.056 1.335-.056 3.665v.478c0 2.33.01 2.625.056 3.665.035.78.166 1.205.276 1.485.186.481.435.832.73 1.12.288.287.64.536 1.12.73.28.11.705.24 1.485.275 1.04.046 1.335.056 3.665.056h.478c2.33 0 2.625-.01 3.665-.056.78-.035 1.205-.166 1.485-.276.481-.186.832-.435 1.12-.73.287-.288.536-.64.73-1.12.11-.28.24-.705.275-1.485.046-1.04.056-1.335.056-3.665v-.478c0-2.33-.01-2.625-.056-3.665-.035-.78-.166-1.205-.276-1.485-.186-.481-.435-.832-.73-1.12a3.01 3.01 0 00-1.12-.73c-.28-.11-.705-.24-1.485-.275-1.04-.046-1.335-.056-3.665-.056h-.478zm-1.516 3.868a4.135 4.135 0 110 8.27 4.135 4.135 0 010-8.27zm0 1.517a2.617 2.617 0 100 5.235 2.617 2.617 0 000-5.235zm4.846-3.766a1.01 1.01 0 110 2.02 1.01 1.01 0 010-2.02z" fill-rule="evenodd"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

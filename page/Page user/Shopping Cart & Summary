@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart - Green Joy Straw</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0da50d",
+                        "primary-dark": "#0a800a",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                        "beige-light": "#F9F9F7", 
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #d1d5db;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 bg-white dark:bg-[#1a1a1a] border-b border-[#f0f4f0] dark:border-[#333]">
+<div class="px-4 lg:px-40 flex flex-1 justify-center py-3">
+<div class="flex items-center justify-between w-full max-w-[1200px]">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#111811] dark:text-white">
+<div class="size-8 text-primary">
+<svg class="h-full w-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Green Joy Straw</h2>
+</div>
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-[#111811] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-[#111811] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">About</a>
+<a class="text-[#111811] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sustainability</a>
+<a class="text-[#111811] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+</div>
+<div class="flex items-center gap-4 lg:gap-8">
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-gray-200 dark:border-gray-700 bg-[#f0f4f0] dark:bg-[#2a2a2a] overflow-hidden group focus-within:ring-2 focus-within:ring-primary/20">
+<div class="text-[#618961] flex items-center justify-center pl-3">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none bg-transparent border-none text-[#111811] dark:text-white focus:ring-0 placeholder:text-[#618961] px-3 text-sm font-normal leading-normal h-full" placeholder="Search"/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-10 bg-[#f0f4f0] dark:bg-[#2a2a2a] text-[#111811] dark:text-white hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 bg-[#f0f4f0] dark:bg-[#2a2a2a] text-[#111811] dark:text-white hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full px-4 lg:px-40 py-8 lg:py-12">
+<div class="layout-content-container max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12">
+<!-- Left Column: Cart Items (2/3 width) -->
+<div class="flex-1 lg:w-2/3 flex flex-col gap-6">
+<!-- Page Heading -->
+<div>
+<h1 class="text-[#111811] dark:text-white text-3xl lg:text-4xl font-black leading-tight tracking-[-0.033em]">Your Cart (3 Items)</h1>
+</div>
+<!-- Table -->
+<div class="w-full overflow-hidden rounded-xl border border-[#dbe6db] dark:border-gray-700 bg-white dark:bg-[#1a1a1a] shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-[#222] border-b border-[#dbe6db] dark:border-gray-700">
+<th class="py-4 pl-6 pr-4 text-sm font-semibold text-[#111811] dark:text-gray-200">Product</th>
+<th class="px-4 py-4 text-sm font-semibold text-[#111811] dark:text-gray-200 w-24 md:w-32">Price</th>
+<th class="px-4 py-4 text-sm font-semibold text-[#111811] dark:text-gray-200 w-32 md:w-40 text-center">Quantity</th>
+<th class="px-4 py-4 text-sm font-semibold text-[#111811] dark:text-gray-200 w-24 md:w-32 text-right">Total</th>
+<th class="py-4 pl-4 pr-6 w-16"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#dbe6db] dark:divide-gray-700">
+<!-- Item 1 -->
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+<td class="py-4 pl-6 pr-4">
+<div class="flex items-center gap-4">
+<div class="shrink-0 h-16 w-16 rounded-lg bg-gray-100 dark:bg-gray-800 bg-center bg-cover overflow-hidden border border-gray-100 dark:border-gray-700" data-alt="Close up of green grass straws in a bundle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAXlAr6-C65ZP0seYWjdlceCG4xMqc7T4dsnhhaP-tyd4ZuikUj3mhi79ZBPFNfCkYAInnL5A6KJIyKARJ96w_KFByB8lhVRE368juvagQIKMLYaKpyKOrba2GpjmoVjm9NWF9KHzv18vZMP54LYDgYmad7p4zi7YVIe1baAMR-1ReUJTIJMWQ5pJ2by2sDjRVoG6IkWze5lvSHCPyWbaEEaXZ5Lpt8NVL2HdscAuBl1RdXC9X-L20mKN4JGIKrCbXgRy5_szFZS14');"></div>
+<div>
+<p class="text-[#111811] dark:text-white text-sm font-medium leading-normal line-clamp-2">Grass Straws - Box 50</p>
+<p class="text-gray-500 text-xs mt-1 md:hidden">$5.00</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-[#618961] dark:text-[#8bc38b] text-sm font-medium hidden md:table-cell">$5.00</td>
+<td class="px-4 py-4">
+<div class="flex items-center justify-center">
+<div class="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden h-9">
+<button class="w-8 h-full flex items-center justify-center bg-gray-50 dark:bg-[#2a2a2a] hover:bg-gray-100 dark:hover:bg-[#333] text-gray-600 dark:text-gray-300 transition-colors">
+<span class="material-symbols-outlined text-[16px] font-bold">remove</span>
+</button>
+<div class="w-10 h-full flex items-center justify-center bg-white dark:bg-[#1a1a1a] text-[#111811] dark:text-white text-sm font-medium border-x border-gray-300 dark:border-gray-600">
+                                                1
+                                            </div>
+<button class="w-8 h-full flex items-center justify-center bg-gray-50 dark:bg-[#2a2a2a] hover:bg-gray-100 dark:hover:bg-[#333] text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px] font-bold">add</span>
+</button>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-[#111811] dark:text-white text-sm font-bold text-right">$5.00</td>
+<td class="py-4 pl-4 pr-6 text-right">
+<button class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Item 2 -->
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+<td class="py-4 pl-6 pr-4">
+<div class="flex items-center gap-4">
+<div class="shrink-0 h-16 w-16 rounded-lg bg-gray-100 dark:bg-gray-800 bg-center bg-cover overflow-hidden border border-gray-100 dark:border-gray-700" data-alt="Bamboo drinking straws on a table surface" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIXiJBhir9aUKTOeTpY22slErGO3_B2lHaF9NuycDdiWb4kblIpxoRfXDYrLFhvB-viWMWlQ-WtFmz5QtxE2RIt3QB7xEODAK0M9qzocJ6U-JtQgu8pd9LphiGsiyfmW8DNAzmZY-8coibxL-tDgddumZDHeriAFeEi8vb2cysLF7G8LLldrcIGSD6LFXgVKHahBbd6znf8e0jlcz876meIyx53mwZxLmbSf2Xl4QEql6APfvsKOusvEdo4h-ahleHQUB1-TFumDA');"></div>
+<div>
+<p class="text-[#111811] dark:text-white text-sm font-medium leading-normal line-clamp-2">Bamboo Straws - Standard</p>
+<p class="text-gray-500 text-xs mt-1 md:hidden">$12.00</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-[#618961] dark:text-[#8bc38b] text-sm font-medium hidden md:table-cell">$12.00</td>
+<td class="px-4 py-4">
+<div class="flex items-center justify-center">
+<div class="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden h-9">
+<button class="w-8 h-full flex items-center justify-center bg-gray-50 dark:bg-[#2a2a2a] hover:bg-gray-100 dark:hover:bg-[#333] text-gray-600 dark:text-gray-300 transition-colors">
+<span class="material-symbols-outlined text-[16px] font-bold">remove</span>
+</button>
+<div class="w-10 h-full flex items-center justify-center bg-white dark:bg-[#1a1a1a] text-[#111811] dark:text-white text-sm font-medium border-x border-gray-300 dark:border-gray-600">
+                                                2
+                                            </div>
+<button class="w-8 h-full flex items-center justify-center bg-gray-50 dark:bg-[#2a2a2a] hover:bg-gray-100 dark:hover:bg-[#333] text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px] font-bold">add</span>
+</button>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-[#111811] dark:text-white text-sm font-bold text-right">$24.00</td>
+<td class="py-4 pl-4 pr-6 text-right">
+<button class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Item 3 -->
+<tr class="group hover:bg-gray-50 dark:hover:bg-[#222] transition-colors">
+<td class="py-4 pl-6 pr-4">
+<div class="flex items-center gap-4">
+<div class="shrink-0 h-16 w-16 rounded-lg bg-gray-100 dark:bg-gray-800 bg-center bg-cover overflow-hidden border border-gray-100 dark:border-gray-700" data-alt="Coconut fiber cleaning brush texture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzmyWI9H1GrrqPRhoRVxzPnANseSr19O610P92v3igqhVVBIgZWaA-kIBeVYSNSYRCQMthC8gX6pxf4XW8fNNxBm8OlA1rIp1iWB1vk8IGG5O7XYxtL4ZNoJuB_AdxcfV9umnTDn9LAzTIIxpKk-W0-bVctHTm0i8QlaNuoAcZd4s8B_MuhOp88HB37irZsxJd7F0jVjvYx_7tmvR7vN61cgFG2TTv3yJ-v-Ao5tIh09RtpIERaled8DT7IhaGC35ydVYUMe-Nt2w');"></div>
+<div>
+<p class="text-[#111811] dark:text-white text-sm font-medium leading-normal line-clamp-2">Coconut Fiber Brush</p>
+<p class="text-gray-500 text-xs mt-1 md:hidden">$3.00</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-[#618961] dark:text-[#8bc38b] text-sm font-medium hidden md:table-cell">$3.00</td>
+<td class="px-4 py-4">
+<div class="flex items-center justify-center">
+<div class="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden h-9">
+<button class="w-8 h-full flex items-center justify-center bg-gray-50 dark:bg-[#2a2a2a] hover:bg-gray-100 dark:hover:bg-[#333] text-gray-600 dark:text-gray-300 transition-colors">
+<span class="material-symbols-outlined text-[16px] font-bold">remove</span>
+</button>
+<div class="w-10 h-full flex items-center justify-center bg-white dark:bg-[#1a1a1a] text-[#111811] dark:text-white text-sm font-medium border-x border-gray-300 dark:border-gray-600">
+                                                1
+                                            </div>
+<button class="w-8 h-full flex items-center justify-center bg-gray-50 dark:bg-[#2a2a2a] hover:bg-gray-100 dark:hover:bg-[#333] text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px] font-bold">add</span>
+</button>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 text-[#111811] dark:text-white text-sm font-bold text-right">$3.00</td>
+<td class="py-4 pl-4 pr-6 text-right">
+<button class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Continue Shopping Button -->
+<div>
+<a class="inline-flex items-center gap-2 text-[#111811] dark:text-white hover:text-primary dark:hover:text-primary font-bold text-sm leading-normal tracking-[0.015em] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] transform group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span>Continue Shopping</span>
+</a>
+</div>
+</div>
+<!-- Right Column: Order Summary (1/3 width, sticky) -->
+<div class="lg:w-1/3 w-full">
+<div class="sticky top-24 bg-beige-light dark:bg-[#1e1e1e] rounded-xl p-6 lg:p-8 shadow-sm border border-transparent dark:border-[#333]">
+<h2 class="text-[#111811] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-6">Order Summary</h2>
+<div class="flex flex-col gap-4 mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-600 dark:text-gray-400 font-medium">Subtotal</span>
+<span class="text-[#111811] dark:text-white font-bold">$32.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-600 dark:text-gray-400 font-medium">Shipping</span>
+<span class="text-gray-500 italic text-xs text-right max-w-[120px]">Calculated at checkout</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-600 dark:text-gray-400 font-medium">Tax</span>
+<span class="text-gray-500 italic text-xs">Calculated at checkout</span>
+</div>
+</div>
+<!-- Coupon Code -->
+<div class="mb-6">
+<label class="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Coupon Code</label>
+<div class="flex gap-2 h-10">
+<input class="flex-1 rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-[#2a2a2a] text-sm px-3 focus:ring-1 focus:ring-primary focus:border-primary dark:text-white shadow-sm" placeholder="Enter code" type="text"/>
+<button class="bg-primary hover:bg-primary-dark text-white px-4 rounded-lg text-sm font-semibold transition-colors shadow-sm">
+                                Apply
+                            </button>
+</div>
+</div>
+<!-- Grand Total -->
+<div class="flex justify-between items-end mb-8">
+<span class="text-[#111811] dark:text-white font-bold text-base">Grand Total</span>
+<span class="text-primary dark:text-primary font-black text-2xl tracking-tight">$32.00</span>
+</div>
+<!-- Checkout Button -->
+<button class="w-full h-12 flex items-center justify-center bg-primary hover:bg-primary-dark text-white rounded-lg text-base font-bold shadow-md transition-all transform active:scale-[0.98]">
+                        Proceed to Checkout
+                    </button>
+<div class="mt-4 flex items-center justify-center gap-2 text-gray-400">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="text-xs font-medium">Secure Checkout</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
+
+
