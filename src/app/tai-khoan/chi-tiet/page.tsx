@@ -13,12 +13,15 @@ export default async function ChiTietPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, phone_number, address")
+    .select("full_name, phone_number, address, avatar_url, email")
     .eq("id", user.id)
     .single();
 
   const displayName = profile?.full_name ?? user.email ?? "User";
-  const avatarUrl = user.user_metadata?.avatar_url as string | undefined;
+  const avatarUrl =
+    (profile?.avatar_url as string | undefined) ??
+    (user.user_metadata?.avatar_url as string | undefined);
+  const userEmail = profile?.email ?? user.email ?? "";
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-[#f6f8f6] dark:bg-[#102210] text-[#111811] dark:text-white">
@@ -108,7 +111,7 @@ export default async function ChiTietPage() {
             </div>
             <AccountDetailsContent
               profile={profile}
-              userEmail={user.email ?? ""}
+              userEmail={userEmail}
               userId={user.id}
             />
           </main>
