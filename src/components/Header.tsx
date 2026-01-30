@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 const SHOP_LINKS = [
   { label: "Ống hút cỏ", href: "/cua-hang?category=ong-hut-co" },
@@ -10,13 +13,36 @@ const SHOP_LINKS = [
 ];
 
 export default function Header() {
+  const [user, setUser] = useState<User | null>(null);
   const [isShopOpen, setIsShopOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const shopRef = useRef<HTMLDivElement>(null);
+  const userRef = useRef<HTMLDivElement>(null);
 
   const cartCount = 2; // TODO: from context/Supabase
+
+  const displayName =
+    user?.user_metadata?.full_name ||
+    user?.user_metadata?.name ||
+    user?.email?.split("@")[0] ||
+    "Truc";
+  const avatarUrl = user?.user_metadata?.avatar_url;
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     function handleScroll() {
@@ -30,6 +56,9 @@ export default function Header() {
     function handleClickOutside(e: MouseEvent) {
       if (shopRef.current && !shopRef.current.contains(e.target as Node)) {
         setIsShopOpen(false);
+      }
+      if (userRef.current && !userRef.current.contains(e.target as Node)) {
+        setUserDropdownOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -153,14 +182,77 @@ export default function Header() {
               )}
             </Link>
 
-            {/* Tài khoản - desktop */}
-            <Link
-              href="/tai-khoan"
-              className="hidden md:flex h-9 w-9 items-center justify-center rounded-full text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 transition-colors"
-              aria-label="Tài khoản"
-            >
-              <span className="material-symbols-outlined text-[22px]">person</span>
-            </Link>
+            {/* Tài khoản / User dropdown - desktop */}
+            {user ? (
+              <div className="hidden md:block relative" ref={userRef}>
+                <button
+                  type="button"
+                  onClick={() => setUserDropdownOpen((o) => !o)}
+                  className="flex items-center gap-2 h-9 pl-1 pr-2 rounded-full text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 transition-colors"
+                  aria-label="Menu tài khoản"
+                  aria-expanded={userDropdownOpen}
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#2f7f34] text-white text-sm font-semibold ring-2 ring-white dark:ring-[#1a261b]">
+                    {avatarUrl ? (
+                      <Image
+                        src={avatarUrl}
+                        alt=""
+                        width={32}
+                        height={32}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      displayName.charAt(0).toUpperCase()
+                    )}
+                  </span>
+                  <span className="text-sm font-medium max-w-[100px] truncate">
+                    {displayName}
+                  </span>
+                  <span
+                    className={`material-symbols-outlined text-lg transition-transform ${userDropdownOpen ? "rotate-180" : ""}`}
+                  >
+                    expand_more
+                  </span>
+                </button>
+                {userDropdownOpen && (
+                  <div className="absolute right-0 top-full mt-1 min-w-[200px] rounded-lg border border-[#eaf0ea] dark:border-white/10 bg-white dark:bg-[#1a261b] shadow-lg py-1 z-50">
+                    <Link
+                      href="/tai-khoan/chi-tiet"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 hover:text-[#2f7f34] transition-colors"
+                      onClick={() => setUserDropdownOpen(false)}
+                    >
+                      <span className="material-symbols-outlined text-[18px]">person</span>
+                      My Profile
+                    </Link>
+                    <Link
+                      href="/tai-khoan/don-hang"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 hover:text-[#2f7f34] transition-colors"
+                      onClick={() => setUserDropdownOpen(false)}
+                    >
+                      <span className="material-symbols-outlined text-[18px]">receipt_long</span>
+                      My Orders
+                    </Link>
+                    <div className="my-1 border-t border-[#eaf0ea] dark:border-white/10" />
+                    <Link
+                      href="/tai-khoan/dang-xuat"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                      onClick={() => setUserDropdownOpen(false)}
+                    >
+                      <span className="material-symbols-outlined text-[18px]">logout</span>
+                      Logout
+                    </Link>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                href="/tai-khoan"
+                className="hidden md:flex h-9 w-9 items-center justify-center rounded-full text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10 transition-colors"
+                aria-label="Tài khoản"
+              >
+                <span className="material-symbols-outlined text-[22px]">person</span>
+              </Link>
+            )}
 
             {/* Ngôn ngữ VN | EN - desktop */}
             <button
@@ -270,14 +362,59 @@ export default function Header() {
                   <span className="material-symbols-outlined">search</span>
                   Tìm kiếm
                 </button>
-                <Link
-                  href="/tai-khoan"
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="material-symbols-outlined">person</span>
-                  Tài khoản
-                </Link>
+                {user ? (
+                  <>
+                    <div className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#eaf0ea]/50 dark:bg-white/5">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#2f7f34] text-white text-sm font-semibold">
+                        {avatarUrl ? (
+                          <Image
+                            src={avatarUrl}
+                            alt=""
+                            width={36}
+                            height={36}
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          displayName.charAt(0).toUpperCase()
+                        )}
+                      </span>
+                      <span className="text-sm font-medium truncate">{displayName}</span>
+                    </div>
+                    <Link
+                      href="/tai-khoan/chi-tiet"
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span className="material-symbols-outlined">person</span>
+                      My Profile
+                    </Link>
+                    <Link
+                      href="/tai-khoan/don-hang"
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span className="material-symbols-outlined">receipt_long</span>
+                      My Orders
+                    </Link>
+                    <Link
+                      href="/tai-khoan/dang-xuat"
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-red-600 dark:text-red-400 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span className="material-symbols-outlined">logout</span>
+                      Logout
+                    </Link>
+                  </>
+                ) : (
+                  <Link
+                    href="/tai-khoan"
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="material-symbols-outlined">person</span>
+                    Tài khoản
+                  </Link>
+                )}
                 <button
                   type="button"
                   className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"

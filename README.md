@@ -40,6 +40,27 @@ M? [http://localhost:3000](http://localhost:3000).
 - **Server:** `src/lib/supabase/server.ts` ? d�ng trong Server Components, Server Actions, Route Handlers
 - **Middleware:** `src/middleware.ts` ? refresh session/auth m?i request
 
+## Kiem tra cau hinh
+
+- **.env.local:** Co `NEXT_PUBLIC_SUPABASE_URL` va `NEXT_PUBLIC_SUPABASE_ANON_KEY` trung voi project Supabase (Settings > API).
+- **Google Login (Supabase):** Authentication > URL Configuration: Redirect URL co `http://localhost:3000/auth/callback`. Authentication > Providers > Google: bat, dien Client ID va Client Secret.
+- **Google Cloud Console:** Authorized redirect URIs co `https://<project-ref>.supabase.co/auth/v1/callback`.
+
+## Dang nhap bang Google (Supabase Auth)
+
+Trang **Tai khoan** va **Dang ky** co nut **Dang nhap / Dang ky bang Google**. Luong OAuth:
+
+1. **Supabase Dashboard** (Authentication):
+   - **URL Configuration**: Them **Redirect URL**: `http://localhost:3000/auth/callback` (va URL production neu co).
+   - **Providers > Google**: Bat Google, dien **Client ID** va **Client Secret** (lay tu Google Cloud Console).
+
+2. **Google Cloud Console** ([console.cloud.google.com](https://console.cloud.google.com)):
+   - Tao OAuth 2.0 Client ID (loai "Web application").
+   - **Authorized redirect URIs**: Them dung `https://<project-ref>.supabase.co/auth/v1/callback` (vd: `https://hdzkgoenpfxyhsgpqatp.supabase.co/auth/v1/callback`).
+   - Copy Client ID va Client Secret vao Supabase > Authentication > Providers > Google.
+
+Sau khi cau hinh, nguoi dung bam "Dang nhap bang Google" se duoc chuyen den Google, dang nhap xong quay ve `/auth/callback` roi ve Trang chu. Dang nhap bang Facebook da duoc go bo.
+
 ## PayOS (thanh toan)
 
 Trang gio hang co nut **Thanh toan bang PayOS**. Them vao `.env.local`:

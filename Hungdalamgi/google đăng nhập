@@ -1,0 +1,17 @@
+
+
+Callback URL (for OAuth)
+https://hdzkgoenpfxyhsgpqatp.supabase.co/auth/v1/callback 
+Web client 1
+926224405951-7jo75pbod6okbi0iijrlgtbblt0ifsnh.apps.googleusercontent.com
+GOOGLE_OAUTH2_CLIENT
+926224405951-2q24uhj2gij5a53tnqiiv409i7kuvrvq.apps.googleusercontent.com
+
+
+
+@page/page tien ich/Login
+
+ dưới đây là mã html lấy 
+header  tươmg tự home page 
+phần main/body  lấy mã html dưới đây 
+@page/Page user/Contact 

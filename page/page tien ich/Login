@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Green Joy - Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#11d411",
+                        "primary-hover": "#0eb60e",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar to match the clean aesthetic if content overflows */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #aaa;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display h-screen w-full overflow-hidden">
+<div class="flex flex-col lg:flex-row h-full w-full">
+<!-- Left Side: Hero Image Section -->
+<div class="relative hidden lg:flex lg:w-1/2 h-full items-center justify-center overflow-hidden bg-cover bg-center" data-alt="Close up of fresh green grass straws in sunlight" style='background-image: linear-gradient(rgba(0, 50, 0, 0.3), rgba(0, 50, 0, 0.6)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBCm-Nx0PxO8ChSJT0b4Y8WE4CPCu5OlrjZOiCUtQi-4BvGhxGwnQovDMsYku4Xdh-4JfG35VAOLzJbqniL0bh7eAw_8g7RewlHf31aMbg2tfnT6DI93ITy7uY9XbJ2e38aA6Xmh07t3b4ucEdOlSHbaZJhbN53uRyi0q_D-t1gWBKh8DThJiZQkpsbCVrSLQREVXYetczFlo4cQa5WfZbSQp9QiESCCESrnpNYw1VRsPKryJFOBhpficK1eBEHh623IKSFZ8hek2A");'>
+<div class="z-10 px-12 text-center max-w-xl">
+<h1 class="text-white text-5xl font-black leading-tight tracking-tight drop-shadow-lg mb-6">
+                    Join the Green Revolution
+                </h1>
+<p class="text-white/90 text-xl font-medium leading-relaxed drop-shadow-md">
+                    Sustainable choices for a better tomorrow. Experience the joy of eco-friendly living with our natural grass straws.
+                </p>
+</div>
+<!-- Decorative leaf pattern or subtle texture could go here if needed -->
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+</div>
+<!-- Right Side: Auth Form -->
+<div class="flex w-full lg:w-1/2 h-full flex-col bg-white dark:bg-[#1a1a1a] overflow-y-auto">
+<div class="flex min-h-full flex-col items-center justify-center px-6 py-12 lg:px-20 xl:px-32">
+<!-- Logo & Header -->
+<div class="w-full max-w-[440px] flex flex-col items-center mb-8">
+<div class="flex items-center gap-2 mb-2 text-primary">
+<span class="material-symbols-outlined !text-4xl">eco</span>
+</div>
+<h2 class="text-[#111811] dark:text-white text-2xl font-bold tracking-tight">Green Joy</h2>
+</div>
+<!-- Tabs -->
+<div class="w-full max-w-[440px] mb-8">
+<div class="flex w-full border-b border-[#e5e7eb] dark:border-gray-700">
+<button class="flex flex-1 items-center justify-center border-b-[3px] border-primary pb-3 pt-2 text-primary dark:text-primary transition-colors">
+<span class="text-sm font-bold tracking-wide uppercase">Sign In</span>
+</button>
+<button class="flex flex-1 items-center justify-center border-b-[3px] border-transparent pb-3 pt-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
+<span class="text-sm font-bold tracking-wide uppercase">Sign Up</span>
+</button>
+</div>
+</div>
+<!-- Form -->
+<form class="w-full max-w-[440px] space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="text-[#111811] dark:text-gray-200 text-sm font-semibold leading-normal" for="email">Email</label>
+<div class="relative">
+<input class="flex w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-[#111811] placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder:text-gray-500 transition-shadow" id="email" placeholder="name@example.com" type="email"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+<span class="material-symbols-outlined !text-xl">mail</span>
+</div>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="text-[#111811] dark:text-gray-200 text-sm font-semibold leading-normal" for="password">Password</label>
+<a class="text-primary hover:text-primary-hover text-xs font-semibold hover:underline" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<input class="flex w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-[#111811] placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder:text-gray-500 transition-shadow" id="password" placeholder="••••••••" type="password"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 cursor-pointer hover:text-gray-600">
+<span class="material-symbols-outlined !text-xl">visibility_off</span>
+</div>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="flex w-full items-center justify-center rounded-lg bg-primary hover:bg-primary-hover px-5 py-3.5 text-white shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" type="button">
+<span class="text-sm font-bold tracking-wide uppercase">Login</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="w-full max-w-[440px] my-8 relative flex items-center">
+<div class="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
+<span class="flex-shrink-0 mx-4 text-gray-400 dark:text-gray-500 text-xs font-medium uppercase tracking-wide">Or continue with</span>
+<div class="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
+</div>
+<!-- Social Logins -->
+<div class="w-full max-w-[440px] flex justify-center gap-4 mb-8">
+<button class="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-colors shadow-sm">
+<!-- Google SVG -->
+<svg aria-hidden="true" class="h-5 w-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+</button>
+<button class="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-colors shadow-sm">
+<!-- Facebook SVG -->
+<svg aria-hidden="true" class="h-5 w-5 text-[#1877F2]" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
+</svg>
+</button>
+</div>
+<!-- Footer Link -->
+<div class="text-center">
+<p class="text-sm text-gray-500 dark:text-gray-400">
+                        Don't have an account? 
+                        <a class="font-bold text-primary hover:text-primary-hover hover:underline ml-1" href="#">Sign Up</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body></html>
