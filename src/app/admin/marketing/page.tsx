@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getAdminCoupons } from "@/lib/coupons";
 
 const ADMIN_AVATAR =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBKqKGDdKY37WfKqF0MwrVcBwu9Ohg4oag6X6JQeeSEFFTPwSBOVfbRjiREu8P-ZkJI9mJximUMeXKeO0_UnDoCtbNb87kJmh-vp0wc2GfmzihWydCp92Nmfv1EOpAZDTp53vFk-4dhC0yIVK01ev81lzHk_bMaKc740ZXvxd5_R1kWjdFqdasuKbpEk9gFeaznlymjtzhCV7OJJLiMxojPDV_PhhO_LBVfujp58oeyIUIyphvqjLKYp955dNymLeK7Qpo8B89vLXs";
@@ -18,47 +19,57 @@ type CouponRow = {
   expired?: boolean;
 };
 
-const COUPONS: CouponRow[] = [
-  {
-    id: "1",
-    code: "GREENJOY10",
-    type: "10% Off",
-    used: 45,
-    total: "100 total",
-    usagePercent: 45,
-    barColor: "bg-[#1c5f21]",
-    startDate: "Oct 01, 2023",
-    endDate: "to Dec 31, 2023",
-    status: "Active",
-  },
-  {
-    id: "2",
-    code: "ECOSHIP",
-    type: "Free Shipping",
-    used: 105,
-    total: "Unlimited",
-    usagePercent: 25,
-    barColor: "bg-blue-500",
-    startDate: "Sep 15, 2023",
-    endDate: "to Dec 15, 2023",
-    status: "Active",
-  },
-  {
-    id: "3",
-    code: "SUMMER23",
-    type: "20% Off",
-    used: 50,
-    total: "50 total",
-    usagePercent: 100,
-    barColor: "bg-slate-400",
-    startDate: "Jun 01, 2023",
-    endDate: "to Aug 31, 2023",
-    status: "Expired",
-    expired: true,
-  },
-];
+function formatDate(d: string | null): string {
+  if (!d) return "--";
+  try {
+    return new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  } catch {
+    return d;
+  }
+}
 
-export default function AdminMarketingPage() {
+function isExpired(endDate: string | null, isActive: boolean): boolean {
+  if (!isActive) return true;
+  if (!endDate) return false;
+  return new Date(endDate) < new Date();
+}
+
+export default async function AdminMarketingPage() {
+  const rows = await getAdminCoupons();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const coupons: CouponRow[] = rows.map((r) => {
+    const expired = isExpired(r.end_date, r.is_active);
+    const used = r.usage_count ?? 0;
+    const limit = r.usage_limit ?? 0;
+    const totalStr = r.usage_limit != null ? `${r.usage_limit} total` : "Unlimited";
+    const usagePercent = r.usage_limit != null && r.usage_limit > 0
+      ? Math.min(100, Math.round((used / r.usage_limit) * 100))
+      : used > 0 ? 100 : 0;
+    const typeLabel =
+      r.discount_type === "percentage"
+        ? `${Number(r.discount_value)}% Off`
+        : `$${Number(r.discount_value).toFixed(2)} Off`;
+
+    return {
+      id: String(r.id),
+      code: r.code,
+      type: typeLabel,
+      used,
+      total: totalStr,
+      usagePercent,
+      barColor: expired ? "bg-slate-400" : usagePercent >= 100 ? "bg-amber-500" : "bg-[#1c5f21]",
+      startDate: formatDate(r.start_date),
+      endDate: r.end_date ? `to ${formatDate(r.end_date)}` : "No expiry",
+      status: expired ? "Expired" : "Active",
+      expired,
+    };
+  });
+
+  const activeCount = coupons.filter((c) => c.status === "Active").length;
+  const totalRedeemed = coupons.reduce((sum, c) => sum + c.used, 0);
+  const total = coupons.length;
   return (
     <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#f6f8f6] dark:bg-[#131f14] relative">
       {/* Top Header - giống Dashboard admin */}
@@ -145,7 +156,7 @@ export default function AdminMarketingPage() {
                   Active Coupons
                 </p>
                 <h3 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-                  3
+                  {activeCount}
                 </h3>
               </div>
             </div>
@@ -160,7 +171,7 @@ export default function AdminMarketingPage() {
                   Total Redeemed
                 </p>
                 <h3 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-                  150
+                  {totalRedeemed}
                 </h3>
               </div>
             </div>
@@ -199,7 +210,7 @@ export default function AdminMarketingPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                  {COUPONS.map((row) => (
+                  {coupons.map((row) => (
                     <tr
                       key={row.id}
                       className="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
@@ -322,8 +333,8 @@ export default function AdminMarketingPage() {
             </div>
             <div className="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Showing <span className="font-medium">1-3</span> of{" "}
-                <span className="font-medium">12</span> results
+                Showing <span className="font-medium">{total === 0 ? 0 : 1}</span>-<span className="font-medium">{total}</span> of{" "}
+                <span className="font-medium">{total}</span> results
               </p>
               <div className="flex gap-2">
                 <button
