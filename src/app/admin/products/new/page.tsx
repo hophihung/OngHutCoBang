@@ -30,6 +30,7 @@ export default function AdminProductNewPage() {
   const [isActive, setIsActive] = useState(true);
   const [baseImageFile, setBaseImageFile] = useState<File | null>(null);
   const [baseImageUrl, setBaseImageUrl] = useState<string | null>(null);
+  const [baseImageLink, setBaseImageLink] = useState("");
   const [variants, setVariants] = useState<VariantRow[]>([newVariant()]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
@@ -76,6 +77,7 @@ export default function AdminProductNewPage() {
     const file = e.target.files?.[0];
     setBaseImageFile(file ?? null);
     setBaseImageUrl(null);
+    setBaseImageLink("");
   }, []);
 
   const handleSubmit = useCallback(
@@ -126,6 +128,8 @@ export default function AdminProductNewPage() {
             data: { publicUrl },
           } = supabase.storage.from("product-images").getPublicUrl(path);
           imageUrl = publicUrl;
+        } else if (baseImageLink.trim()) {
+          imageUrl = baseImageLink.trim();
         }
 
         const { data: productData, error: productErr } = await supabase
@@ -186,6 +190,8 @@ export default function AdminProductNewPage() {
     if (!baseImageFile) return null;
     return URL.createObjectURL(baseImageFile);
   }, [baseImageFile]);
+
+  const previewFromLink = baseImageLink.trim() || null;
 
   useEffect(() => {
     return () => {
@@ -455,7 +461,7 @@ export default function AdminProductNewPage() {
                     </span>
                     Media
                   </h2>
-                  <div className="w-full">
+                  <div className="w-full space-y-4">
                     <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-[#1c5f21]/40 rounded-lg cursor-pointer bg-slate-50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors group">
                       <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <span className="material-symbols-outlined text-4xl text-slate-400 group-hover:text-[#1c5f21] mb-2 transition-colors">
@@ -475,6 +481,20 @@ export default function AdminProductNewPage() {
                         onChange={handleImageChange}
                       />
                     </label>
+                    <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                      <span className="shrink-0">Hoặc nhập link ảnh:</span>
+                    </div>
+                    <input
+                      type="url"
+                      placeholder="https://..."
+                      value={baseImageLink}
+                      onChange={(e) => {
+                        setBaseImageLink(e.target.value);
+                        setBaseImageFile(null);
+                        setBaseImageUrl(null);
+                      }}
+                      className="w-full h-10 px-4 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-[#1c5f21] focus:ring-1 focus:ring-[#1c5f21] outline-none text-slate-900 dark:text-white placeholder-slate-400 text-sm"
+                    />
                   </div>
                   <div className="mt-4">
                     {previewUrl ? (
@@ -492,6 +512,27 @@ export default function AdminProductNewPage() {
                             setBaseImageFile(null);
                             setBaseImageUrl(null);
                           }}
+                          className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-0.5 hover:bg-black/70"
+                        >
+                          <span className="material-symbols-outlined text-[16px]">
+                            close
+                          </span>
+                        </button>
+                      </div>
+                    ) : previewFromLink ? (
+                      <div className="relative aspect-square max-w-[200px] rounded-md overflow-hidden border border-slate-200 dark:border-slate-700">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={previewFromLink}
+                          alt="Preview from link"
+                          className="object-cover w-full h-full"
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setBaseImageLink("")}
                           className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-0.5 hover:bg-black/70"
                         >
                           <span className="material-symbols-outlined text-[16px]">
