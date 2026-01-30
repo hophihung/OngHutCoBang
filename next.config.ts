@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
         hostname: "cdn-media.sforum.vn",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "hdzkgoenpfxyhsgpqatp.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
     ],
   },
 };

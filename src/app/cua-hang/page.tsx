@@ -3,69 +3,7 @@ import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import Footer from "@/components/home/Footer";
-
-const PRODUCTS = [
-  {
-    id: "1",
-    name: "Hand-Cut Lepironia Grass Straws",
-    description:
-      "Directly sourced, completely biodegradable organic straws for everyday use.",
-    price: "$14.00",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBFNN1Zkd65vfbBAK3j91xXSXf_pWZt3kuvhzgKtpC1Jp5Alxoe9EFvABETKAVYM9Y1EkFKGQYF94h4GjWaT7oOVjP2EnbjoNV1_hyiJGa7NOE_fffNqGVzFkxUJ2Fp5Xd--N8Xsuwq5_bwUnL_AfrdmHbUon9bh_k5oVHxv92exT-hpwG-lVEfoimA6Ko8kxmLQlOHm5j0k0tAhj2HSDPNmHaUB1ON7PG71pPsl8ZX27CNTtf1VxWQLdRWQ6cTc9HWLbdVKtSsrdw",
-    badge: "Bestseller" as const,
-  },
-  {
-    id: "2",
-    name: "Artisan Travel Cutlery Kit",
-    description:
-      "Compact, reusable bamboo fork, knife, and spoon in a hemp carrying case.",
-    price: "$22.50",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCUCgymuwJZb3Wx1Ghe--5WMvI0n6SA_YVKhR49lapqyQ0g3Xz8QSaSg_zAIjsDJNgBbBYjg0ZjhZx3GTG_UZyALnwLQaPNqjyL4TmHnT_btT0_2V9Mgy0R1X3bNBFDBFWVW_dKVn8uMxDe9TZGdxrY5CN9ENjHeexYalTqXwfs3yGBbTP4t4QsN8o4R4sxUKdKzb2T56yavnWnTSCvHdnZpPJ4YSCA9XVWmeFpTZ2gCXTqJO3oCAByRGcoO6uVAh5zZcCyHjVN9Uc",
-    badge: null,
-  },
-  {
-    id: "3",
-    name: "The Coastal Picnic Basket",
-    description:
-      "Hand-woven by local artisans using sustainable rattan and seagrass materials.",
-    price: "$45.00",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDrvLyLMStxmyFMhflUnnavoNNBhi5NnFfMBT-0A6IqFY9RNNesnaLpXTU71pnNOVkA1Ygp1DyamWreJEGYoUVO3XcOCBJwqLxIwHvPVtKn3whTgrU375B4quTpBSA4VQDKdEqaXzLJkya33BeppbM5VOGZI2a8OT3mMxbA0fUgCFVnw3Ac3nem6033SaqnM4X9ytIF2xP1cyqexfL3CiNYL3qHWJ31-lm5PH7h4sj8JQGgxq86Z5kZgBol-xsmAP-TFsbJRypwyyw",
-    badge: null,
-  },
-  {
-    id: "4",
-    name: "Bulk Eco-Straw Bundle (250pc)",
-    description:
-      "Perfect for events or small businesses looking for plastic-free alternatives.",
-    price: "$38.00",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAiNaR1vP3GYoNVlT4zpgB4Jo3Dd639GXdBr3lhbfjHlx_TDP9IuCT0Wc2-GF10H0JQa4cCM2AepUpxXIegCVRZ5PA2updsS1FIJQs-jkGZDL8S1AIytkTwS5Pp2mfp9GG-L4ery1aCyVeZJTylkSBKWqAavQDh6wFjgFh0jCtPpc4QnS3AH4WfVuyPBORkibp9px_zCwPLzGrz0GFVJtExscea4p-mt2ZebXRM843l8kyUdTLmtnlBzRylyHz3Km02Pn07Zg3Lv88",
-    badge: null,
-  },
-  {
-    id: "5",
-    name: "Bamboo Toothbrush Set",
-    description:
-      "4-pack of compostable toothbrushes with soft BPA-free bristles.",
-    price: "$12.00",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCMFtS3ryX-4ZrEvwdLIbhkmTuZRAG_qdHtkD2tWvinlaXQpNWS_XXHH-JcnmuwyBSexeFDkgTKT3nsTE_b4svtLqF2uoj4jXY2S3LvAPaoQ_dmn-OOBUr18p9y2ZQ4HZc9fedDb266kdi_KY54S_8MEDDgkWCbt1yIccorU4o9-3yBZtzFuubPzW8o0TBaRLQ-MK-qhykyIxtrfD5GqQk-Arc0Aw6eYKE1YyWLI512UPElh4u9qf7UPPKhTJZEAhgRSFxkV37HDJ8",
-    badge: "New" as const,
-  },
-  {
-    id: "6",
-    name: "Natural Kitchen Scrubber",
-    description:
-      "Durable, plant-based loofah scrubbers that replace plastic sponges.",
-    price: "$8.99",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuD-EF70bTQNhtg-mbHvp67C-lZON4xTUs_kaBO1v3xIap1k7qcDF_Ofo4lnHyyhghVY228f_2mOZ0YeQMRIRCa0wFrArwzpeHTmPcUMG_77NRPlnfSTE5q2A1U5WBfW18yEINRgqCQdPOViMGU5drBat_T_D_DiG2bLxEukAMo2YOO1ALX7gmMirNMucGxCcFRLu9Xu1qaK6_0J4npD3pUvb-GKjTg9VMuinTTwfMqRtdUew7VdDJp8aOnJLc3Bfk4rjYsCAczJ1zg",
-    badge: null,
-  },
-];
+import { getStoreProducts } from "@/lib/products";
 
 const CATEGORIES = [
   { label: "Grass Straws", href: "/cua-hang?category=grass-straws", icon: "eco", active: true },
@@ -74,7 +12,13 @@ const CATEGORIES = [
   { label: "Bundled Sets", href: "/cua-hang?category=sets", icon: "inventory_2", active: false },
 ];
 
-export default function CuaHangPage() {
+function formatPrice(price: number): string {
+  if (price >= 1000) return `$${(price / 1000).toFixed(1)}k`;
+  return `$${price.toFixed(2)}`;
+}
+
+export default async function CuaHangPage() {
+  const products = await getStoreProducts();
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-[#f6f8f6] dark:bg-[#102212] text-slate-900 dark:text-white transition-colors duration-200">
       <AnnouncementBar />
@@ -152,7 +96,7 @@ export default function CuaHangPage() {
         <section className="flex-1 flex flex-col gap-6 min-w-0">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
             <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-              Showing 12 products
+              Showing {products.length} products
             </h2>
             <div className="flex items-center gap-3">
               <span className="text-sm text-slate-500">Sort by:</span>
@@ -166,57 +110,69 @@ export default function CuaHangPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {PRODUCTS.map((product) => (
-              <article
-                key={product.id}
-                className="group bg-white dark:bg-[#141e15] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800 flex flex-col h-full"
-              >
-                <Link href={`/cua-hang/${product.id}`} className="relative block aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800/50">
-                  <Image
-                    src={product.image}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  {product.badge && (
-                    <span
-                      className={`absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest shadow-sm ${
-                        product.badge === "Bestseller"
-                          ? "bg-white/90 text-[#1c5f21]"
-                          : "bg-[#1c5f21] text-white"
-                      }`}
-                    >
-                      {product.badge}
-                    </span>
-                  )}
-                </Link>
-                <div className="p-5 flex flex-col flex-1">
-                  <Link href={`/cua-hang/${product.id}`}>
-                    <h3 className="font-serif text-xl text-slate-900 dark:text-white mb-2 leading-tight group-hover:text-[#1c5f21] transition-colors">
-                      {product.name}
-                    </h3>
-                  </Link>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 flex-1">
-                    {product.description}
-                  </p>
-                  <div className="mt-auto flex items-center justify-between pt-4 gap-2">
-                    <span className="text-lg font-bold text-slate-900 dark:text-white">
-                      {product.price}
-                    </span>
-                    <button
-                      type="button"
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-[#1c5f21] text-[#1c5f21] text-sm font-bold hover:bg-[#1c5f21] hover:text-white transition-all whitespace-nowrap"
-                    >
-                      <span className="material-symbols-outlined text-[18px]">
-                        add_shopping_cart
+            {products.length === 0 ? (
+              <p className="col-span-full text-center text-slate-500 dark:text-slate-400 py-12">
+                Chưa có sản phẩm.
+              </p>
+            ) : (
+              products.map((product) => (
+                <article
+                  key={product.id}
+                  className="group bg-white dark:bg-[#141e15] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800 flex flex-col h-full"
+                >
+                  <Link href={`/cua-hang/${product.id}`} className="relative block aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800/50">
+                    {product.base_image_url ? (
+                      <Image
+                        src={product.base_image_url}
+                        alt=""
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center text-slate-400">
+                        <span className="material-symbols-outlined text-5xl">image</span>
+                      </div>
+                    )}
+                    {product.badge && (
+                      <span
+                        className={`absolute top-3 left-3 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest shadow-sm ${
+                          product.badge === "Bestseller"
+                            ? "bg-white/90 text-[#1c5f21]"
+                            : "bg-[#1c5f21] text-white"
+                        }`}
+                      >
+                        {product.badge}
                       </span>
-                      Add to Cart
-                    </button>
+                    )}
+                  </Link>
+                  <div className="p-5 flex flex-col flex-1">
+                    <Link href={`/cua-hang/${product.id}`}>
+                      <h3 className="font-serif text-xl text-slate-900 dark:text-white mb-2 leading-tight group-hover:text-[#1c5f21] transition-colors">
+                        {product.name}
+                      </h3>
+                    </Link>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 flex-1">
+                      {product.description ?? ""}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between pt-4 gap-2">
+                      <span className="text-lg font-bold text-slate-900 dark:text-white">
+                        {product.price != null ? formatPrice(product.price) : "—"}
+                      </span>
+                      <button
+                        type="button"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-[#1c5f21] text-[#1c5f21] text-sm font-bold hover:bg-[#1c5f21] hover:text-white transition-all whitespace-nowrap"
+                      >
+                        <span className="material-symbols-outlined text-[18px]">
+                          add_shopping_cart
+                        </span>
+                        Add to Cart
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))
+            )}
           </div>
 
           <div className="flex justify-center mt-8 lg:mt-12 gap-2">

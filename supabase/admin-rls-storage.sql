@@ -35,11 +35,15 @@ CREATE POLICY "Admin full access categories" ON public.categories
   WITH CHECK ((SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin');
 
 -- 4. Storage: policy cho bucket product-images (tạo bucket trong Dashboard: Storage -> New bucket, id = product-images, public nếu cần)
--- Cho phép authenticated upload và đọc object trong bucket product-images
+-- Chỉ admin mới được upload; mọi người đọc (SELECT)
 DROP POLICY IF EXISTS "Authenticated upload product-images" ON storage.objects;
-CREATE POLICY "Authenticated upload product-images" ON storage.objects
+DROP POLICY IF EXISTS "Admin upload product-images" ON storage.objects;
+CREATE POLICY "Admin upload product-images" ON storage.objects
   FOR INSERT TO authenticated
-  WITH CHECK (bucket_id = 'product-images');
+  WITH CHECK (
+    bucket_id = 'product-images'
+    AND (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
+  );
 
 DROP POLICY IF EXISTS "Public read product-images" ON storage.objects;
 CREATE POLICY "Public read product-images" ON storage.objects

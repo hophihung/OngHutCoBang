@@ -39,11 +39,17 @@ export default function AdminProductNewPage() {
   const [success, setSuccess] = useState<string | null>(null);
 
   useEffect(() => {
+    // #region agent log
+    fetch("http://127.0.0.1:7244/ingest/808af093-b680-421d-a5cb-399a9ce3d1b4", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ location: "admin/products/new/page.tsx:useEffect categories", message: "categories fetch start", data: {}, timestamp: Date.now(), sessionId: "debug-session", hypothesisId: "H3" }) }).catch(() => {});
+    // #endregion
     const supabase = createClient();
     supabase
       .from("categories")
       .select("id, name, slug")
       .then(({ data, error: err }) => {
+        // #region agent log
+        fetch("http://127.0.0.1:7244/ingest/808af093-b680-421d-a5cb-399a9ce3d1b4", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ location: "admin/products/new/page.tsx:categories then", message: "Supabase response", data: { hasError: !!err, errorMessage: err?.message ?? null, dataIsNull: data == null, dataLength: Array.isArray(data) ? data.length : -1, dataSample: Array.isArray(data) && data[0] ? { id: data[0].id, name: data[0].name } : null }, timestamp: Date.now(), sessionId: "debug-session", hypothesisId: "H1_H2_H4" }) }).catch(() => {});
+        // #endregion
         setCategoriesLoading(false);
         if (err) {
           setError("Không tải được danh mục: " + err.message);
@@ -112,6 +118,21 @@ export default function AdminProductNewPage() {
       const supabase = createClient();
 
       try {
+        // Console: kiểm tra user + role trước khi insert (RLS products cần role = admin)
+        const { data: { user: authUser } } = await supabase.auth.getUser();
+        const userId = authUser?.id ?? null;
+        let profileRole: string | null = null;
+        if (userId) {
+          const { data: profile } = await supabase.from("profiles").select("role").eq("id", userId).single();
+          profileRole = profile?.role ?? null;
+        }
+        console.log("[Admin New Product] Auth trước khi insert:", {
+          userId,
+          profileRole,
+          isAdmin: profileRole === "admin",
+          message: profileRole !== "admin" ? "RLS products sẽ chặn: cần role = admin" : "OK",
+        });
+
         let imageUrl: string | null = baseImageUrl ?? null;
         if (baseImageFile) {
           const ext = baseImageFile.name.split(".").pop() || "jpg";
@@ -132,6 +153,7 @@ export default function AdminProductNewPage() {
           imageUrl = baseImageLink.trim();
         }
 
+        console.log("[Admin New Product] Insert products...", { name, category_id: categoryId, userId, profileRole });
         const { data: productData, error: productErr } = await supabase
           .from("products")
           .insert({
@@ -145,6 +167,14 @@ export default function AdminProductNewPage() {
           .single();
 
         if (productErr) {
+          console.error("[Admin New Product] Insert products thất bại (RLS?):", {
+            message: productErr.message,
+            code: productErr.code,
+            details: productErr.details,
+            userId,
+            profileRole,
+            hint: profileRole !== "admin" ? "User không có role admin → RLS chặn. Kiểm tra: UPDATE profiles SET role = 'admin' WHERE id = ..." : "Kiểm tra policy Admin full access products trên bảng products.",
+          });
           setError("Tạo sản phẩm thất bại: " + productErr.message);
           setLoading(false);
           return;
@@ -368,7 +398,8 @@ export default function AdminProductNewPage() {
                       <div className="relative">
                         <select
                           id="category"
-                          value={categoryId ?? ""}
+                          name="category"
+                          value={categoryId != null ? String(categoryId) : ""}
                           onChange={(e) =>
                             setCategoryId(e.target.value ? Number(e.target.value) : null)
                           }
@@ -379,7 +410,7 @@ export default function AdminProductNewPage() {
                             {categoriesLoading ? "Đang tải..." : "Select category..."}
                           </option>
                           {categories.map((c) => (
-                            <option key={c.id} value={c.id}>
+                            <option key={c.id} value={String(c.id)}>
                               {c.name}
                             </option>
                           ))}

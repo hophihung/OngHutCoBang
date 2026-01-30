@@ -16,6 +16,7 @@ export default function LoginForm() {
 
   const callbackError = searchParams.get("error");
   const showCallbackError = callbackError === "auth_callback";
+  const next = searchParams.get("next") ?? "/";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -28,14 +29,15 @@ export default function LoginForm() {
       setError(signInError.message);
       return;
     }
-    router.push("/");
+    router.push(next.startsWith("/") ? next : `/${next}`);
     router.refresh();
   }
 
   async function handleGoogleSignIn() {
     setError(null);
     const supabase = createClient();
-    const redirectTo = `${typeof window !== "undefined" ? window.location.origin : ""}/auth/callback`;
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    const redirectTo = `${origin}/auth/callback?next=${encodeURIComponent(next)}`;
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo },
