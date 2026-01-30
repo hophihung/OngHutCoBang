@@ -1,10 +1,98 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 const ADMIN_AVATAR =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBKqKGDdKY37WfKqF0MwrVcBwu9Ohg4oag6X6JQeeSEFFTPwSBOVfbRjiREu8P-ZkJI9mJximUMeXKeO0_UnDoCtbNb87kJmh-vp0wc2GfmzihWydCp92Nmfv1EOpAZDTp53vFk-4dhC0yIVK01ev81lzHk_bMaKc740ZXvxd5_R1kWjdFqdasuKbpEk9gFeaznlymjtzhCV7OJJLiMxojPDV_PhhO_LBVfujp58oeyIUIyphvqjLKYp955dNymLeK7Qpo8B89vLXs";
 
+function randomCode(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let s = "";
+  for (let i = 0; i < 8; i++) s += chars[Math.floor(Math.random() * chars.length)];
+  return s;
+}
+
 export default function AdminCouponNewPage() {
+  const router = useRouter();
+  const [couponCode, setCouponCode] = useState("");
+  const [description, setDescription] = useState("");
+  const [discountType, setDiscountType] = useState<"percentage" | "fixed_cart">("percentage");
+  const [discountValue, setDiscountValue] = useState("");
+  const [usageLimit, setUsageLimit] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [isActive, setIsActive] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setError(null);
+      setSuccess(null);
+
+      const code = couponCode.trim().toUpperCase();
+      if (!code) {
+        setError("Vui lòng nhập mã coupon.");
+        return;
+      }
+      const value = Number(discountValue);
+      if (Number.isNaN(value) || value < 0) {
+        setError("Giá trị giảm giá phải là số không âm.");
+        return;
+      }
+      if (discountType === "percentage" && value > 100) {
+        setError("Giảm theo % không được vượt 100.");
+        return;
+      }
+
+      const payload = {
+        code,
+        description: description.trim() || null,
+        discount_type: discountType,
+        discount_value: value,
+        usage_limit: usageLimit.trim() ? Number(usageLimit) : null,
+        start_date: startDate || null,
+        end_date: endDate || null,
+        is_active: isActive,
+      };
+
+      setLoading(true);
+      const supabase = createClient();
+      try {
+        const { error: insertErr } = await supabase.from("coupons").insert(payload).select("id");
+
+        if (insertErr) {
+          setError("Lưu coupon thất bại: " + insertErr.message);
+          setLoading(false);
+          return;
+        }
+        setSuccess("Đã tạo coupon.");
+        setTimeout(() => router.push("/admin/marketing"), 1500);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Có lỗi xảy ra.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [
+      couponCode,
+      description,
+      discountType,
+      discountValue,
+      usageLimit,
+      startDate,
+      endDate,
+      isActive,
+      router,
+    ]
+  );
+
   return (
     <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#f6f8f6] dark:bg-[#131f14] relative">
       {/* Top Header - giống Dashboard admin */}
@@ -99,36 +187,50 @@ export default function AdminCouponNewPage() {
             </ol>
           </nav>
 
-          {/* Header with Title and Actions */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-            <div>
-              <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
-                Create New Coupon
-              </h1>
-              <p className="mt-1 text-slate-500 dark:text-slate-400">
-                Configure discount rules and schedule for your promotion.
-              </p>
+          {(error || success) && (
+            <div
+              className={`mb-6 px-4 py-3 rounded-lg ${
+                error
+                  ? "bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200"
+                  : "bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200"
+              }`}
+            >
+              {error || success}
             </div>
-            <div className="flex items-center gap-3">
-              <Link
-                href="/admin/marketing"
-                className="px-5 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-[#1a1a1a] border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1c5f21]/20"
-              >
-                Cancel
-              </Link>
-              <button
-                type="button"
-                className="px-5 py-2.5 text-sm font-bold text-white bg-[#1c5f21] hover:bg-[#164d1b] rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#1c5f21] focus:ring-offset-2 dark:focus:ring-offset-[#131f14] flex items-center gap-2"
-              >
-                <span className="material-symbols-outlined text-[20px]">
-                  save
-                </span>
-                Save Coupon
-              </button>
-            </div>
-          </div>
+          )}
 
-          {/* Main Content Grid */}
+          <form onSubmit={handleSubmit}>
+            {/* Header with Title and Actions */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+              <div>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                  Create New Coupon
+                </h1>
+                <p className="mt-1 text-slate-500 dark:text-slate-400">
+                  Configure discount rules and schedule for your promotion.
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/admin/marketing"
+                  className="px-5 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-[#1a1a1a] border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1c5f21]/20"
+                >
+                  Cancel
+                </Link>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="px-5 py-2.5 text-sm font-bold text-white bg-[#1c5f21] hover:bg-[#164d1b] disabled:opacity-60 disabled:cursor-not-allowed rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#1c5f21] focus:ring-offset-2 dark:focus:ring-offset-[#131f14] flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-[20px]">
+                    save
+                  </span>
+                  {loading ? "Đang lưu..." : "Save Coupon"}
+                </button>
+              </div>
+            </div>
+
+            {/* Main Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             {/* Left Column: Configuration Form */}
             <div className="lg:col-span-2 space-y-6">
@@ -153,12 +255,14 @@ export default function AdminCouponNewPage() {
                         id="coupon_code"
                         name="coupon_code"
                         type="text"
-                        defaultValue="SUMMER25"
+                        value={couponCode}
+                        onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                         placeholder="e.g., GREENJOY10"
                         className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white shadow-sm focus:border-[#1c5f21] focus:ring-[#1c5f21] sm:text-base py-3 pl-4 pr-12 uppercase placeholder:normal-case placeholder:text-slate-400"
                       />
                       <button
                         type="button"
+                        onClick={() => setCouponCode(randomCode())}
                         className="absolute right-2 p-2 text-slate-400 hover:text-[#1c5f21] dark:hover:text-[#1c5f21] transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
                         title="Generate Random Code"
                       >
@@ -185,6 +289,8 @@ export default function AdminCouponNewPage() {
                       id="description"
                       name="description"
                       rows={2}
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                       placeholder="Summer sale promotion for returning customers..."
                       className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white shadow-sm focus:border-[#1c5f21] focus:ring-[#1c5f21] sm:text-sm py-3 px-4 placeholder:text-slate-400 resize-none"
                     />
@@ -212,6 +318,8 @@ export default function AdminCouponNewPage() {
                       <select
                         id="discount_type"
                         name="discount_type"
+                        value={discountType}
+                        onChange={(e) => setDiscountType(e.target.value as "percentage" | "fixed_cart")}
                         className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white shadow-sm focus:border-[#1c5f21] focus:ring-[#1c5f21] sm:text-sm py-3 px-4 appearance-none"
                       >
                         <option value="percentage">Percentage (%)</option>
@@ -236,6 +344,10 @@ export default function AdminCouponNewPage() {
                         id="discount_value"
                         name="discount_value"
                         type="number"
+                        min={0}
+                        step={discountType === "percentage" ? 1 : 0.01}
+                        value={discountValue}
+                        onChange={(e) => setDiscountValue(e.target.value)}
                         placeholder="25"
                         className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white shadow-sm focus:border-[#1c5f21] focus:ring-[#1c5f21] sm:text-sm py-3 px-4 placeholder:text-slate-400 pr-10"
                       />
@@ -267,6 +379,9 @@ export default function AdminCouponNewPage() {
                       id="usage_limit"
                       name="usage_limit"
                       type="number"
+                      min={0}
+                      value={usageLimit}
+                      onChange={(e) => setUsageLimit(e.target.value)}
                       placeholder="e.g., 1000 (Leave empty for unlimited)"
                       className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white shadow-sm focus:border-[#1c5f21] focus:ring-[#1c5f21] sm:text-sm py-3 px-4 placeholder:text-slate-400"
                     />
@@ -282,6 +397,8 @@ export default function AdminCouponNewPage() {
                       id="start_date"
                       name="start_date"
                       type="date"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
                       className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white shadow-sm focus:border-[#1c5f21] focus:ring-[#1c5f21] sm:text-sm py-3 px-4 placeholder:text-slate-400"
                     />
                   </div>
@@ -296,6 +413,8 @@ export default function AdminCouponNewPage() {
                       id="end_date"
                       name="end_date"
                       type="date"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
                       className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white shadow-sm focus:border-[#1c5f21] focus:ring-[#1c5f21] sm:text-sm py-3 px-4 placeholder:text-slate-400"
                     />
                   </div>
@@ -312,7 +431,8 @@ export default function AdminCouponNewPage() {
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
-                      defaultChecked
+                      checked={isActive}
+                      onChange={(e) => setIsActive(e.target.checked)}
                       className="sr-only peer"
                     />
                     <div className="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#1c5f21]/20 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 peer-checked:after:border-white peer-checked:bg-[#1c5f21]" />
@@ -391,6 +511,7 @@ export default function AdminCouponNewPage() {
               </div>
             </div>
           </div>
+          </form>
         </div>
       </div>
     </main>
