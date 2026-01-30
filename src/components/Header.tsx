@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const SHOP_LINKS = [
   { label: "Ống hút cỏ", href: "/cua-hang?category=ong-hut-co" },
@@ -156,6 +157,8 @@ export default function Header() {
 
           {/* C. Phải - Action Icons */}
           <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
+            {/* Giao diện sáng/tối */}
+            <ThemeToggle />
             {/* Tìm kiếm - desktop */}
             <button
               type="button"

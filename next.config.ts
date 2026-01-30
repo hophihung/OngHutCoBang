@@ -5,22 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "tse4.mm.bing.net",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "i.pinimg.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn-media.sforum.vn",
+        hostname: "**", // Chấp nhận mọi tên miền HTTPS
         pathname: "/**",
       },
     ],

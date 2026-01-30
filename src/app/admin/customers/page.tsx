@@ -1,17 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const AVATAR_URLS = [
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDfAUzXZIWj-yvcNFNK3qdtS9hKlKAALVVLn-XmouLG4_97WyPhACPTHbOEp4kkyo6uafNz-WsrlvMO-xYeM08BAusmLb5Z6RUoxy_sX05N0BpMCs0xlGhmpIK1ONHxu7h5H4Q1--UyCeKNTc1iPSFRaHnBHt6-zGknpA0QHHDF91NLTS-BkXm_GZzikvbVq4fDj5Rhx_Za9nNs85NbMG4x2Mz1PrtSfmEh21R1A_VCM_VoIXHxAOpao3WteFAfrS7H5OfnLxyIyR8",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuCxEUpiTs0ibqJm5KY_Kcb2V5U3XDwTCPWFV6hVvpDd7mC2Wux87eGaJJcixVjZk3OcyNszXq5Wv99mI9NGMHKz08D6bXzrvTIeG2-mnXjuGxMOx_MvZfbpChOBm7UAzQ_fYJGuJwffyG9YSZPqybWIsPMX1qpjSBsYHY-KpAmrB-k-n9OM9RR2ap965Op8smSpIBMOsD7Po8V0EsUfq88zrZFVNSdLPOI007UO3vm37E-I_-0IP0HnZG1ZSFQDCklgQ5o2Lf5idpc",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuD7ykDFLt9EgN6VkxnRG3z87py0tUAJTSYkFP2cbSDQqR5mbUvLK4ZSAKZ1EvcV5Q-eBwYQYYZaTWi1nF-QSVSm-KtT1NzalKcBZzIFoCzA3cw0pmjtXeSEcakq916GYFnQb0KIQOKUekMYXf1TGRykZbDTXNGi9aV_3iXRKkRRIcWMqQQixF5VKmwWdrMLuTWGiVYefh2lF7p3T70KGGKLw-FYUF0m7n-qibxbzbe2nIjfB774JQtKyVDDMjKroLlUbjy0shGPpxs",
-];
+import { getAdminCustomerRows } from "@/lib/customers";
 
 type CustomerRow = {
   id: string;
   name: string;
   customerId: string;
-  display: { type: "avatar"; url: string } | { type: "initials"; letters: string; bgClass: string };
+  display: { type: "initials"; letters: string; bgClass: string };
   email: string;
   phone: string;
   ordersCount: number;
@@ -20,85 +15,21 @@ type CustomerRow = {
   joinDate: string;
 };
 
-const CUSTOMERS: CustomerRow[] = [
-  {
-    id: "8829",
-    name: "Nguyen Van A",
-    customerId: "#CUS-001",
-    display: { type: "avatar", url: AVATAR_URLS[0] },
-    email: "nguyen.a@example.com",
-    phone: "+84 90 123 4567",
-    ordersCount: 12,
-    ordersClass: "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-    totalSpent: "5,200,000 VND",
-    joinDate: "Oct 24, 2023",
-  },
-  {
-    id: "2",
-    name: "Tran Thi B",
-    customerId: "#CUS-002",
-    display: { type: "avatar", url: AVATAR_URLS[1] },
-    email: "tran.b@example.com",
-    phone: "+84 91 234 5678",
-    ordersCount: 8,
-    ordersClass: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
-    totalSpent: "3,150,000 VND",
-    joinDate: "Sep 15, 2023",
-  },
-  {
-    id: "3",
-    name: "Le Van C",
-    customerId: "#CUS-003",
-    display: { type: "initials", letters: "LV", bgClass: "bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400" },
-    email: "le.c@example.com",
-    phone: "+84 93 456 7890",
-    ordersCount: 5,
-    ordersClass: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
-    totalSpent: "2,500,000 VND",
-    joinDate: "Nov 02, 2023",
-  },
-  {
-    id: "4",
-    name: "Pham Thi D",
-    customerId: "#CUS-004",
-    display: { type: "avatar", url: AVATAR_URLS[2] },
-    email: "pham.d@example.com",
-    phone: "+84 98 765 4321",
-    ordersCount: 3,
-    ordersClass: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
-    totalSpent: "1,200,000 VND",
-    joinDate: "Dec 10, 2023",
-  },
-  {
-    id: "5",
-    name: "Hoang Van E",
-    customerId: "#CUS-005",
-    display: { type: "initials", letters: "HE", bgClass: "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400" },
-    email: "hoang.e@example.com",
-    phone: "+84 96 111 2222",
-    ordersCount: 1,
-    ordersClass: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
-    totalSpent: "450,000 VND",
-    joinDate: "Jan 05, 2024",
-  },
+const INITIALS_COLORS = [
+  "bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400",
+  "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+  "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
+  "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300",
 ];
 
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  if (parts[0]) return parts[0].slice(0, 2).toUpperCase();
+  return "??";
+}
+
 function CustomerCell({ row }: { row: CustomerRow }) {
-  if (row.display.type === "avatar") {
-    return (
-      <div className="flex items-center gap-4">
-        <div className="relative h-10 w-10 rounded-full ring-2 ring-white dark:ring-slate-800 overflow-hidden shrink-0">
-          <Image src={row.display.url} alt="" fill className="object-cover" />
-        </div>
-        <div>
-          <div className="font-semibold text-slate-900 dark:text-white">
-            {row.name}
-          </div>
-          <div className="text-xs text-slate-500">ID: {row.customerId}</div>
-        </div>
-      </div>
-    );
-  }
   return (
     <div className="flex items-center gap-4">
       <div
@@ -116,7 +47,25 @@ function CustomerCell({ row }: { row: CustomerRow }) {
   );
 }
 
-export default function AdminCustomersPage() {
+export default async function AdminCustomersPage() {
+  const rows = await getAdminCustomerRows();
+  const customers: CustomerRow[] = rows.map((r, i) => ({
+    id: String(r.id),
+    name: r.full_name ?? "",
+    customerId: `#CUS-${String(r.id).padStart(3, "0")}`,
+    display: {
+      type: "initials" as const,
+      letters: getInitials(r.full_name ?? ""),
+      bgClass: INITIALS_COLORS[i % INITIALS_COLORS.length],
+    },
+    email: r.email ?? "--",
+    phone: r.phone ?? "--",
+    ordersCount: 0,
+    ordersClass: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
+    totalSpent: "0 VND",
+    joinDate: r.created_at ? new Date(r.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "--",
+  }));
+  const total = customers.length;
   return (
     <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#f6f8f6] dark:bg-[#131f14] relative">
       {/* Top Header - giống Dashboard admin */}
@@ -205,15 +154,15 @@ export default function AdminCustomersPage() {
                 </span>
                 Filter
               </button>
-              <button
-                type="button"
+              <Link
+                href="/admin/customers/new"
                 className="flex-1 sm:flex-none flex items-center justify-center gap-2 h-11 px-5 rounded-lg bg-[#1c5f21] text-white font-semibold text-sm hover:bg-[#1c5f21]/90 transition-colors shadow-sm"
               >
                 <span className="material-symbols-outlined text-[20px]">
                   add
                 </span>
                 Add Customer
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -244,7 +193,7 @@ export default function AdminCustomersPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                  {CUSTOMERS.map((row) => (
+                  {customers.map((row) => (
                     <tr
                       key={row.customerId}
                       className="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
@@ -298,15 +247,15 @@ export default function AdminCustomersPage() {
               <div className="text-sm text-slate-500 dark:text-slate-400">
                 Showing{" "}
                 <span className="font-medium text-slate-900 dark:text-white">
-                  1
+                  {total === 0 ? 0 : 1}
                 </span>{" "}
                 to{" "}
                 <span className="font-medium text-slate-900 dark:text-white">
-                  5
+                  {total}
                 </span>{" "}
                 of{" "}
                 <span className="font-medium text-slate-900 dark:text-white">
-                  128
+                  {total}
                 </span>{" "}
                 customers
               </div>
