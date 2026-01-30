@@ -51,19 +51,21 @@ export default function AdminCouponNewPage() {
         return;
       }
 
+      const payload = {
+        code,
+        description: description.trim() || null,
+        discount_type: discountType,
+        discount_value: value,
+        usage_limit: usageLimit.trim() ? Number(usageLimit) : null,
+        start_date: startDate || null,
+        end_date: endDate || null,
+        is_active: isActive,
+      };
+
       setLoading(true);
       const supabase = createClient();
       try {
-        const { error: insertErr } = await supabase.from("coupons").insert({
-          code,
-          description: description.trim() || null,
-          discount_type: discountType,
-          discount_value: value,
-          usage_limit: usageLimit.trim() ? Number(usageLimit) : null,
-          start_date: startDate || null,
-          end_date: endDate || null,
-          is_active: isActive,
-        });
+        const { error: insertErr } = await supabase.from("coupons").insert(payload).select("id");
 
         if (insertErr) {
           setError("Lưu coupon thất bại: " + insertErr.message);
