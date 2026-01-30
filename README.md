@@ -40,6 +40,13 @@ M? [http://localhost:3000](http://localhost:3000).
 - **Server:** `src/lib/supabase/server.ts` ? d�ng trong Server Components, Server Actions, Route Handlers
 - **Middleware:** `src/middleware.ts` ? refresh session/auth m?i request
 
+## PayOS (thanh toan)
+
+Trang gio hang co nut **Thanh toan bang PayOS**. Them vao `.env.local`:
+
+- `PAYOS_CLIENT_ID`, `PAYOS_API_KEY`, `PAYOS_CHECKSUM_KEY` (lay tai [PayOS Business](https://business.payos.vn/))
+- Sau thanh toan nguoi dung ve `/gio-hang?payos=success` hoac `?payos=cancel` neu huy.
+
 ## Scripts
 
 | L?nh   | M� t?              |

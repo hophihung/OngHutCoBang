@@ -41,6 +41,41 @@ const INITIAL_ITEMS: CartItem[] = [
 
 export default function CartContent() {
   const [items, setItems] = useState<CartItem[]>(INITIAL_ITEMS);
+  const [payosLoading, setPayosLoading] = useState(false);
+  const [payosError, setPayosError] = useState<string | null>(null);
+
+  const handlePayOSCheckout = async () => {
+    if (items.length === 0) return;
+    setPayosError(null);
+    setPayosLoading(true);
+    try {
+      const res = await fetch("/api/payos/create-link", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({
+            name: i.name,
+            quantity: i.quantity,
+            price: i.price,
+          })),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setPayosError(data.error ?? "Không tạo được link thanh toán");
+        return;
+      }
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+        return;
+      }
+      setPayosError("Link thanh toán không hợp lệ");
+    } catch {
+      setPayosError("Lỗi kết nối. Vui lòng thử lại.");
+    } finally {
+      setPayosLoading(false);
+    }
+  };
 
   const updateQuantity = (id: string, delta: number) => {
     setItems((prev) =>
@@ -267,12 +302,28 @@ export default function CartContent() {
             </span>
           </div>
 
-          <Link
-            href="/thanh-toan"
-            className="w-full h-12 flex items-center justify-center bg-[#1c5f21] hover:bg-[#164d1b] text-white rounded-lg text-base font-bold shadow-md transition-all transform active:scale-[0.98]"
+          {payosError && (
+            <p className="text-red-500 text-sm mb-2" role="alert">
+              {payosError}
+            </p>
+          )}
+          <button
+            type="button"
+            onClick={handlePayOSCheckout}
+            disabled={isEmpty || payosLoading}
+            className="w-full h-12 flex items-center justify-center gap-2 bg-[#1c5f21] hover:bg-[#164d1b] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg text-base font-bold shadow-md transition-all transform active:scale-[0.98]"
           >
-            Proceed to Checkout
-          </Link>
+            {payosLoading ? (
+              <>
+                <span className="material-symbols-outlined animate-spin text-[20px]">
+                  progress_activity
+                </span>
+                Đang chuyển hướng PayOS...
+              </>
+            ) : (
+              "Thanh toán bằng PayOS"
+            )}
+          </button>
           <div className="mt-4 flex items-center justify-center gap-2 text-slate-400">
             <span className="material-symbols-outlined text-[16px]">lock</span>
             <span className="text-xs font-medium">Secure Checkout</span>
