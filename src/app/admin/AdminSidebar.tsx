@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const LOGO_URL =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBd8y94uBRlLodULGApadRhugMLBS50K2n9Cy00gUMDI_RxzzPVCjVa7YGTtQNV0f55tg8HxRu9qdIg0vL8sxIjPbMp4YLr-WkPYKLgpZDjleYC1aB4wjJcGwhWWY4kxNn4pGZcczBNUT8ONZFt9qxA9pdRQYecnIh124LJGu0lp2ocDMf45f71newVAh3r-KFIqdg7lyaY5eBCPDvPXhPYSq0pFRYV4LhOyZJZaMDqJwV0ZH2bAQvVjQwNgfWt3obVXNzK0GY42a4";
@@ -19,6 +21,14 @@ const NAV_ITEMS = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  async function handleLogout() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/");
+    router.refresh();
+  }
 
   return (
     <aside className="w-64 shrink-0 flex flex-col bg-[#1B5E20] text-white transition-all duration-300 shadow-xl z-20">
@@ -71,13 +81,18 @@ export default function AdminSidebar() {
           </nav>
         </div>
         <div className="flex flex-col gap-1 border-t border-white/10 pt-4">
-          <Link
-            href="/"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/80 hover:bg-white/5 hover:text-white transition-colors"
+          <div className="flex items-center gap-2 px-3 py-2">
+            <span className="text-white/70 text-sm">Giao diện</span>
+            <ThemeToggle variant="sidebar" />
+          </div>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/80 hover:bg-white/5 hover:text-white transition-colors w-full text-left"
           >
             <span className="material-symbols-outlined">logout</span>
-            <p className="text-sm font-medium">Log Out</p>
-          </Link>
+            <p className="text-sm font-medium">Đăng xuất</p>
+          </button>
         </div>
       </div>
     </aside>
