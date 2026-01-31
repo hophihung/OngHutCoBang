@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type ProfileRow = {
@@ -22,24 +22,57 @@ export default function AccountDetailsContent({ profile, userEmail, userId }: Pr
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
+  // #region agent log - Khi mount (đăng nhập Google): profile/userId hiển thị trên Console trình duyệt
+  useEffect(() => {
+    console.log("[Chi tiết tài khoản] Form mount", {
+      userId,
+      userEmail,
+      profile: profile ?? null,
+      hint: "Nếu profile null: có thể bảng profiles chưa có row cho user này hoặc lỗi đọc (thiếu cột avatar_url/email).",
+    });
+  }, [userId, userEmail, profile]);
+  // #endregion
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setMessage(null);
     setSaving(true);
+    const payload = {
+      full_name: fullName.trim() || null,
+      phone_number: phoneNumber.trim() || null,
+      address: address.trim() || null,
+    };
+    // #region agent log - Trước khi gửi update
+    console.log("[Chi tiết tài khoản] Lưu: payload gửi lên", { userId, payload });
+    // #endregion
     const supabase = createClient();
-    const { error } = await supabase
+    const { data: authUser } = await supabase.auth.getUser();
+    // #region agent log - Auth trước khi update (RLS profiles cần auth.uid() = id)
+    console.log("[Chi tiết tài khoản] Auth trước khi update", {
+      authUserId: authUser?.user?.id ?? null,
+      userIdTrongForm: userId,
+      match: authUser?.user?.id === userId,
+      hint: "Nếu match false hoặc authUserId null: session có thể hết/không đúng → RLS chặn UPDATE.",
+    });
+    // #endregion
+    const { data, error } = await supabase
       .from("profiles")
-      .update({
-        full_name: fullName.trim() || null,
-        phone_number: phoneNumber.trim() || null,
-        address: address.trim() || null,
-      })
-      .eq("id", userId);
+      .upsert({ id: userId, ...payload }, { onConflict: "id" })
+      .select("id");
     setSaving(false);
+    // #region agent log - Kết quả update bảng profiles
     if (error) {
+      console.error("[Chi tiết tài khoản] Update profiles thất bại", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: "RLS: cần policy 'Users can update own profile' (trong rls-patches.sql). Nếu chưa chạy rls-patches.sql thì UPDATE bị chặn.",
+      });
       setMessage({ type: "error", text: error.message });
       return;
     }
+    console.log("[Chi tiết tài khoản] Update profiles thành công", { data });
+    // #endregion
     setMessage({ type: "success", text: "Đã lưu thay đổi." });
   }
 
