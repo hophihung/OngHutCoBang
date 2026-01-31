@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Suspense } from "react";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import LoginForm from "./LoginForm";
@@ -36,9 +37,11 @@ export default function TaiKhoanPage() {
           <div className="absolute inset-0 bg-[#2f7f34]/10 mix-blend-overlay pointer-events-none" />
         </div>
 
-        {/* Right: Auth Form */}
+        {/* Right: Auth Form - Suspense required for useSearchParams() in LoginForm */}
         <div className="flex w-full lg:w-1/2 min-h-[50vh] lg:min-h-[calc(100vh-theme(spacing.16))] flex-col bg-white dark:bg-[#1a1a1a] overflow-y-auto">
-          <LoginForm />
+          <Suspense fallback={<div className="flex min-h-full items-center justify-center text-slate-500 dark:text-slate-400">Đang tải...</div>}>
+            <LoginForm />
+          </Suspense>
         </div>
       </main>
     </div>
