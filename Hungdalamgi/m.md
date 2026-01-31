@@ -86,3 +86,9 @@ Vì mặc định ai đăng ký cũng là `customer`, nên để có tài khoả
 
 * **User:** Đăng nhập -> Chỉ thấy profile và đơn hàng của chính mình (nhờ RLS mặc định).
 * **Admin:** Đăng nhập -> Thấy toàn bộ đơn hàng, khách hàng và được quyền sửa sản phẩm (nhờ RLS bổ sung ở trên).
+
+
+Error: Failed to run sql query: ERROR: 23505: duplicate key value violates unique constraint "product_variants_sku_key" DETAIL: Key (sku)=(OHC-K100-010) already exists.
+
+
+https://onghutco.vn/wp-content/uploads/2020/09/Ong-hut-co-bang-tuoi.png.webp

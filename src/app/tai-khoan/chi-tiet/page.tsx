@@ -11,11 +11,22 @@ export default async function ChiTietPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/tai-khoan");
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("full_name, phone_number, address, avatar_url, email")
     .eq("id", user.id)
-    .single();
+    .maybeSingle();
+
+  // #region agent log - Chi tiết tài khoản: khi load (chạy trên server → xem terminal)
+  console.log("[Chi tiết tài khoản] Load", {
+    userId: user.id,
+    userEmail: user.email,
+    userMetadata: user.user_metadata ? { full_name: user.user_metadata.full_name, name: user.user_metadata.name } : null,
+    profile: profile ?? null,
+    profileError: profileError ? { message: profileError.message, code: profileError.code } : null,
+    hint: profileError ? "Lỗi đọc profiles (cột thiếu? RLS?). Nếu chưa chạy profile-google-trigger.sql thì bảng có thể thiếu cột avatar_url, email." : null,
+  });
+  // #endregion
 
   const displayName = profile?.full_name ?? user.email ?? "User";
   const avatarUrl =

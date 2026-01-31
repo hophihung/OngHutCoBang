@@ -135,12 +135,12 @@ export default function Header() {
             >
               Về chúng tôi
             </Link>
-            <Link
+            {/* <Link
               href="/cau-chuyen"
               className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"
             >
               Câu chuyện
-            </Link>
+            </Link> */}
             <Link
               href="/blog"
               className="text-sm font-medium text-[#111811] dark:text-gray-200 hover:text-[#2f7f34] transition-colors"

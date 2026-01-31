@@ -4,7 +4,9 @@
 -- 1. Bật RLS cho cart_items (policy đã có trong schema)
 ALTER TABLE public.cart_items ENABLE ROW LEVEL SECURITY;
 
--- 2. Policy cập nhật profile
+-- 2. Policy profile: user được tạo/sửa chính mình (khi đăng nhập Google lần đầu có thể chưa có row → cần INSERT)
+CREATE POLICY "Users can insert own profile" ON public.profiles
+  FOR INSERT WITH CHECK (auth.uid() = id);
 CREATE POLICY "Users can update own profile" ON public.profiles
   FOR UPDATE USING (auth.uid() = id);
 
