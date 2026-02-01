@@ -154,3 +154,14 @@ CREATE POLICY "Users manage own cart items" ON public.cart_items
   FOR ALL USING (
     cart_id IN (SELECT id FROM public.carts WHERE user_id = auth.uid())
   );
+
+---
+--- ẢNH ĐẠI DIỆN (Avatar) – Chi tiết tài khoản
+--- Nếu bảng profiles chưa có cột avatar_url, chạy:
+--- ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS avatar_url TEXT;
+--- ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS email TEXT;
+---
+--- Storage: Tạo bucket "avatars" trong Supabase Dashboard > Storage, đặt Public.
+--- Policy: Cho phép user đăng nhập upload vào thư mục của mình (path prefix = auth.uid()::text).
+--- Ví dụ policy INSERT: (bucket_id = 'avatars' AND (storage.foldername(name))[1] = auth.uid()::text)
+--- Ví dụ policy SELECT: true (public read) hoặc tương tự.
