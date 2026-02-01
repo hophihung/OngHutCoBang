@@ -79,8 +79,8 @@ export default function AccountDetailsContent({ profile, userEmail, userId }: Pr
   return (
     <>
       {/* Section 1: Personal Information */}
-      <section className="bg-white dark:bg-[#1a2c1a] rounded-xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-100 dark:border-white/10">
+      <section className="bg-white dark:bg-[#152e15] rounded-xl shadow-sm border border-[#f0f4f0] dark:border-[#1f331f] overflow-hidden">
+        <div className="px-6 py-4 border-b border-[#f0f4f0] dark:border-[#1f331f]">
           <h2 className="text-[#111811] dark:text-white text-xl font-bold leading-tight tracking-tight">
             Thông tin cá nhân
           </h2>
@@ -167,72 +167,6 @@ export default function AccountDetailsContent({ profile, userEmail, userId }: Pr
               </button>
             </div>
           </form>
-        </div>
-      </section>
-
-      {/* Section 2: Address Book */}
-      <section className="bg-white dark:bg-[#1a2c1a] rounded-xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-100 dark:border-white/10 flex justify-between items-center">
-          <h2 className="text-[#111811] dark:text-white text-xl font-bold leading-tight tracking-tight">
-            Sổ địa chỉ
-          </h2>
-        </div>
-        <div className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Default Address Card */}
-          <div className="relative flex flex-col p-5 rounded-xl border border-[#2f7f34]/30 dark:border-[#2f7f34]/50 bg-white dark:bg-white/5 hover:shadow-md transition-all">
-            <div className="flex justify-between items-start mb-4">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[#2f7f34]">
-                  home
-                </span>
-                <span className="text-[#111811] dark:text-white font-bold text-base">
-                  Nhà riêng
-                </span>
-              </div>
-              <span className="bg-[#2f7f34]/10 text-[#2f7f34] dark:bg-[#2f7f34]/20 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">
-                Mặc định
-              </span>
-            </div>
-            <div className="flex flex-col gap-1 mb-6 text-sm text-gray-600 dark:text-gray-300">
-              <p className="font-medium text-[#111811] dark:text-white">
-                {fullName || userEmail || "—"}
-              </p>
-              {address && <p>{address}</p>}
-              {phoneNumber && <p className="mt-2">{phoneNumber}</p>}
-            </div>
-            <div className="mt-auto flex gap-4 pt-4 border-t border-gray-100 dark:border-white/10">
-              <button
-                type="button"
-                className="text-sm font-medium text-gray-600 hover:text-[#2f7f34] dark:text-gray-400 dark:hover:text-[#2f7f34] transition-colors flex items-center gap-1"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  edit
-                </span>
-                Sửa
-              </button>
-              <button
-                type="button"
-                className="text-sm font-medium text-gray-600 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 transition-colors flex items-center gap-1"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  delete
-                </span>
-                Xóa
-              </button>
-            </div>
-          </div>
-          {/* Add New Address Card */}
-          <button
-            type="button"
-            className="group flex flex-col items-center justify-center p-5 rounded-xl border-2 border-dashed border-gray-200 dark:border-white/20 hover:border-[#2f7f34] hover:bg-[#f6f8f6] dark:hover:bg-white/5 transition-all min-h-[220px]"
-          >
-            <div className="h-12 w-12 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-400 group-hover:bg-[#2f7f34] group-hover:text-white transition-all mb-3">
-              <span className="material-symbols-outlined text-[24px]">add</span>
-            </div>
-            <span className="text-gray-500 dark:text-gray-400 font-bold group-hover:text-[#2f7f34] transition-colors">
-              Thêm địa chỉ mới
-            </span>
-          </button>
         </div>
       </section>
     </>
