@@ -32,6 +32,8 @@ export type StoreProduct = {
   base_image_url: string | null;
   price: number | null;
   badge: string | null;
+  /** First variant id for Add to Cart (shop list). */
+  default_variant_id: number | null;
 };
 
 /**
@@ -53,15 +55,17 @@ export async function getFeaturedProducts(): Promise<FeaturedProduct[]> {
     const ids = products.map((p) => p.id)
     const { data: variants } = await supabase
       .from('product_variants')
-      .select('product_id, price')
+      .select('id, product_id, price')
       .in('product_id', ids)
 
     const minPriceByProduct: Record<number, number> = {}
+    const firstVariantIdByProduct: Record<number, number> = {}
     variants?.forEach((v) => {
       const pid = v.product_id
       const p = Number(v.price)
       if (minPriceByProduct[pid] == null || p < minPriceByProduct[pid])
         minPriceByProduct[pid] = p
+      if (firstVariantIdByProduct[pid] == null) firstVariantIdByProduct[pid] = v.id
     })
 
     return products.map((p) => ({
@@ -70,6 +74,7 @@ export async function getFeaturedProducts(): Promise<FeaturedProduct[]> {
       description: p.description ?? null,
       price: minPriceByProduct[p.id] ?? 0,
       image_url: p.base_image_url ?? null,
+      default_variant_id: firstVariantIdByProduct[p.id] ?? null,
     }))
   } catch {
     return []
@@ -152,15 +157,17 @@ export async function getStoreProducts(): Promise<StoreProduct[]> {
     const ids = products.map((p) => p.id)
     const { data: variants } = await supabase
       .from('product_variants')
-      .select('product_id, price')
+      .select('id, product_id, price')
       .in('product_id', ids)
 
     const minPriceByProduct: Record<number, number> = {}
+    const firstVariantIdByProduct: Record<number, number> = {}
     variants?.forEach((v) => {
       const pid = v.product_id
       const p = Number(v.price)
       if (minPriceByProduct[pid] == null || p < minPriceByProduct[pid])
         minPriceByProduct[pid] = p
+      if (firstVariantIdByProduct[pid] == null) firstVariantIdByProduct[pid] = v.id
     })
 
     return products.map((p, i) => ({
@@ -170,8 +177,70 @@ export async function getStoreProducts(): Promise<StoreProduct[]> {
       base_image_url: p.base_image_url ?? null,
       price: minPriceByProduct[p.id] ?? null,
       badge: i === 0 ? 'Bestseller' : i < 3 ? 'New' : null,
+      default_variant_id: firstVariantIdByProduct[p.id] ?? null,
     }))
   } catch {
     return []
+  }
+}
+
+export type ProductVariantRow = {
+  id: number;
+  variant_name: string | null;
+  price: number;
+  stock_quantity: number;
+  image_url: string | null;
+};
+
+export type ProductWithVariants = {
+  product: {
+    id: number;
+    name: string;
+    description: string | null;
+    base_image_url: string | null;
+  };
+  variants: ProductVariantRow[];
+};
+
+/**
+ * Lấy một sản phẩm và danh sách variants theo product id (cho trang chi tiết).
+ */
+export async function getProductWithVariantsById(
+  productId: number
+): Promise<ProductWithVariants | null> {
+  try {
+    const supabase = await createClient()
+    const { data: product, error: productError } = await supabase
+      .from('products')
+      .select('id, name, description, base_image_url')
+      .eq('id', productId)
+      .single()
+
+    if (productError || !product) return null
+
+    const { data: variants, error: variantsError } = await supabase
+      .from('product_variants')
+      .select('id, variant_name, price, stock_quantity, image_url')
+      .eq('product_id', productId)
+
+    if (variantsError) return null
+
+    return {
+      product: {
+        id: product.id,
+        name: product.name,
+        description: product.description ?? null,
+        base_image_url: product.base_image_url ?? null,
+      },
+      variants: (variants ?? []).map((v) => ({
+        id: v.id,
+        variant_name: v.variant_name ?? null,
+        price: Number(v.price),
+        stock_quantity: v.stock_quantity ?? 0,
+        image_url: v.image_url ?? null,
+      })),
+    }
+  } catch {
+    return null
   }
 }

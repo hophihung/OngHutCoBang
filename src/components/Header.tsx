@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useCart } from "@/contexts/CartContext";
 
 const SHOP_LINKS = [
   { label: "Ống hút cỏ", href: "/cua-hang?category=ong-hut-co" },
@@ -22,8 +23,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const shopRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
-
-  const cartCount = 2; // TODO: from context/Supabase
+  const { cartCount } = useCart();
 
   const displayName =
     user?.user_metadata?.full_name ||

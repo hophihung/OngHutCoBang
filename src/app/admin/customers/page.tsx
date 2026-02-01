@@ -48,6 +48,7 @@ function CustomerCell({ row }: { row: CustomerRow }) {
 }
 
 export default async function AdminCustomersPage() {
+  // Data from Supabase (customers table). ordersCount / totalSpent are placeholders until orders integration.
   const rows = await getAdminCustomerRows();
   const customers: CustomerRow[] = rows.map((r, i) => ({
     id: String(r.id),

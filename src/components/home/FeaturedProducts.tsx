@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCart } from "@/contexts/CartContext";
 import type { FeaturedProduct } from "@/lib/products";
 
 function formatPrice(price: number): string {
@@ -13,6 +15,16 @@ type FeaturedProductsProps = { products?: FeaturedProduct[] };
 
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   const list = products ?? [];
+  const { addToCart } = useCart();
+  const router = useRouter();
+
+  function handleAddToCart(e: React.MouseEvent, p: FeaturedProduct) {
+    e.preventDefault();
+    if (p.default_variant_id == null) return;
+    const err = addToCart(p.default_variant_id, 1);
+    if (err === "login_required") router.push("/tai-khoan?next=/gio-hang");
+  }
+
   return (
     <section
       id="shop"
@@ -77,7 +89,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                       type="button"
                       className="flex h-9 w-9 items-center justify-center rounded-full bg-[#eaf0ea] text-[#2f7f34] hover:bg-[#2f7f34] hover:text-white transition-all"
                       aria-label={`Thêm ${p.name} vào giỏ`}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={(e) => handleAddToCart(e, p)}
                     >
                       <span className="material-symbols-outlined text-lg">
                         add_shopping_cart

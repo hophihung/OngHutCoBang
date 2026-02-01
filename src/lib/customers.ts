@@ -26,3 +26,22 @@ export async function getAdminCustomerRows(): Promise<AdminCustomerRow[]> {
     return []
   }
 }
+
+/**
+ * Lấy một khách hàng theo id từ bảng customers (admin).
+ */
+export async function getAdminCustomerById(id: number): Promise<AdminCustomerRow | null> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('customers')
+      .select('id, full_name, email, phone, address, created_at')
+      .eq('id', id)
+      .maybeSingle()
+
+    if (error || !data) return null
+    return data as AdminCustomerRow
+  } catch {
+    return null
+  }
+}
