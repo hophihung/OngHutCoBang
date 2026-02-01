@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useCart } from "@/contexts/CartContext";
 import {
@@ -17,6 +18,7 @@ import {
 const VND_TO_USD = 1 / 25_000;
 
 export default function CartContent() {
+  const router = useRouter();
   const { setCartCount } = useCart();
   const [items, setItems] = useState<CartItemDisplay[]>([]);
   const [loading, setLoading] = useState(true);
