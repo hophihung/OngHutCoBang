@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     }
 
     const baseUrl = getBaseUrl(req);
-    const returnUrl = `${baseUrl}/gio-hang?payos=success`;
+    const returnUrl = `${baseUrl}/tai-khoan/don-hang?payos=success`;
     const cancelUrl = `${baseUrl}/gio-hang?payos=cancel`;
 
     const itemsVND = body.items.map((item) => ({

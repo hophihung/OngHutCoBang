@@ -18,11 +18,11 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   const { addToCart } = useCart();
   const router = useRouter();
 
-  function handleAddToCart(e: React.MouseEvent, p: FeaturedProduct) {
+  async function handleAddToCart(e: React.MouseEvent, p: FeaturedProduct) {
     e.preventDefault();
     if (p.default_variant_id == null) return;
-    const err = addToCart(p.default_variant_id, 1);
-    if (err === "login_required") router.push("/tai-khoan?next=/gio-hang");
+    const { error } = await addToCart(p.default_variant_id, 1);
+    if (error === "login_required") router.push("/tai-khoan?next=/gio-hang");
   }
 
   return (

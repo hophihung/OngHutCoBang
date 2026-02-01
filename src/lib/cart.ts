@@ -68,13 +68,13 @@ export async function getCartItems(cartId: number): Promise<CartItemDisplay[]> {
   const { data, error } = await supabase
     .from("cart_items")
     .select(
-      "id, variant_id, quantity, product_variants(id, price, variant_name, product_id, image_url, products(name, base_image_url))"
+      "id, cart_id, variant_id, quantity, product_variants(id, price, variant_name, product_id, image_url, products(name, base_image_url))"
     )
     .eq("cart_id", cartId);
 
   if (error || !data) return [];
 
-  return (data as CartItemRow[]).map((row) => {
+  return (data as unknown as CartItemRow[]).map((row) => {
     const v = row.product_variants;
     const name = v?.products?.name ?? v?.variant_name ?? "Product";
     const price = Number(v?.price ?? 0);
@@ -154,6 +154,15 @@ export async function removeCartItem(
 ): Promise<{ error: string | null }> {
   const supabase = createClient();
   const { error } = await supabase.from("cart_items").delete().eq("id", cartItemId);
+  return { error: error?.message ?? null };
+}
+
+/**
+ * Clear all items in a cart (e.g. after successful payment).
+ */
+export async function clearCart(cartId: number): Promise<{ error: string | null }> {
+  const supabase = createClient();
+  const { error } = await supabase.from("cart_items").delete().eq("cart_id", cartId);
   return { error: error?.message ?? null };
 }
 

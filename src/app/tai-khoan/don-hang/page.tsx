@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
+import ClearCartOnPayOSSuccess from "./ClearCartOnPayOSSuccess";
 import DashboardOrdersContent from "./DashboardOrdersContent";
 import { createClient } from "@/lib/supabase/server";
 
@@ -128,6 +129,7 @@ export default async function DonHangPage() {
 
           {/* Main Content */}
           <main className="flex-1 flex flex-col gap-6 min-w-0">
+            <ClearCartOnPayOSSuccess />
             <div className="flex flex-col gap-1">
               <h2 className="text-[#111811] dark:text-white text-3xl font-bold tracking-tight">
                 Đơn hàng của tôi
