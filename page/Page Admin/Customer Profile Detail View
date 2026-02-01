@@ -40,7 +40,7 @@
 <div class="bg-primary/10 p-2 rounded-lg">
 <span class="material-symbols-outlined text-primary">eco</span>
 </div>
-<h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Green Joy Straw <span class="text-gray-400 font-normal text-sm ml-2">/ Admin</span></h1>
+<h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">ReenCo <span class="text-gray-400 font-normal text-sm ml-2">/ Admin</span></h1>
 </div>
 <div class="flex items-center gap-4">
 <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300">

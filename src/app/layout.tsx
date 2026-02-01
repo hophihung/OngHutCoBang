@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Green Joy Straw - Ống hút cỏ tự nhiên",
+  title: "ReenCo - Ống hút cỏ tự nhiên",
   description:
     "Ống hút cỏ bàng - Giải pháp xanh cho cuộc sống lành mạnh và bền vững.",
 };

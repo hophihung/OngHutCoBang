@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="material-symbols-outlined text-3xl text-white">
                 eco
               </span>
-              <h3 className="text-xl font-bold">Green Joy Straw</h3>
+              <h3 className="text-xl font-bold">ReenCo</h3>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Chuyên cung cấp các sản phẩm thân thiện môi trường, thay thế nhựa
@@ -115,7 +115,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-white/10 pt-8 text-center text-xs text-gray-400">
-          <p>© 2023 Green Joy Straw. All rights reserved.</p>
+          <p>© 2023 ReenCo. All rights reserved.</p>
         </div>
       </div>
     </footer>

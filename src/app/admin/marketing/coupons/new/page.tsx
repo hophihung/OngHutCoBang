@@ -456,7 +456,7 @@ export default function AdminCouponNewPage() {
                           eco
                         </span>
                         <span className="text-xs font-bold tracking-widest uppercase">
-                          Green Joy Straw
+                          ReenCo
                         </span>
                       </div>
                       <div className="text-4xl font-black mb-1">25% OFF</div>

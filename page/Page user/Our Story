@@ -3,7 +3,7 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Our Story: From Farm to Table - Green Joy Straw</title>
+<title>Our Story: From Farm to Table - ReenCo</title>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -45,7 +45,7 @@
 <div class="text-primary">
 <span class="material-symbols-outlined text-3xl">eco</span>
 </div>
-<h2 class="text-xl font-bold tracking-tight text-text-main dark:text-white">Green Joy Straw</h2>
+<h2 class="text-xl font-bold tracking-tight text-text-main dark:text-white">ReenCo</h2>
 </div>
 <!-- Desktop Nav -->
 <nav class="hidden md:flex items-center gap-8">
@@ -324,7 +324,7 @@
                 </p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
 <button class="bg-primary hover:bg-green-500 text-black px-8 py-4 rounded-lg text-base font-bold transition-all hover:-translate-y-1 shadow-lg shadow-primary/25">
-                        Shop Green Joy Straws
+                        Shop ReenCos
                     </button>
 <button class="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-lg text-base font-bold transition-all">
                         Partner With Us
@@ -337,10 +337,10 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary">eco</span>
-<span class="font-bold text-text-main dark:text-white">Green Joy Straw</span>
+<span class="font-bold text-text-main dark:text-white">ReenCo</span>
 </div>
 <div class="text-sm text-text-muted dark:text-gray-500">
-                    © 2023 Green Joy Straw. All rights reserved.
+                    © 2023 ReenCo. All rights reserved.
                 </div>
 <div class="flex gap-4">
 <a class="text-text-muted hover:text-primary transition-colors dark:text-gray-400" href="#">

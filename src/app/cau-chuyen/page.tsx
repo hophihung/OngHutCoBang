@@ -344,7 +344,7 @@ export default function CauChuyenPage() {
                 href="/cua-hang"
                 className="inline-flex items-center justify-center bg-[#2f7f34] hover:bg-[#1e5622] text-black px-8 py-4 rounded-lg text-base font-bold transition-all hover:-translate-y-1 shadow-lg shadow-[#2f7f34]/25"
               >
-                Shop Green Joy Straws
+                Shop ReenCos
               </Link>
               <Link
                 href="/lien-he"

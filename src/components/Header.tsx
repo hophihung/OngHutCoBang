@@ -85,7 +85,7 @@ export default function Header() {
                 <span className="material-symbols-outlined text-4xl">eco</span>
               </div>
               <h2 className="text-xl font-bold leading-tight tracking-tight text-[#2f7f34]">
-                Green Joy Straw
+                ReenCo
               </h2>
             </Link>
           </div>

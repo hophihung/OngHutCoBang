@@ -38,6 +38,34 @@ export type StoreProduct = {
   default_variant_id: number | null;
 };
 
+/** Danh mục cho sidebar cửa hàng. */
+export type CategoryRow = {
+  id: number;
+  name: string;
+  slug: string | null;
+};
+
+/**
+ * Lấy danh mục cho sidebar cửa hàng.
+ */
+export async function getCategories(): Promise<CategoryRow[]> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('categories')
+      .select('id, name, slug')
+      .order('name')
+    if (error || !data) return []
+    return (data as CategoryRow[]).map((r) => ({
+      id: r.id,
+      name: r.name,
+      slug: r.slug ?? null,
+    }))
+  } catch {
+    return []
+  }
+}
+
 /**
  * Lấy sản phẩm nổi bật từ Supabase (tối đa 4, is_active = true).
  * Giá lấy từ min(price) của product_variants.
@@ -183,6 +211,131 @@ export async function getStoreProducts(): Promise<StoreProduct[]> {
     }))
   } catch {
     return []
+  }
+}
+
+export type StoreProductsFilterOptions = {
+  categorySlug?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  inStockOnly?: boolean;
+  sort?: 'newest' | 'price_asc' | 'price_desc';
+  page?: number;
+  limit?: number;
+};
+
+/**
+ * Lấy sản phẩm cửa hàng có filter, sort, phân trang.
+ */
+export async function getStoreProductsFiltered(
+  options: StoreProductsFilterOptions = {}
+): Promise<{ products: StoreProduct[]; total: number }> {
+  const {
+    categorySlug,
+    minPrice,
+    maxPrice,
+    inStockOnly = false,
+    sort = 'newest',
+    page = 1,
+    limit = 12,
+  } = options
+
+  try {
+    const supabase = await createClient()
+
+    let categoryId: number | null = null
+    if (categorySlug) {
+      const slugMatch = await supabase
+        .from('categories')
+        .select('id')
+        .eq('slug', categorySlug)
+        .maybeSingle()
+      if (slugMatch.data?.id) categoryId = slugMatch.data.id as number
+      else {
+        const idNum = Number(categorySlug)
+        if (!Number.isNaN(idNum)) {
+          const idMatch = await supabase
+            .from('categories')
+            .select('id')
+            .eq('id', idNum)
+            .maybeSingle()
+          if (idMatch.data?.id) categoryId = idMatch.data.id as number
+        }
+      }
+    }
+
+    let query = supabase
+      .from('products')
+      .select('id, name, description, base_image_url, created_at, category_id')
+      .eq('is_active', true)
+
+    if (categoryId != null) query = query.eq('category_id', categoryId)
+    const { data: products, error: productsError } = await query.order('created_at', {
+      ascending: false,
+    })
+
+    if (productsError || !products?.length) {
+      return { products: [], total: 0 }
+    }
+
+    const ids = products.map((p) => p.id)
+    const { data: variants } = await supabase
+      .from('product_variants')
+      .select('id, product_id, price, stock_quantity')
+      .in('product_id', ids)
+
+    const minPriceByProduct: Record<number, number> = {}
+    const firstVariantIdByProduct: Record<number, number> = {}
+    const totalStockByProduct: Record<number, number> = {}
+    variants?.forEach((v) => {
+      const pid = v.product_id
+      const price = Number(v.price)
+      const stock = Number(v.stock_quantity ?? 0)
+      if (minPriceByProduct[pid] == null || price < minPriceByProduct[pid])
+        minPriceByProduct[pid] = price
+      if (firstVariantIdByProduct[pid] == null) firstVariantIdByProduct[pid] = v.id
+      totalStockByProduct[pid] = (totalStockByProduct[pid] ?? 0) + stock
+    })
+
+    type ProductRow = (typeof products)[0] & { category_id?: number }
+    let filtered = products as ProductRow[]
+    filtered = filtered.filter((p) => {
+      const minP = minPriceByProduct[p.id] ?? 0
+      if (minPrice != null && minP < minPrice) return false
+      if (maxPrice != null && minP > maxPrice) return false
+      if (inStockOnly && (totalStockByProduct[p.id] ?? 0) <= 0) return false
+      return true
+    })
+
+    const sortKey = sort === 'newest' ? 'created_at' : 'minPrice'
+    if (sort === 'price_asc') {
+      filtered.sort(
+        (a, b) => (minPriceByProduct[a.id] ?? 0) - (minPriceByProduct[b.id] ?? 0)
+      )
+    } else if (sort === 'price_desc') {
+      filtered.sort(
+        (a, b) => (minPriceByProduct[b.id] ?? 0) - (minPriceByProduct[a.id] ?? 0)
+      )
+    }
+    // newest: already ordered by created_at from query
+
+    const total = filtered.length
+    const offset = (page - 1) * limit
+    const paged = filtered.slice(offset, offset + limit)
+
+    const productsOut: StoreProduct[] = paged.map((p, i) => ({
+      id: p.id,
+      name: p.name,
+      description: p.description ?? null,
+      base_image_url: p.base_image_url ?? null,
+      price: minPriceByProduct[p.id] ?? null,
+      badge: i === 0 ? 'Bestseller' : i < 3 ? 'New' : null,
+      default_variant_id: firstVariantIdByProduct[p.id] ?? null,
+    }))
+
+    return { products: productsOut, total }
+  } catch {
+    return { products: [], total: 0 }
   }
 }
 

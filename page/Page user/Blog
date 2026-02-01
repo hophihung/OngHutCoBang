@@ -3,7 +3,7 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Green Living Blog - Green Joy Straw</title>
+<title>Green Living Blog - ReenCo</title>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -53,7 +53,7 @@
 <div class="size-8 text-primary">
 <span class="material-symbols-outlined !text-[32px]">eco</span>
 </div>
-<h2 class="text-xl font-bold tracking-tight">Green Joy Straw</h2>
+<h2 class="text-xl font-bold tracking-tight">ReenCo</h2>
 </a>
 <nav class="hidden md:flex items-center gap-8">
 <a class="sans-text text-sm font-medium text-background-dark/80 hover:text-primary dark:text-white/80 dark:hover:text-primary transition-colors" href="#">Shop</a>
@@ -297,7 +297,7 @@
                 </p>
 </div>
 <div class="mt-16 pt-8 border-t border-[#dce4dc] dark:border-[#2a402a] flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-forest/60 dark:text-white/50 sans-text">
-<p>© 2023 Green Joy Straw. All rights reserved.</p>
+<p>© 2023 ReenCo. All rights reserved.</p>
 <div class="flex gap-6">
 <a class="hover:text-primary" href="#">Privacy Policy</a>
 <a class="hover:text-primary" href="#">Terms of Service</a>

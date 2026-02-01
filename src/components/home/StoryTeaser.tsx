@@ -29,7 +29,7 @@ export default function StoryTeaser() {
               Hướng tới nền kinh tế tuần hoàn từ cây Cỏ Bàng
             </h2>
             <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-              Green Joy Straw không chỉ bán ống hút, chúng tôi xây dựng một vòng
+              ReenCo không chỉ bán ống hút, chúng tôi xây dựng một vòng
               đời sản phẩm bền vững. Từ những cánh đồng cỏ bàng hoang sơ tại
               miền Tây, qua bàn tay khéo léo của người nông dân, đến khi trở về
               với đất mẹ, mỗi chiếc ống hút là một cam kết về tương lai xanh.
