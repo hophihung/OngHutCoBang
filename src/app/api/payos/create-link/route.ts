@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     const result = await payos.paymentRequests.create({
       orderCode,
       amount: amountVND,
-      description: `Đơn hàng Ong Hut Co Bang #${orderCode}`,
+      description: "Ong Hut Co Bang",
       returnUrl,
       cancelUrl,
       items: itemsVND,
