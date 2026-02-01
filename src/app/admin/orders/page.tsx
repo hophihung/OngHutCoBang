@@ -1,64 +1,52 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getAdminOrders } from "@/lib/orders";
 
 const ADMIN_AVATAR =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBKqKGDdKY37WfKqF0MwrVcBwu9Ohg4oag6X6JQeeSEFFTPwSBOVfbRjiREu8P-ZkJI9mJximUMeXKeO0_UnDoCtbNb87kJmh-vp0wc2GfmzihWydCp92Nmfv1EOpAZDTp53vFk-4dhC0yIVK01ev81lzHk_bMaKc740ZXvxd5_R1kWjdFqdasuKbpEk9gFeaznlymjtzhCV7OJJLiMxojPDV_PhhO_LBVfujp58oeyIUIyphvqjLKYp955dNymLeK7Qpo8B89vLXs";
 
-const AVATAR_URLS = [
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuACVSFRnHDgOhpWYnuhz19-Kdpg_wIBptlybiLB4TEzDpqgPklepELp1krY31-qhIZVBXuipeJWwBgMM2rG-E_mqpi_ArlIhUBNoJZEnWQbZ98ZIZ7ZtnXaqMOQdyUpbpiSbNJhNYj9bgJUKtf94TYTvDPDM76eYxBwghMJq__LhEhlQ4vNwkC_5xcqpJZKpQ4fpksEbr166TxawuAIedDAP4Bcd03iDlcBD2LqF5yKrssorL6P2Wwc7NWYv9PrL-FhiioDxHQBb34",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDmmqnO0PfjgERGR8bR1H1Xk3Nekql3X-1eQ7qp00Jue-4iezFs8GxyV0WS3FouHySDvzj76BxQENb7Zc3FBTbJxJFxWmf9DTg6rpWRAXTPFh6D4Jn7YteheLZlZf2w0HNAR6Yz2ddu3P0G7zQSMUcBaNrvtbre7_YYYEL9p526_A7XSScBiV6mi9VuW49NAZFQh4dam32pv8-QsR2SNu7xV5Y0Sh7QZWKgIUXqEX4qvZr45erhaxCJL8AJkVy9rhGTFs44mYbXpqE",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDBiOxLP3ztKPTyeMsk-WjaQyASuX2Vm1sxFhVhR4HQm6GbxLr5nm2Nw5xQvq9MdH3BiFgcerrj2mdTA0rD087MSMAs6CKOzko-QtFVVFsZMP2TPeSf6qNsG9biYe5OqiyKrhPXb5TO1BG5vs4rbXgEidz9Z7YPBRxDVZQLFmMNLrIcR7nbPrZPmVRHToWtpM_n9iJxXNG4nMptCqBUL5LREMKQqfwz3kMUFB-xoVm9_zElhTVVZodP2QabJIhWd-X8YRV1gSgoLHw",
-];
+function formatDate(iso: string) {
+  try {
+    return new Date(iso).toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    });
+  } catch {
+    return iso;
+  }
+}
 
-type CustomerDisplay = { type: "avatar"; url: string } | { type: "initials"; letters: string };
+function formatMoney(value: number) {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(value);
+}
 
-const ORDERS = [
-  {
-    id: "#ORD-2025-001",
-    customer: "Alice Johnson",
-    customerDisplay: { type: "avatar" as const, url: AVATAR_URLS[0] },
-    date: "Oct 24, 2025",
-    total: "$124.50",
-    payment: "Paid" as const,
-    fulfillment: "Pending" as const,
-  },
-  {
-    id: "#ORD-2025-002",
-    customer: "Michael Scott",
-    customerDisplay: { type: "initials" as const, letters: "MS" },
-    date: "Oct 23, 2025",
-    total: "$89.00",
-    payment: "Paid" as const,
-    fulfillment: "Shipping" as const,
-  },
-  {
-    id: "#ORD-2025-003",
-    customer: "Sarah Connor",
-    customerDisplay: { type: "avatar" as const, url: AVATAR_URLS[1] },
-    date: "Oct 23, 2025",
-    total: "$210.25",
-    payment: "Unpaid" as const,
-    fulfillment: "Cancelled" as const,
-  },
-  {
-    id: "#ORD-2025-004",
-    customer: "James Bond",
-    customerDisplay: { type: "initials" as const, letters: "JB" },
-    date: "Oct 22, 2025",
-    total: "$450.00",
-    payment: "Paid" as const,
-    fulfillment: "Completed" as const,
-  },
-  {
-    id: "#ORD-2025-005",
-    customer: "Dwight Schrute",
-    customerDisplay: { type: "avatar" as const, url: AVATAR_URLS[2] },
-    date: "Oct 21, 2025",
-    total: "$32.50",
-    payment: "Paid" as const,
-    fulfillment: "Completed" as const,
-  },
-];
+function paymentLabel(method: string | null): string {
+  if (method === "payos") return "Paid";
+  if (method === "cod") return "Unpaid";
+  return method ?? "—";
+}
+
+function fulfillmentLabel(status: string): string {
+  const map: Record<string, string> = {
+    pending: "Pending",
+    confirmed: "Confirmed",
+    shipping: "Shipping",
+    completed: "Completed",
+    cancelled: "Cancelled",
+  };
+  return map[status] ?? status;
+}
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length >= 2)
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  return name.slice(0, 2).toUpperCase() || "—";
+}
 
 function PaymentBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
@@ -78,6 +66,8 @@ function FulfillmentBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     Pending:
       "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+    Confirmed:
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
     Shipping:
       "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
     Completed:
@@ -94,41 +84,25 @@ function FulfillmentBadge({ status }: { status: string }) {
   );
 }
 
-function CustomerCell({
-  display,
-  name,
-}: {
-  display: CustomerDisplay;
-  name: string;
-}) {
-  if (display.type === "avatar") {
-    return (
-      <div className="flex items-center gap-3">
-        <div className="relative size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden shrink-0">
-          <Image src={display.url} alt="" fill className="object-cover" />
-        </div>
-        <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
-          {name}
-        </span>
-      </div>
-    );
-  }
+function CustomerCell({ name }: { name: string }) {
   return (
     <div className="flex items-center gap-3">
       <div className="size-8 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-xs font-bold text-purple-600 dark:text-purple-400 shrink-0">
-        {display.letters}
+        {initials(name)}
       </div>
       <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
-        {name}
+        {name || "—"}
       </span>
     </div>
   );
 }
 
-export default function AdminOrdersPage() {
+export default async function AdminOrdersPage() {
+  const orders = await getAdminOrders();
+  const totalPages = Math.max(1, Math.ceil(orders.length / 10));
+
   return (
     <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#f6f8f6] dark:bg-[#131f14] relative">
-      {/* Top Header - giống Dashboard admin */}
       <header className="h-16 flex items-center justify-between px-6 md:px-8 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a1a1a] shrink-0 sticky top-0 z-10">
         <div className="flex items-center gap-4">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white">
@@ -177,10 +151,8 @@ export default function AdminOrdersPage() {
         </div>
       </header>
 
-      {/* Scrollable Content - Order Management List body */}
       <div className="flex-1 overflow-y-auto bg-[#f6f8f6] dark:bg-[#131f14] p-6 md:p-8">
         <div className="max-w-7xl mx-auto flex flex-col gap-6">
-          {/* Page Controls: Search, Filter, Export */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex flex-1 items-center gap-3 flex-wrap">
               <div className="relative w-full max-w-md">
@@ -221,7 +193,6 @@ export default function AdminOrdersPage() {
             </div>
           </div>
 
-          {/* Data Table Card */}
           <div className="bg-white dark:bg-[#1a1a1a] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
@@ -251,49 +222,60 @@ export default function AdminOrdersPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                  {ORDERS.map((order) => (
-                    <tr
-                      key={order.id}
-                      className="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer"
-                    >
-                      <td className="py-4 px-6 text-sm font-medium text-slate-900 dark:text-white whitespace-nowrap">
-                        {order.id}
-                      </td>
-                      <td className="py-4 px-6">
-                        <CustomerCell
-                          display={order.customerDisplay}
-                          name={order.customer}
-                        />
-                      </td>
-                      <td className="py-4 px-6 text-sm text-slate-600 dark:text-slate-400 whitespace-nowrap">
-                        {order.date}
-                      </td>
-                      <td className="py-4 px-6 text-sm font-semibold text-slate-900 dark:text-white whitespace-nowrap">
-                        {order.total}
-                      </td>
-                      <td className="py-4 px-6">
-                        <PaymentBadge status={order.payment} />
-                      </td>
-                      <td className="py-4 px-6">
-                        <FulfillmentBadge status={order.fulfillment} />
-                      </td>
-                      <td className="py-4 px-6 text-right">
-                        <Link
-                          href={`/admin/orders/${order.id.replace("#", "").toLowerCase()}`}
-                          className="inline-flex p-1.5 rounded-lg text-slate-400 hover:text-[#1c5f21] hover:bg-[#1c5f21]/10 transition-colors"
-                          aria-label="Xem chi tiết"
-                        >
-                          <span className="material-symbols-outlined text-[20px]">
-                            visibility
-                          </span>
-                        </Link>
+                  {orders.length === 0 ? (
+                    <tr>
+                      <td
+                        colSpan={7}
+                        className="py-12 px-6 text-center text-slate-500 dark:text-slate-400"
+                      >
+                        Chưa có đơn hàng nào.
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    orders.map((order) => (
+                      <tr
+                        key={order.id}
+                        className="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer"
+                      >
+                        <td className="py-4 px-6 text-sm font-medium text-slate-900 dark:text-white whitespace-nowrap">
+                          #{order.id}
+                        </td>
+                        <td className="py-4 px-6">
+                          <CustomerCell name={order.recipient_name} />
+                        </td>
+                        <td className="py-4 px-6 text-sm text-slate-600 dark:text-slate-400 whitespace-nowrap">
+                          {formatDate(order.created_at)}
+                        </td>
+                        <td className="py-4 px-6 text-sm font-semibold text-slate-900 dark:text-white whitespace-nowrap">
+                          {formatMoney(order.final_amount)}
+                        </td>
+                        <td className="py-4 px-6">
+                          <PaymentBadge
+                            status={paymentLabel(order.payment_method)}
+                          />
+                        </td>
+                        <td className="py-4 px-6">
+                          <FulfillmentBadge
+                            status={fulfillmentLabel(order.status)}
+                          />
+                        </td>
+                        <td className="py-4 px-6 text-right">
+                          <Link
+                            href={`/admin/orders/${order.id}`}
+                            className="inline-flex p-1.5 rounded-lg text-slate-400 hover:text-[#1c5f21] hover:bg-[#1c5f21]/10 transition-colors"
+                            aria-label="Xem chi tiết"
+                          >
+                            <span className="material-symbols-outlined text-[20px]">
+                              visibility
+                            </span>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
-            {/* Pagination */}
             <div className="px-6 py-4 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
               <span className="text-sm text-slate-500 dark:text-slate-400">
                 Page{" "}
@@ -302,7 +284,7 @@ export default function AdminOrdersPage() {
                 </span>{" "}
                 of{" "}
                 <span className="font-medium text-slate-900 dark:text-white">
-                  10
+                  {totalPages}
                 </span>
               </span>
               <div className="flex gap-2">
