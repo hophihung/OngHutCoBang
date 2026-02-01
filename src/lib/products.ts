@@ -7,6 +7,8 @@ export type FeaturedProduct = {
   description: string | null;
   price: number;
   image_url: string | null;
+  /** First variant id for Add to Cart. */
+  default_variant_id: number | null;
 };
 
 /** Hàng bảng admin: sản phẩm + category + 1 variant (sku, price, stock). */
