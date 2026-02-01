@@ -3,7 +3,7 @@
 /* Tailwind v4: dark: utilities theo class .dark trên html (nút chuyển giao diện) */
 @custom-variant dark (&&:where(.dark, .dark *));
 
-/* Green Joy Straw theme - theo HTML mới */
+/* ReenCo theme - theo HTML mới */
 :root {
   --background: #f6f8f6;
   --foreground: #111811;

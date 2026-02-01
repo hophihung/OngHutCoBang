@@ -57,7 +57,7 @@ Cần các mục sau (Sắp xếp theo độ quan trọng):
 Copy đoạn này vào Stitch để tạo giao diện Admin Dashboard hiện đại, sạch sẽ.
 
 ```text
-Create a clean, modern Admin Dashboard UI for "Green Joy Straw" e-commerce website (B2C model).
+Create a clean, modern Admin Dashboard UI for "ReenCo" e-commerce website (B2C model).
 
 ## 1. Layout Structure
 - **Sidebar (Left):** Dark Green background (#1B5E20). White text.

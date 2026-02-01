@@ -346,7 +346,7 @@ export default function VeChungToiPage() {
                 href="/cua-hang"
                 className="inline-flex items-center justify-center bg-[#1c5f21] hover:bg-[#164d1b] text-white px-8 py-4 rounded-lg text-base font-bold transition-all hover:-translate-y-1 shadow-lg shadow-[#1c5f21]/25"
               >
-                Shop Green Joy Straws
+                Shop ReenCo
               </Link>
               <Link
                 href="/#contact"
