@@ -62,31 +62,31 @@ export default async function AdminProductsPage() {
 
       {/* Scrollable Content - Product Inventory body */}
       <div className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth">
-        <div className="flex flex-col gap-6">
-          {/* Page title & Add button */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-[1200px] mx-auto">
-            <div>
-              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1">
-                <Link href="/admin" className="hover:text-[#1c5f21]">
+        <div className="max-w-[1200px] mx-auto flex flex-col gap-6">
+          {/* Page header: breadcrumb + title + primary action */}
+          <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-1">
+              <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+                <Link href="/admin" className="hover:text-[#1c5f21] transition-colors">
                   Home
                 </Link>
-                <span aria-hidden className="text-slate-400">›</span>
-                <span>Inventory</span>
-                <span aria-hidden className="text-slate-400">›</span>
-                <span className="font-semibold text-[#1c5f21]">Products</span>
+                <span aria-hidden className="text-slate-300 dark:text-slate-600 select-none">/</span>
+                <span className="text-slate-500 dark:text-slate-400">Inventory</span>
+                <span aria-hidden className="text-slate-300 dark:text-slate-600 select-none">/</span>
+                <span className="font-medium text-[#1c5f21] dark:text-emerald-400">Products</span>
               </nav>
-              <h1 className="text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-tight">
+              <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Products
               </h1>
             </div>
             <Link
               href="/admin/products/new"
-              className="flex items-center justify-center gap-2 bg-[#1c5f21] hover:bg-[#1c5f21]/90 text-white px-5 py-2.5 rounded-lg shadow-sm transition-all text-sm font-bold tracking-wide"
+              className="inline-flex items-center justify-center gap-2 bg-[#1c5f21] hover:bg-[#1a5520] dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white px-4 py-2.5 rounded-lg text-sm font-semibold shadow-sm transition-colors shrink-0"
             >
-              <span aria-hidden className="text-xl leading-none">+</span>
+              <span aria-hidden className="flex items-center justify-center size-5 rounded-full border-2 border-white/80 text-lg leading-none">+</span>
               Add New Product
             </Link>
-          </div>
+          </header>
 
           <ProductsTableClient products={products} />
         </div>
