@@ -21,7 +21,7 @@ function paramsToFilterOptions(params: ReturnType<typeof parseShopParams>) {
   const page = Math.max(1, parseInt(params.page ?? "1", 10) || 1);
   const minPrice = params.minPrice != null && params.minPrice !== "" ? Number(params.minPrice) : undefined;
   const maxPrice = params.maxPrice != null && params.maxPrice !== "" ? Number(params.maxPrice) : undefined;
-  const sort =
+  const sort: "newest" | "price_asc" | "price_desc" =
     params.sort === "price_asc" || params.sort === "price_desc" || params.sort === "newest"
       ? params.sort
       : "newest";
