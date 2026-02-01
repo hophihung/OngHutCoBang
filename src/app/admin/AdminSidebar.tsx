@@ -9,9 +9,14 @@ import ThemeToggle from "@/components/ThemeToggle";
 const LOGO_URL =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBd8y94uBRlLodULGApadRhugMLBS50K2n9Cy00gUMDI_RxzzPVCjVa7YGTtQNV0f55tg8HxRu9qdIg0vL8sxIjPbMp4YLr-WkPYKLgpZDjleYC1aB4wjJcGwhWWY4kxNn4pGZcczBNUT8ONZFt9qxA9pdRQYecnIh124LJGu0lp2ocDMf45f71newVAh3r-KFIqdg7lyaY5eBCPDvPXhPYSq0pFRYV4LhOyZJZaMDqJwV0ZH2bAQvVjQwNgfWt3obVXNzK0GY42a4";
 
-const NAV_ITEMS = [
+const NAV_ITEMS: Array<{
+  href: string;
+  icon: string;
+  label: string;
+  badge?: number;
+}> = [
   { href: "/admin", icon: "dashboard", label: "Dashboard" },
-  { href: "/admin/orders", icon: "shopping_bag", label: "Orders", badge: 5 },
+  { href: "/admin/orders", icon: "shopping_bag", label: "Orders" },
   { href: "/admin/products", icon: "inventory_2", label: "Products" },
   { href: "/admin/customers", icon: "group", label: "Customers" },
   { href: "/admin/marketing", icon: "campaign", label: "Marketing" },

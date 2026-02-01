@@ -1,54 +1,73 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getAdminOrderById } from "@/lib/orders";
 
 const ADMIN_AVATAR =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBKqKGDdKY37WfKqF0MwrVcBwu9Ohg4oag6X6JQeeSEFFTPwSBOVfbRjiREu8P-ZkJI9mJximUMeXKeO0_UnDoCtbNb87kJmh-vp0wc2GfmzihWydCp92Nmfv1EOpAZDTp53vFk-4dhC0yIVK01ev81lzHk_bMaKc740ZXvxd5_R1kWjdFqdasuKbpEk9gFeaznlymjtzhCV7OJJLiMxojPDV_PhhO_LBVfujp58oeyIUIyphvqjLKYp955dNymLeK7Qpo8B89vLXs";
 
-const PRODUCT_IMAGES = [
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuC9x4WKS__z5Mq04VDb_mP5JxNfifnWMEEmRGmm3raM70OMAuSGzvlXg3TqHON0t7350THwxuxPJdQA5RUBsswdtQRaUGxNRWXptkeENGN830lIuPZ1eGCI6R9lwVrMCGVQH_m2Mzi0Au-YbkLKJ1bQmGE7gG6_rFnEEHJxEKUnbJGCt_esYQgefpbloxX1V9wIqMuuGh9pIbM8d9HBXwGdw8KDOzWLvsdof5vu87n0p1bd-xUka6on9vYuEYvJx0WpIl4j-seHKIc",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDpVy9pjhsCGYbQNezFjRBgYPA5x5Ga3UJjkUziWaIjOwXQDFpHSoT-bns_75QwYgTq2TgDJnqHlChuHhNla-21gKN1VP8BjEPZWyeO-KYPxZodjA00Nb62qB7e0Y4DmYQkMd37lJax2OU3Z-gHQ0VZ5_sw_tJrtwvUNW4ZrO_1mlh_P4_M6oQyrZaQsW4Cvwmj1oco7iwD_EHAW-CGKvcC8Yjo-meXG_5eZCTJk08b96JvXn_Tqh1AXd8z3isIVvSeiCGA129ULOI",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuCKT3BmmcDXRb1kuYf76DHPeXT7Hf1VISeLbVUizQWCl4M8T-3IVcBc7Kj56fGzG24JaPEQEwucve_RYT9F4uSlyburO0HkRaYlZoM9vU85L21je1ghbtVlxsSwFSmnTf3ErULo_QIZ6jkgZ2qQuBh-1noiC_XIQalD7mBL_cV4_nWzZoeakr-DbGXQcm7wmR5VpWMDxyAL_IqJYjLQy1Vs4DJawNhA4aPHocEGjH7H95eJh4m8zQS5SuB9TnfTUByxguc7zpX9K9k",
-];
+function formatDate(iso: string) {
+  try {
+    return new Date(iso).toLocaleString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } catch {
+    return iso;
+  }
+}
 
-const MAP_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAAQ8b4ZJN_IuPhWfwM1r4DPIk2Bqd9-kJwl2RBOgzsaN6VkLE1UM03Fg5TafDlqkwIPZj_CoSej4o8Moj4YPeFsVVq_NczzHGbHnRyHpKEN-83agko0du8bpg5bBnZuY_WFv7bxvV_iBr4IrChwPsywkRKpPhNGUsLGPLqQE_vQMyBhN_Q0paIyTAB3BQagYcBO4fvmzcvPf6Cq3bXJZJk-4T2AAa5-933OR3KsxkrdvvsN2IYD-zGxDXSiSo4R9acPOXcTQF-O80";
+function formatMoney(value: number) {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(value);
+}
 
-const ORDER_ITEMS = [
-  {
-    name: "Grass Straws - Box 50",
-    sku: "GS-50-BX",
-    image: PRODUCT_IMAGES[0],
-    price: "$5.00",
-    qty: 10,
-    total: "$50.00",
-  },
-  {
-    name: "Bamboo Cutlery Set",
-    sku: "BAM-CUT-01",
-    image: PRODUCT_IMAGES[1],
-    price: "$12.00",
-    qty: 2,
-    total: "$24.00",
-  },
-  {
-    name: "Coconut Cleaning Brush",
-    sku: "COCO-BR-01",
-    image: PRODUCT_IMAGES[2],
-    price: "$3.50",
-    qty: 1,
-    total: "$3.50",
-  },
-];
+function statusBadgeClass(status: string): string {
+  const map: Record<string, string> = {
+    pending:
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 border-yellow-200 dark:border-yellow-700",
+    confirmed:
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 border-yellow-200 dark:border-yellow-700",
+    shipping:
+      "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200 dark:border-blue-700",
+    completed:
+      "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border-green-200 dark:border-green-700",
+    cancelled:
+      "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 border-red-200 dark:border-red-700",
+  };
+  return map[status] ?? "bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300";
+}
+
+function paymentMethodLabel(method: string | null): string {
+  if (method === "payos") return "PayOS";
+  if (method === "cod") return "Cash on Delivery";
+  return method ?? "—";
+}
 
 export default async function AdminOrderDetailsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await params;
+  const { id } = await params;
+  const orderId = Number(id);
+  if (Number.isNaN(orderId) || orderId < 1) notFound();
+
+  const order = await getAdminOrderById(orderId);
+  if (!order) notFound();
+
+  const items = order.order_items;
+  const subtotal = order.total_amount;
+  const shipping = order.shipping_fee;
+  const total = order.final_amount;
+
   return (
     <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#f6f8f6] dark:bg-[#131f14] relative">
-      {/* Top Header - giống Dashboard admin */}
       <header className="h-16 flex items-center justify-between px-6 md:px-8 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a1a1a] shrink-0 sticky top-0 z-10">
         <div className="flex items-center gap-4">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white">
@@ -97,10 +116,8 @@ export default async function AdminOrderDetailsPage({
         </div>
       </header>
 
-      {/* Main Content - Order Details body */}
       <div className="flex-1 overflow-y-auto p-6 md:px-10 py-8">
         <div className="max-w-[1400px] mx-auto w-full">
-          {/* Page Heading & Actions */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div className="flex flex-col gap-2">
               <Link
@@ -114,13 +131,15 @@ export default async function AdminOrderDetailsPage({
               </Link>
               <div className="flex items-center gap-3 flex-wrap">
                 <h1 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-                  Order #ORD-2025-001
+                  Order #{order.id}
                 </h1>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-700">
-                  Pending
+                <span
+                  className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${statusBadgeClass(order.status)}`}
+                >
+                  {order.status}
                 </span>
                 <span className="text-sm text-slate-500 dark:text-slate-400">
-                  Oct 24, 2025 at 10:34 AM
+                  {formatDate(order.created_at)}
                 </span>
               </div>
             </div>
@@ -146,18 +165,15 @@ export default async function AdminOrderDetailsPage({
             </div>
           </div>
 
-          {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left Column: Order Items & Totals */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Items Table Card */}
               <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
                 <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
                   <h3 className="font-semibold text-slate-900 dark:text-white">
                     Order Items
                   </h3>
                   <span className="text-sm text-slate-500">
-                    {ORDER_ITEMS.length} Items
+                    {items.length} Items
                   </span>
                 </div>
                 <div className="overflow-x-auto">
@@ -179,46 +195,67 @@ export default async function AdminOrderDetailsPage({
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                      {ORDER_ITEMS.map((item) => (
-                        <tr
-                          key={item.sku}
-                          className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
-                        >
-                          <td className="px-6 py-4">
-                            <div className="flex items-center gap-4">
-                              <div className="relative size-12 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden shrink-0">
-                                <Image
-                                  src={item.image}
-                                  alt=""
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                              <div>
-                                <p className="font-medium text-slate-900 dark:text-white">
-                                  {item.name}
-                                </p>
-                                <p className="text-sm text-slate-500 dark:text-slate-400">
-                                  SKU: {item.sku}
-                                </p>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-300">
-                            {item.price}
-                          </td>
-                          <td className="px-6 py-4 text-center text-slate-600 dark:text-slate-300">
-                            {item.qty}
-                          </td>
-                          <td className="px-6 py-4 text-right font-medium text-slate-900 dark:text-white">
-                            {item.total}
+                      {items.length === 0 ? (
+                        <tr>
+                          <td
+                            colSpan={4}
+                            className="px-6 py-8 text-center text-slate-500 dark:text-slate-400"
+                          >
+                            No items.
                           </td>
                         </tr>
-                      ))}
+                      ) : (
+                        items.map((item) => (
+                          <tr
+                            key={item.id}
+                            className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                          >
+                            <td className="px-6 py-4">
+                              <div className="flex items-center gap-4">
+                                <div className="relative size-12 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden shrink-0">
+                                  {item.image_url ? (
+                                    <Image
+                                      src={item.image_url}
+                                      alt=""
+                                      fill
+                                      className="object-cover"
+                                      sizes="48px"
+                                    />
+                                  ) : (
+                                    <span className="flex items-center justify-center w-full h-full text-slate-400 text-xs">
+                                      —
+                                    </span>
+                                  )}
+                                </div>
+                                <div>
+                                  <p className="font-medium text-slate-900 dark:text-white">
+                                    {item.name}
+                                  </p>
+                                  {item.sku && (
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                                      SKU: {item.sku}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 text-right text-slate-600 dark:text-slate-300">
+                              {formatMoney(item.price_at_purchase)}
+                            </td>
+                            <td className="px-6 py-4 text-center text-slate-600 dark:text-slate-300">
+                              {item.quantity}
+                            </td>
+                            <td className="px-6 py-4 text-right font-medium text-slate-900 dark:text-white">
+                              {formatMoney(
+                                item.price_at_purchase * item.quantity
+                              )}
+                            </td>
+                          </tr>
+                        ))
+                      )}
                     </tbody>
                   </table>
                 </div>
-                {/* Summary Footer */}
                 <div className="bg-slate-50 dark:bg-slate-800/30 p-6 border-t border-slate-100 dark:border-slate-800">
                   <div className="flex flex-col gap-3 ml-auto max-w-xs w-full">
                     <div className="flex justify-between text-sm">
@@ -226,7 +263,7 @@ export default async function AdminOrderDetailsPage({
                         Subtotal
                       </span>
                       <span className="font-medium text-slate-900 dark:text-white">
-                        $77.50
+                        {formatMoney(subtotal)}
                       </span>
                     </div>
                     <div className="flex justify-between text-sm">
@@ -234,15 +271,7 @@ export default async function AdminOrderDetailsPage({
                         Shipping
                       </span>
                       <span className="font-medium text-slate-900 dark:text-white">
-                        $5.00
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-slate-500 dark:text-slate-400">
-                        Discount
-                      </span>
-                      <span className="font-medium text-slate-900 dark:text-white">
-                        -$0.00
+                        {formatMoney(shipping)}
                       </span>
                     </div>
                     <div className="h-px bg-slate-200 dark:bg-slate-700 my-1" />
@@ -251,117 +280,66 @@ export default async function AdminOrderDetailsPage({
                         Total
                       </span>
                       <span className="text-xl font-bold text-[#1c5f21]">
-                        $82.50
+                        {formatMoney(total)}
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* Order Notes */}
-              <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
-                <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-                  Order Notes
-                </h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  Customer requested minimal packaging. Please include a
-                  recycling guide flyer.
-                </p>
-              </div>
+              {order.note && (
+                <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+                  <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
+                    Order Notes
+                  </h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    {order.note}
+                  </p>
+                </div>
+              )}
             </div>
 
-            {/* Right Column: Customer, Shipping, Payment, Timeline */}
             <div className="space-y-6">
-              {/* Customer Card */}
               <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-slate-900 dark:text-white">
-                    Customer
-                  </h3>
-                  <button
-                    type="button"
-                    className="text-slate-400 hover:text-[#1c5f21] transition-colors"
-                    aria-label="Chỉnh sửa"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">
-                      edit
-                    </span>
-                  </button>
-                </div>
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
+                  Customer
+                </h3>
                 <div className="flex items-center gap-4 mb-6">
                   <div className="size-12 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 flex items-center justify-center font-bold text-lg shrink-0">
-                    AJ
+                    {order.recipient_name
+                      .trim()
+                      .split(/\s+/)
+                      .map((s) => s[0])
+                      .join("")
+                      .slice(0, 2)
+                      .toUpperCase() || "—"}
                   </div>
                   <div>
                     <p className="font-semibold text-slate-900 dark:text-white">
-                      Alex Johnson
+                      {order.recipient_name}
                     </p>
                     <p className="text-xs text-slate-500">
-                      Regular Customer
+                      {order.recipient_phone}
                     </p>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3 text-sm">
-                    <span className="material-symbols-outlined text-slate-400 text-[20px] mt-0.5 shrink-0">
-                      mail
-                    </span>
-                    <a
-                      href="mailto:alex.j@example.com"
-                      className="text-[#1c5f21] hover:underline truncate"
-                    >
-                      alex.j@example.com
-                    </a>
-                  </div>
-                  <div className="flex items-start gap-3 text-sm">
-                    <span className="material-symbols-outlined text-slate-400 text-[20px] mt-0.5 shrink-0">
-                      call
-                    </span>
-                    <span className="text-slate-900 dark:text-slate-300">
-                      +1 (555) 012-3456
-                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Shipping Address */}
               <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-slate-900 dark:text-white">
-                    Shipping Address
-                  </h3>
-                  <button
-                    type="button"
-                    className="text-slate-400 hover:text-[#1c5f21] transition-colors"
-                    aria-label="Sao chép"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">
-                      content_copy
-                    </span>
-                  </button>
-                </div>
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
+                  Shipping Address
+                </h3>
                 <div className="flex gap-4">
                   <div className="size-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 text-slate-400">
                     <span className="material-symbols-outlined">
                       local_shipping
                     </span>
                   </div>
-                  <div className="text-sm text-slate-900 dark:text-slate-300 leading-relaxed">
-                    <p>123 Eco Lane</p>
-                    <p>Portland, OR 97204</p>
-                    <p>United States</p>
+                  <div className="text-sm text-slate-900 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                    {order.shipping_address || "—"}
                   </div>
-                </div>
-                <div className="mt-4 relative h-24 w-full rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700">
-                  <Image
-                    src={MAP_IMAGE}
-                    alt="Map Portland OR"
-                    fill
-                    className="object-cover"
-                  />
                 </div>
               </div>
 
-              {/* Payment Info */}
               <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
                 <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
                   Payment Info
@@ -372,68 +350,12 @@ export default async function AdminOrderDetailsPage({
                       payments
                     </span>
                     <span className="text-sm text-slate-900 dark:text-slate-300">
-                      Cash on Delivery
+                      {paymentMethodLabel(order.payment_method)}
                     </span>
                   </div>
                   <span className="text-sm font-medium text-slate-900 dark:text-white">
-                    $82.50
+                    {formatMoney(order.final_amount)}
                   </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-500">Status</span>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800">
-                    Unpaid
-                  </span>
-                </div>
-              </div>
-
-              {/* Order History Timeline */}
-              <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
-                <h3 className="font-semibold text-slate-900 dark:text-white mb-6">
-                  Order History
-                </h3>
-                <div className="relative pl-4 border-l-2 border-slate-100 dark:border-slate-800 space-y-8">
-                  <div className="relative">
-                    <div className="absolute -left-[23px] top-0 size-4 rounded-full bg-[#1c5f21] border-4 border-white dark:border-[#1a1a1a]" />
-                    <div className="flex flex-col -mt-1.5">
-                      <p className="text-sm font-medium text-slate-900 dark:text-white">
-                        Order Placed
-                      </p>
-                      <p className="text-xs text-slate-500 mt-0.5">
-                        Oct 24, 10:34 AM
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <div className="absolute -left-[23px] top-0 size-4 rounded-full bg-yellow-400 border-4 border-white dark:border-[#1a1a1a]" />
-                    <div className="flex flex-col -mt-1.5">
-                      <p className="text-sm font-medium text-slate-900 dark:text-white">
-                        Payment Pending
-                      </p>
-                      <p className="text-xs text-slate-500 mt-0.5">
-                        Awaiting COD
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative opacity-50">
-                    <div className="absolute -left-[23px] top-0 size-4 rounded-full bg-slate-200 dark:bg-slate-700 border-4 border-white dark:border-[#1a1a1a]" />
-                    <div className="flex flex-col -mt-1.5">
-                      <p className="text-sm font-medium text-slate-900 dark:text-white">
-                        Processing
-                      </p>
-                      <p className="text-xs text-slate-500 mt-0.5">
-                        Estimated Oct 25
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative opacity-50">
-                    <div className="absolute -left-[23px] top-0 size-4 rounded-full bg-slate-200 dark:bg-slate-700 border-4 border-white dark:border-[#1a1a1a]" />
-                    <div className="flex flex-col -mt-1.5">
-                      <p className="text-sm font-medium text-slate-900 dark:text-white">
-                        Shipped
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

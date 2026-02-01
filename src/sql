@@ -140,6 +140,12 @@ CREATE POLICY "Users can view own orders" ON public.orders
 CREATE POLICY "Users can create orders" ON public.orders
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 
+-- Admin có thể xem tất cả đơn hàng
+CREATE POLICY "Admins can view all orders" ON public.orders
+  FOR SELECT USING (
+    (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
+  );
+
 -- 4. Chính sách cho Giỏ hàng: Chỉ chủ sở hữu mới được đụng vào
 CREATE POLICY "Users manage own cart" ON public.carts
   FOR ALL USING (auth.uid() = user_id);

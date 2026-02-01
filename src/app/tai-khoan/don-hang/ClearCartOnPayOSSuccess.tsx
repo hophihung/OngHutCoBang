@@ -7,8 +7,8 @@ import { useCart } from "@/contexts/CartContext";
 import { getCartId, clearCart } from "@/lib/cart";
 
 /**
- * When URL has payos=success (redirect from PayOS after payment), clear the user's cart
- * once and replace URL to /tai-khoan/don-hang (no query) to avoid clearing again on refresh.
+ * When URL has payos=success (redirect from PayOS after payment): create order from cart
+ * via API, then clear cart and replace URL so "Đơn hàng của tôi" shows the new order.
  */
 export default function ClearCartOnPayOSSuccess() {
   const searchParams = useSearchParams();
@@ -27,10 +27,18 @@ export default function ClearCartOnPayOSSuccess() {
         router.replace("/tai-khoan/don-hang");
         return;
       }
+      const res = await fetch("/api/orders/from-cart", { method: "POST" });
+      if (res.ok) {
+        setCartCount(0);
+        router.replace("/tai-khoan/don-hang");
+        router.refresh();
+        return;
+      }
       const cartId = await getCartId(session.user.id);
       if (cartId) await clearCart(cartId);
       setCartCount(0);
       router.replace("/tai-khoan/don-hang");
+      router.refresh();
     })();
   }, [searchParams, router, setCartCount]);
 
