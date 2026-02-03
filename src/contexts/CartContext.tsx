@@ -14,6 +14,12 @@ import {
   addCartItem as addCartItemLib,
   getCartCount,
 } from "@/lib/cart";
+import {
+  getGuestCart,
+  getGuestCartCount,
+  addToGuestCart as addToGuestCartLib,
+  clearGuestCart,
+} from "@/lib/guestCart";
 
 type CartContextValue = {
   cartCount: number;
@@ -41,7 +47,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (id) {
         getCartCount(id).then(setCartCount);
       } else {
-        setCartCount(0);
+        setCartCount(getGuestCartCount());
       }
     });
     const {
@@ -50,9 +56,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const id = session?.user?.id ?? null;
       setUserId(id);
       if (id) {
-        getCartCount(id).then(setCartCount);
+        const guestItems = getGuestCart();
+        if (guestItems.length > 0) {
+          getOrCreateCart(id).then((cartId) => {
+            if (cartId) {
+              guestItems.forEach(({ variantId, quantity }) => {
+                addCartItemLib(cartId, variantId, quantity);
+              });
+              clearGuestCart();
+            }
+            getCartCount(id).then(setCartCount);
+          });
+        } else {
+          getCartCount(id).then(setCartCount);
+        }
       } else {
-        setCartCount(0);
+        setCartCount(getGuestCartCount());
       }
     });
     return () => subscription.unsubscribe();
@@ -60,12 +79,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addToCart = useCallback(
     async (variantId: number, quantity: number): Promise<{ error: string | null }> => {
-      if (!userId) return { error: "login_required" };
-      const cartId = await getOrCreateCart(userId);
-      if (!cartId) return { error: "Không tạo được giỏ hàng" };
-      const { error } = await addCartItemLib(cartId, variantId, quantity);
-      if (error) return { error };
-      const count = await getCartCount(userId);
+      if (userId) {
+        const cartId = await getOrCreateCart(userId);
+        if (!cartId) return { error: "Không tạo được giỏ hàng" };
+        const { error } = await addCartItemLib(cartId, variantId, quantity);
+        if (error) return { error };
+        const count = await getCartCount(userId);
+        setCartCount(count);
+        return { error: null };
+      }
+      const count = addToGuestCartLib(variantId, quantity);
       setCartCount(count);
       return { error: null };
     },

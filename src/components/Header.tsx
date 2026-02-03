@@ -74,19 +74,21 @@ export default function Header() {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center">
-          {/* A. Trái - Logo (nền trong suốt) */}
+          {/* A. Trái - Logo */}
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className="flex items-center gap-2 text-[#2f7f34] cursor-pointer"
+              className="flex items-center cursor-pointer"
               aria-label="Về Trang chủ"
             >
-              <div className="size-8 flex items-center justify-center">
-                <span className="material-symbols-outlined text-4xl">eco</span>
-              </div>
-              <h2 className="text-xl font-bold leading-tight tracking-tight text-[#2f7f34]">
-                ReenCo
-              </h2>
+              <Image
+                src="/logo.png"
+                alt="ReenCo"
+                width={120}
+                height={44}
+                className="h-10 w-auto object-contain dark:brightness-0.95"
+                priority
+              />
             </Link>
           </div>
 

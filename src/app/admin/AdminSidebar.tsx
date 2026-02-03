@@ -6,8 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ThemeToggle from "@/components/ThemeToggle";
 
-const LOGO_URL =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuBd8y94uBRlLodULGApadRhugMLBS50K2n9Cy00gUMDI_RxzzPVCjVa7YGTtQNV0f55tg8HxRu9qdIg0vL8sxIjPbMp4YLr-WkPYKLgpZDjleYC1aB4wjJcGwhWWY4kxNn4pGZcczBNUT8ONZFt9qxA9pdRQYecnIh124LJGu0lp2ocDMf45f71newVAh3r-KFIqdg7lyaY5eBCPDvPXhPYSq0pFRYV4LhOyZJZaMDqJwV0ZH2bAQvVjQwNgfWt3obVXNzK0GY42a4";
 
 const NAV_ITEMS: Array<{
   href: string;
@@ -39,24 +37,24 @@ export default function AdminSidebar() {
     <aside className="w-64 shrink-0 flex flex-col bg-[#1B5E20] text-white transition-all duration-300 shadow-xl z-20">
       <div className="flex h-full flex-col justify-between p-4">
         <div className="flex flex-col gap-6">
-          <div className="flex items-center gap-3 px-2 py-2">
-            <div className="relative size-10 shrink-0 rounded-full border-2 border-white/20 overflow-hidden">
+          <Link href="/" className="flex items-center gap-3 px-2 py-2">
+            <div className="relative size-10 shrink-0 rounded-full border-2 border-white/20 overflow-hidden bg-white">
               <Image
-                src={LOGO_URL}
-                alt="Green Joy logo"
+                src="/logo.png"
+                alt="ReenCo"
                 fill
-                className="object-cover"
+                className="object-contain p-1"
               />
             </div>
             <div className="flex flex-col">
               <h1 className="text-white text-lg font-bold leading-normal tracking-tight">
-                Green Joy
+                ReenCo
               </h1>
               <p className="text-green-200 text-xs font-normal">
                 Admin Console
               </p>
             </div>
-          </div>
+          </Link>
           <nav className="flex flex-col gap-1">
             {NAV_ITEMS.map((item) => {
               const isActive =

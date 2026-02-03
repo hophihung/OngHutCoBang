@@ -137,8 +137,12 @@ CREATE POLICY "Public view products" ON public.products
 CREATE POLICY "Users can view own orders" ON public.orders
   FOR SELECT USING (auth.uid() = user_id);
 
+-- Cho phép user tạo đơn (auth.uid() = user_id) hoặc khách (user_id IS NULL)
+DROP POLICY IF EXISTS "Users can create orders" ON public.orders;
 CREATE POLICY "Users can create orders" ON public.orders
-  FOR INSERT WITH CHECK (auth.uid() = user_id);
+  FOR INSERT WITH CHECK (auth.uid() = user_id OR user_id IS NULL);
+
+-- Nếu bảng orders có user_id NOT NULL, chạy trước: ALTER TABLE public.orders ALTER COLUMN user_id DROP NOT NULL;
 
 -- Admin có thể xem tất cả đơn hàng
 CREATE POLICY "Admins can view all orders" ON public.orders
@@ -165,3 +169,13 @@ CREATE POLICY "Users manage own cart items" ON public.cart_items
 --- Policy: Cho phép user đăng nhập upload vào thư mục của mình (path prefix = auth.uid()::text).
 --- Ví dụ policy INSERT: (bucket_id = 'avatars' AND (storage.foldername(name))[1] = auth.uid()::text)
 --- Ví dụ policy SELECT: true (public read) hoặc tương tự.
+---
+--- GUEST CHECKOUT – order_items INSERT (chỉ chạy nếu bật RLS trên order_items)
+--- ALTER TABLE public.order_items ENABLE ROW LEVEL SECURITY;
+--- CREATE POLICY "Insert order_items for own or guest order" ON public.order_items
+---   FOR INSERT WITH CHECK (
+---     EXISTS (
+---       SELECT 1 FROM public.orders o
+---       WHERE o.id = order_id AND (o.user_id = auth.uid() OR o.user_id IS NULL)
+---     )
+---   );
