@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useCart } from "@/contexts/CartContext";
 import {
@@ -13,29 +12,68 @@ import {
   removeCartItem,
   type CartItemDisplay,
 } from "@/lib/cart";
+import {
+  getGuestCart,
+  setGuestCart,
+  getGuestCartCount,
+} from "@/lib/guestCart";
 
 /** PayOS API expects price in USD; DB may store VND. */
 const VND_TO_USD = 1 / 25_000;
 
+type CartRow = CartItemDisplay & { variant_id: number };
+
 export default function CartContent() {
-  const router = useRouter();
   const { setCartCount } = useCart();
-  const [items, setItems] = useState<CartItemDisplay[]>([]);
+  const [items, setItems] = useState<CartRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [authRequired, setAuthRequired] = useState(false);
+  const [isGuest, setIsGuest] = useState(false);
   const [payosLoading, setPayosLoading] = useState(false);
   const [payosError, setPayosError] = useState<string | null>(null);
+
+  const [guestName, setGuestName] = useState("");
+  const [guestPhone, setGuestPhone] = useState("");
+  const [guestAddress, setGuestAddress] = useState("");
+  const [guestEmail, setGuestEmail] = useState("");
 
   const fetchItems = useCallback(async () => {
     const supabase = createClient();
     const { data: { session } } = await supabase.auth.getSession();
     if (!session?.user?.id) {
-      setItems([]);
-      setAuthRequired(true);
+      setIsGuest(true);
+      const guestItems = getGuestCart();
+      if (guestItems.length === 0) {
+        setItems([]);
+        setLoading(false);
+        return;
+      }
+      const ids = guestItems.map((i) => i.variantId).join(",");
+      const res = await fetch(`/api/variants?ids=${ids}`);
+      const variants = (await res.json()) as Array<{
+        variant_id: number;
+        name: string;
+        price: number;
+        image: string | null;
+      }>;
+      const variantMap = new Map(variants.map((v) => [v.variant_id, v]));
+      const rows: CartRow[] = guestItems
+        .filter((gi) => variantMap.has(gi.variantId))
+        .map((gi) => {
+          const v = variantMap.get(gi.variantId)!;
+          return {
+            id: gi.variantId,
+            variant_id: gi.variantId,
+            quantity: gi.quantity,
+            name: v.name,
+            price: v.price,
+            image: v.image,
+          };
+        });
+      setItems(rows);
       setLoading(false);
       return;
     }
-    setAuthRequired(false);
+    setIsGuest(false);
     const cartId = await getOrCreateCart(session.user.id);
     if (!cartId) {
       setItems([]);
@@ -43,7 +81,9 @@ export default function CartContent() {
       return;
     }
     const list = await getCartItems(cartId);
-    setItems(list);
+    setItems(
+      list.map((i) => ({ ...i, variant_id: i.variant_id }))
+    );
     setLoading(false);
   }, []);
 
@@ -64,6 +104,39 @@ export default function CartContent() {
     setPayosError(null);
     setPayosLoading(true);
     try {
+      if (isGuest) {
+        if (!guestName.trim() || !guestPhone.trim() || !guestAddress.trim()) {
+          setPayosError("Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ.");
+          setPayosLoading(false);
+          return;
+        }
+        const res = await fetch("/api/checkout/guest", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: items.map((i) => ({ variant_id: i.variant_id, quantity: i.quantity })),
+            customer_info: {
+              name: guestName.trim(),
+              phone: guestPhone.trim(),
+              address: guestAddress.trim(),
+              email: guestEmail.trim() || undefined,
+            },
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          setPayosError(data.error ?? "Không tạo được link thanh toán");
+          setPayosLoading(false);
+          return;
+        }
+        if (data.checkoutUrl) {
+          window.location.href = data.checkoutUrl;
+          return;
+        }
+        setPayosError("Link thanh toán không hợp lệ");
+        setPayosLoading(false);
+        return;
+      }
       const res = await fetch("/api/payos/create-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -96,6 +169,18 @@ export default function CartContent() {
     const item = items.find((i) => i.id === cartItemId);
     if (!item) return;
     const newQty = Math.max(0, item.quantity + delta);
+    if (isGuest) {
+      const guestItems = getGuestCart();
+      const next = guestItems
+        .map((i) =>
+          i.variantId === item.variant_id ? { ...i, quantity: newQty } : i
+        )
+        .filter((i) => i.quantity > 0);
+      setGuestCart(next);
+      setCartCount(getGuestCartCount());
+      await fetchItems();
+      return;
+    }
     await updateCartItemQuantity(cartItemId, newQty);
     await fetchItems();
     const supabase = createClient();
@@ -108,6 +193,17 @@ export default function CartContent() {
   };
 
   const removeItem = async (cartItemId: number) => {
+    const item = items.find((i) => i.id === cartItemId);
+    if (!item) return;
+    if (isGuest) {
+      const guestItems = getGuestCart().filter(
+        (i) => i.variantId !== item.variant_id
+      );
+      setGuestCart(guestItems);
+      setCartCount(getGuestCartCount());
+      await fetchItems();
+      return;
+    }
     await removeCartItem(cartItemId);
     await fetchItems();
     const supabase = createClient();
@@ -123,36 +219,16 @@ export default function CartContent() {
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const isEmpty = items.length === 0;
 
+  const guestFormValid =
+    guestName.trim() !== "" &&
+    guestPhone.trim() !== "" &&
+    guestAddress.trim() !== "";
+  const guestPayDisabled = isEmpty || payosLoading || !guestFormValid;
+
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[200px] text-slate-500">
         Đang tải giỏ hàng...
-      </div>
-    );
-  }
-
-  const supabase = createClient();
-  supabase.auth.getSession().then(({ data: { session } }) => {
-    if (!session?.user && !loading) {
-      router.replace("/tai-khoan?next=/gio-hang");
-    }
-  });
-
-  if (!loading && authRequired) {
-    return (
-      <div className="flex-1 lg:w-2/3 flex flex-col gap-6">
-        <h1 className="text-slate-900 dark:text-white text-3xl lg:text-4xl font-black leading-tight tracking-tight">
-          Giỏ hàng
-        </h1>
-        <div className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1a1a1a] shadow-sm p-12 text-center">
-          <p className="text-slate-500 dark:text-slate-400 mb-4">Đăng nhập để xem giỏ hàng.</p>
-          <Link
-            href="/tai-khoan?next=/gio-hang"
-            className="inline-flex items-center gap-2 text-[#1c5f21] font-bold text-sm"
-          >
-            Đăng nhập
-          </Link>
-        </div>
       </div>
     );
   }
@@ -299,7 +375,65 @@ export default function CartContent() {
         </div>
       </div>
 
-      <div className="lg:w-1/3 w-full">
+      <div className="lg:w-1/3 w-full flex flex-col gap-6">
+        {isGuest && !isEmpty && (
+          <div className="bg-white dark:bg-[#1e1e1e] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+            <h2 className="text-slate-900 dark:text-white text-lg font-bold mb-4">
+              Thông tin giao hàng
+            </h2>
+            <div className="flex flex-col gap-3">
+              <label className="block">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  Họ tên <span className="text-red-500">*</span>
+                </span>
+                <input
+                  type="text"
+                  value={guestName}
+                  onChange={(e) => setGuestName(e.target.value)}
+                  placeholder="Nguyễn Văn A"
+                  className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-[#2a2a2a] text-slate-900 dark:text-white text-sm px-3 py-2 focus:ring-1 focus:ring-[#1c5f21] focus:border-[#1c5f21]"
+                />
+              </label>
+              <label className="block">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  Số điện thoại <span className="text-red-500">*</span>
+                </span>
+                <input
+                  type="tel"
+                  value={guestPhone}
+                  onChange={(e) => setGuestPhone(e.target.value)}
+                  placeholder="090 123 4567"
+                  className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-[#2a2a2a] text-slate-900 dark:text-white text-sm px-3 py-2 focus:ring-1 focus:ring-[#1c5f21] focus:border-[#1c5f21]"
+                />
+              </label>
+              <label className="block">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  Địa chỉ giao hàng <span className="text-red-500">*</span>
+                </span>
+                <input
+                  type="text"
+                  value={guestAddress}
+                  onChange={(e) => setGuestAddress(e.target.value)}
+                  placeholder="Số nhà, đường, quận, thành phố"
+                  className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-[#2a2a2a] text-slate-900 dark:text-white text-sm px-3 py-2 focus:ring-1 focus:ring-[#1c5f21] focus:border-[#1c5f21]"
+                />
+              </label>
+              <label className="block">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  Email (tùy chọn)
+                </span>
+                <input
+                  type="email"
+                  value={guestEmail}
+                  onChange={(e) => setGuestEmail(e.target.value)}
+                  placeholder="email@example.com"
+                  className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-[#2a2a2a] text-slate-900 dark:text-white text-sm px-3 py-2 focus:ring-1 focus:ring-[#1c5f21] focus:border-[#1c5f21]"
+                />
+              </label>
+            </div>
+          </div>
+        )}
+
         <div className="sticky top-24 bg-[#F9F9F7] dark:bg-[#1e1e1e] rounded-xl p-6 lg:p-8 shadow-sm border border-transparent dark:border-slate-700">
           <h2 className="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight mb-6">
             Order Summary
@@ -357,7 +491,7 @@ export default function CartContent() {
           <button
             type="button"
             onClick={handlePayOSCheckout}
-            disabled={isEmpty || payosLoading}
+            disabled={isGuest ? guestPayDisabled : isEmpty || payosLoading}
             className="w-full h-12 flex items-center justify-center gap-2 bg-[#1c5f21] hover:bg-[#164d1b] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg text-base font-bold shadow-md transition-all transform active:scale-[0.98]"
           >
             {payosLoading ? (

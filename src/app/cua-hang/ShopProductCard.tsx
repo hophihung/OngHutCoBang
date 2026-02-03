@@ -2,18 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import type { StoreProduct } from "@/lib/products";
 
 function formatPrice(price: number): string {
-  if (price >= 1000) return `${(price / 1000).toFixed(1)}k`;
-  return `${price.toFixed(0)}`;
+  return price.toLocaleString("vi-VN");
 }
 
 export default function ShopProductCard({ product }: { product: StoreProduct }) {
-  const router = useRouter();
   const { addToCart } = useCart();
   const [adding, setAdding] = useState(false);
 
@@ -22,12 +19,8 @@ export default function ShopProductCard({ product }: { product: StoreProduct }) 
     e.stopPropagation();
     if (!product.default_variant_id) return;
     setAdding(true);
-    const { error } = await addToCart(product.default_variant_id, 1);
+    await addToCart(product.default_variant_id, 1);
     setAdding(false);
-    if (error === "login_required") {
-      router.push("/tai-khoan?next=/gio-hang");
-      return;
-    }
   };
 
   return (
@@ -72,7 +65,7 @@ export default function ShopProductCard({ product }: { product: StoreProduct }) 
         </p>
         <div className="mt-auto flex items-center justify-between pt-4 gap-2">
           <span className="text-lg font-bold text-slate-900 dark:text-white">
-            {product.price != null ? formatPrice(product.price) + "₫" : "—"}
+            {product.price != null ? formatPrice(product.price) + " đ" : "—"}
           </span>
           <button
             type="button"

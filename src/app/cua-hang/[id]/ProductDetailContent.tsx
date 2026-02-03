@@ -41,10 +41,6 @@ export default function ProductDetailContent({ product }: { product: ProductDeta
     setAdding(true);
     const { error } = await addToCart(selectedVariant.id, quantity);
     setAdding(false);
-    if (error === "login_required") {
-      router.push("/tai-khoan?next=/gio-hang");
-      return;
-    }
     if (!error) router.push("/gio-hang");
   };
 
@@ -93,7 +89,7 @@ export default function ProductDetailContent({ product }: { product: ProductDeta
         </h1>
         <div className="mt-4 flex flex-wrap items-center gap-6">
           <div className="text-3xl font-bold text-[#1c5f21]">
-            {price >= 1000 ? `${(price / 1000).toFixed(1)}k` : price.toFixed(0)}₫
+            {price.toLocaleString("vi-VN")} đ
           </div>
         </div>
         <p className="mt-6 text-base leading-relaxed text-slate-600 dark:text-slate-300">
@@ -118,7 +114,7 @@ export default function ProductDetailContent({ product }: { product: ProductDeta
                       : "bg-white dark:bg-white/5 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white hover:border-[#1c5f21] hover:text-[#1c5f21]"
                   }`}
                 >
-                  {v.variant_name || `Variant ${v.id}`} – {v.price >= 1000 ? `${(v.price / 1000).toFixed(1)}k` : v.price}₫
+                  {v.variant_name || `Variant ${v.id}`} – {Number(v.price).toLocaleString("vi-VN")} đ
                 </button>
               ))}
             </div>
