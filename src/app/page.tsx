@@ -1,6 +1,7 @@
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import HomeHero from "@/components/home/HomeHero";
+import HomeCoupons from "@/components/home/HomeCoupons";
 import StatsBar from "@/components/home/StatsBar";
 import WhyCoBang from "@/components/home/WhyCoBang";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
@@ -16,6 +17,7 @@ export default async function Home() {
       <Header />
       <main className="flex-1">
         <HomeHero />
+        <HomeCoupons />
         <StatsBar />
         <WhyCoBang />
         <FeaturedProducts products={products} />
