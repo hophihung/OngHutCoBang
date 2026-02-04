@@ -21,3 +21,17 @@ export type Category = {
   slug: string | null;
   created_at?: string;
 };
+
+export type BlogPost = {
+  id: number;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  body: string | null;
+  category: string | null;
+  image_url: string | null;
+  author: string | null;
+  status: "draft" | "published";
+  created_at?: string;
+  updated_at?: string;
+};
