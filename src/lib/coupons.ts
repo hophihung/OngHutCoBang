@@ -31,3 +31,22 @@ export async function getAdminCoupons(): Promise<AdminCouponRow[]> {
     return []
   }
 }
+
+/**
+ * Lấy một coupon theo id (admin).
+ */
+export async function getAdminCouponById(id: number): Promise<AdminCouponRow | null> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('coupons')
+      .select('id, code, description, discount_type, discount_value, usage_limit, usage_count, start_date, end_date, is_active, created_at')
+      .eq('id', id)
+      .maybeSingle()
+
+    if (error || !data) return null
+    return data as AdminCouponRow
+  } catch {
+    return null
+  }
+}
