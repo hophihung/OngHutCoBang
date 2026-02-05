@@ -136,11 +136,15 @@ export default async function AdminCustomerProfilePage({
               <div className="grid grid-cols-2 divide-x divide-slate-100 dark:divide-slate-800">
                 <div className="p-4 text-center">
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Spent</p>
-                  <p className="text-xl font-bold text-[#1c5f21]">0 VND</p>
+                  <p className="text-xl font-bold text-[#1c5f21]">
+                    {customer.totalSpent > 0
+                      ? `${Number(customer.totalSpent).toLocaleString("vi-VN")} đ`
+                      : "0 đ"}
+                  </p>
                 </div>
                 <div className="p-4 text-center">
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Orders</p>
-                  <p className="text-xl font-bold text-slate-900 dark:text-white">0</p>
+                  <p className="text-xl font-bold text-slate-900 dark:text-white">{customer.ordersCount}</p>
                 </div>
               </div>
             </div>
