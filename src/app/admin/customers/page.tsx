@@ -48,7 +48,6 @@ function CustomerCell({ row }: { row: CustomerRow }) {
 }
 
 export default async function AdminCustomersPage() {
-  // Data from Supabase (customers table). ordersCount / totalSpent are placeholders until orders integration.
   const rows = await getAdminCustomerRows();
   const customers: CustomerRow[] = rows.map((r, i) => ({
     id: String(r.id),
@@ -61,9 +60,15 @@ export default async function AdminCustomersPage() {
     },
     email: r.email ?? "--",
     phone: r.phone ?? "--",
-    ordersCount: 0,
-    ordersClass: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
-    totalSpent: "0 VND",
+    ordersCount: r.ordersCount,
+    ordersClass:
+      r.ordersCount > 0
+        ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+        : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
+    totalSpent:
+      r.totalSpent > 0
+        ? `${Number(r.totalSpent).toLocaleString("vi-VN")} đ`
+        : "0 đ",
     joinDate: r.created_at ? new Date(r.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "--",
   }));
   const total = customers.length;
