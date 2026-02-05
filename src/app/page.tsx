@@ -8,16 +8,20 @@ import FeaturedProducts from "@/components/home/FeaturedProducts";
 import StoryTeaser from "@/components/home/StoryTeaser";
 import Footer from "@/components/home/Footer";
 import { getFeaturedProducts } from "@/lib/products";
+import { getActiveCouponsForHome } from "@/lib/coupons";
 
 export default async function Home() {
-  const products = await getFeaturedProducts();
+  const [products, coupons] = await Promise.all([
+    getFeaturedProducts(),
+    getActiveCouponsForHome(),
+  ]);
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <AnnouncementBar />
       <Header />
       <main className="flex-1">
         <HomeHero />
-        <HomeCoupons />
+        <HomeCoupons coupons={coupons} />
         <StatsBar />
         <WhyCoBang />
         <FeaturedProducts products={products} />

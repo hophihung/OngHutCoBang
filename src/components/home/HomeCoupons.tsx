@@ -1,11 +1,15 @@
 "use client";
 
-const COUPONS = [
-  { code: "REENCO-3K", discount: "3k", minOrder: "0", minOrderNum: 0 },
-  { code: "REENCO-6K", discount: "6k", minOrder: "149,000", minOrderNum: 149000 },
-  { code: "REENCO-12K", discount: "12k", minOrder: "259,000", minOrderNum: 259000 },
-  { code: "REENCO-15K", discount: "15k", minOrder: "359,000", minOrderNum: 359000 },
-];
+import type { HomeCoupon } from "@/lib/coupons";
+
+function formatDiscountDisplay(c: HomeCoupon): string {
+  if (c.discount_type === "percentage") {
+    return `${Number(c.discount_value)}%`;
+  }
+  const v = Number(c.discount_value);
+  if (v >= 1000) return `${(v / 1000).toFixed(0)}k`;
+  return `${v.toLocaleString("vi-VN")} đ`;
+}
 
 function copyCode(code: string) {
   navigator.clipboard.writeText(code).then(() => {
@@ -13,12 +17,16 @@ function copyCode(code: string) {
   });
 }
 
-export default function HomeCoupons() {
+type Props = { coupons: HomeCoupon[] };
+
+export default function HomeCoupons({ coupons }: Props) {
+  if (coupons.length === 0) return null;
+
   return (
     <section className="w-full py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {COUPONS.map((c) => (
+          {coupons.map((c) => (
             <div
               key={c.code}
               className="relative bg-white dark:bg-[#1f2937] rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 flex overflow-hidden shadow-sm hover:shadow-md transition-shadow"
@@ -38,13 +46,14 @@ export default function HomeCoupons() {
                       Giảm
                     </span>
                     <span className="text-[#facc15] text-3xl font-bold italic tracking-tighter">
-                      {c.discount}
+                      {formatDiscountDisplay(c)}
                     </span>
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    {c.minOrderNum === 0
-                      ? `Giảm ${c.discount.toUpperCase().replace("K", ",000")} ₫ cho đơn bất kỳ`
-                      : `Giảm ${c.discount.toUpperCase().replace("K", ",000")} ₫ khi đơn từ ${c.minOrder} ₫`}
+                    {c.description?.trim() ||
+                      (c.discount_type === "percentage"
+                        ? `Giảm ${Number(c.discount_value)}% cho đơn hàng`
+                        : `Giảm ${Number(c.discount_value).toLocaleString("vi-VN")} ₫ cho đơn hàng`)}
                   </p>
                 </div>
                 <div className="flex items-center justify-between mt-3 gap-2">
