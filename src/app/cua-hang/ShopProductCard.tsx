@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import type { StoreProduct } from "@/lib/products";
 
 function formatPrice(price: number): string {
@@ -12,6 +13,7 @@ function formatPrice(price: number): string {
 
 export default function ShopProductCard({ product }: { product: StoreProduct }) {
   const { addToCart } = useCart();
+  const { isFavorite, toggleFavorite } = useFavorites();
   const [adding, setAdding] = useState(false);
 
   const handleAddToCart = async (e: React.MouseEvent) => {
@@ -53,6 +55,27 @@ export default function ShopProductCard({ product }: { product: StoreProduct }) 
             {product.badge}
           </span>
         )}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleFavorite(product.id);
+          }}
+          className={`absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 dark:bg-gray-800/90 shadow-sm transition-colors ${
+            isFavorite(product.id)
+              ? "text-red-500 dark:text-red-400"
+              : "text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+          }`}
+          aria-label={isFavorite(product.id) ? "Bỏ yêu thích" : "Yêu thích"}
+        >
+          <span
+            className="material-symbols-outlined text-[20px]"
+            style={{ fontVariationSettings: isFavorite(product.id) ? '"FILL" 1' : undefined }}
+          >
+            favorite
+          </span>
+        </button>
       </Link>
       <div className="p-5 flex flex-col flex-1">
         <Link href={`/cua-hang/${product.id}`}>

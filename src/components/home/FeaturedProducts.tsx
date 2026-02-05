@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import type { FeaturedProduct } from "@/lib/products";
 
 function formatPrice(price: number): string {
@@ -14,6 +15,7 @@ type FeaturedProductsProps = { products?: FeaturedProduct[] };
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   const list = products ?? [];
   const { addToCart } = useCart();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   async function handleAddToCart(e: React.MouseEvent, p: FeaturedProduct) {
     e.preventDefault();
@@ -75,11 +77,24 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                     </span>
                     <button
                       type="button"
-                      onClick={(e) => e.preventDefault()}
-                      className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 dark:bg-gray-800/90 text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 shadow-sm transition-colors"
-                      aria-label="Yêu thích"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleFavorite(p.id);
+                      }}
+                      className={`absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 dark:bg-gray-800/90 shadow-sm transition-colors ${
+                        isFavorite(p.id)
+                          ? "text-red-500 dark:text-red-400"
+                          : "text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+                      }`}
+                      aria-label={isFavorite(p.id) ? "Bỏ yêu thích" : "Yêu thích"}
                     >
-                      <span className="material-symbols-outlined text-[20px]">favorite_border</span>
+                      <span
+                        className="material-symbols-outlined text-[20px]"
+                        style={{ fontVariationSettings: isFavorite(p.id) ? '"FILL" 1' : undefined }}
+                      >
+                        favorite
+                      </span>
                     </button>
                   </div>
                   <div className="flex-1 flex flex-col p-5 text-left">
