@@ -51,7 +51,7 @@ export default async function AdminMarketingPage() {
     const typeLabel =
       r.discount_type === "percentage"
         ? `${Number(r.discount_value)}% Off`
-        : `$${Number(r.discount_value).toFixed(2)} Off`;
+        : `${Number(r.discount_value).toLocaleString("vi-VN")} đ Off`;
 
     return {
       id: String(r.id),
