@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 export type ProductVariantForDetail = {
   id: number;
@@ -27,6 +28,7 @@ type ProductDetailProps = {
 export default function ProductDetailContent({ product }: { product: ProductDetailProps["product"] }) {
   const router = useRouter();
   const { addToCart } = useCart();
+  const { isFavorite, toggleFavorite } = useFavorites();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -87,10 +89,30 @@ export default function ProductDetailContent({ product }: { product: ProductDeta
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-[40px] leading-tight">
           {product.name}
         </h1>
-        <div className="mt-4 flex flex-wrap items-center gap-6">
+        <div className="mt-4 flex flex-wrap items-center gap-4">
           <div className="text-3xl font-bold text-[#1c5f21]">
             {price.toLocaleString("vi-VN")} đ
           </div>
+          <button
+            type="button"
+            onClick={() => toggleFavorite(product.id)}
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-colors ${
+              isFavorite(product.id)
+                ? "border-red-500 text-red-500 dark:border-red-400 dark:text-red-400 bg-red-50 dark:bg-red-900/20"
+                : "border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-red-500 hover:text-red-500 dark:hover:border-red-400 dark:hover:text-red-400"
+            }`}
+            aria-label={isFavorite(product.id) ? "Bỏ yêu thích" : "Thêm vào yêu thích"}
+          >
+            <span
+              className="material-symbols-outlined"
+              style={{ fontVariationSettings: isFavorite(product.id) ? '"FILL" 1' : undefined }}
+            >
+              favorite
+            </span>
+            <span className="text-sm font-semibold">
+              {isFavorite(product.id) ? "Đã yêu thích" : "Yêu thích"}
+            </span>
+          </button>
         </div>
         <p className="mt-6 text-base leading-relaxed text-slate-600 dark:text-slate-300">
           {product.description || "Sản phẩm ống hút cỏ tự nhiên."}

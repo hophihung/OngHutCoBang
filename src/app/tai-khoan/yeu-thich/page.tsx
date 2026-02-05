@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import AccountSidebar from "../AccountSidebar";
+import YeuThichContent from "./YeuThichContent";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function YeuThichPage() {
@@ -35,12 +36,11 @@ export default async function YeuThichPage() {
               <h2 className="text-[#111811] dark:text-white text-3xl font-bold tracking-tight">
                 Yêu thích
               </h2>
-            </div>
-            <div className="rounded-xl bg-white dark:bg-[#152e15] p-8 shadow-sm border border-[#f0f4f0] dark:border-[#1f331f] text-center">
-              <p className="text-[#111811] dark:text-gray-300 font-semibold uppercase tracking-wide">
-                TÍNH NĂNG NÀY SẼ ĐƯỢC CẬP NHẬT THÊM
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Các sản phẩm bạn đã thêm vào danh sách yêu thích.
               </p>
             </div>
+            <YeuThichContent />
           </main>
         </div>
       </div>
