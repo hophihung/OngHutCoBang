@@ -1,55 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getDashboardStats, getDashboardRecentOrders } from "@/lib/dashboard";
 
 const ADMIN_AVATAR =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBKqKGDdKY37WfKqF0MwrVcBwu9Ohg4oag6X6JQeeSEFFTPwSBOVfbRjiREu8P-ZkJI9mJximUMeXKeO0_UnDoCtbNb87kJmh-vp0wc2GfmzihWydCp92Nmfv1EOpAZDTp53vFk-4dhC0yIVK01ev81lzHk_bMaKc740ZXvxd5_R1kWjdFqdasuKbpEk9gFeaznlymjtzhCV7OJJLiMxojPDV_PhhO_LBVfujp58oeyIUIyphvqjLKYp955dNymLeK7Qpo8B89vLXs";
 
-const AVATARS = [
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuCRx6lS_lw0SLT3XZAksFL4B2gLY-XSCuyH6npvfP3r3lrZ6-rsKdsTDGp4LPZ0i3Yul_sQ4M7nbQKUki2ti6Y2EhCIfeAonwnDNbjtTY1QiyBNkcmllgYl8m-TnWxRE_ur4gBpqIHX_jwOKcHiRslp0oVPsT5fIOPaQMBixQt60E1yfHDrDqfquxGfVtB9sUjSJVB8TwD5iuGteSK8Rw4jDyBnEvos6W4bYXWhbu4dumODKxiGBGDXde-WEhbJP6PqMD6ck7dBVp8",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDnoRs3Mt9z0kw83IzhO4_Wb4DaAkuxWFwRJvA1aL6yJxih6xoYcdtTJJvTi2H507KbA7b8T0E_yPYtCSWVGCQt8rGnl0V-sBlHcVBzZ-S51ghKeDuwgaQcJrwXQfBwR7Ak8IECvFFYy5WoyH4lEAg58nRkLXn3WParoanBp6XxedFZ83JVgCQP44H3IKDdiwVienNGUAW-BpxKHpJh63IJOMqiEpP7gkJcVQ5eQcSCsqJRgHd7AWsj-Y_DV8_5Hp0Uz1Dwdcvl5GI",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuCGBMz7H4MRLO-RKADb4LsEdZIzzixH2s9u_mcCv4thgV5E1l8_j8AxXXKHgZxd71ZWJCArL7vXta8kMKFzROPwvaOTmgZW6jQGY1-Rfb8dprz-zOb7_m9mCdLziPH8UtiqGoNyVE3x2dMaisou9YeHg-hm-YOAe0ud7IAs8GSjCwHPUt36_MQmVp9kPFuXDaZ_Ad28wT7EmKbvWM60KNOfjblWeRkn1LnDMZm_LICPZAGhP0FrMepOxSajaj0l5mhm0ZrQmRgMkLs",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuA85pHRgInapTmvH1_094SGalx_qPXTBxQpYmh1VR96aHF5DbzDJWygk0kL7dOZ-L4TG48GSac0hW11VwA2W2ieqOrLQXDhuSegg6vh-oNVgG9ojpwE_dKl3AHKLlWdQFobg6ln9G65uaxXR9-cZFmrjsNLLldkgKrZLwuLX3dWN_3qVCT4NECLY-NKv_UGqQTM_WH3TJ4lc4LXjsvdqLyG1LQv1rFhMGfQmgV9HJ34jqWODuIxs3Sn7CAnHgUcWSqy_Zr6dRxi_2o",
-];
-
-const ORDERS = [
-  {
-    id: "#ORD-7352",
-    customer: "Nguyen Van A",
-    date: "Oct 24, 2023",
-    total: "1,250,000 VND",
-    status: "Pending" as const,
-    avatar: AVATARS[0],
-  },
-  {
-    id: "#ORD-7351",
-    customer: "Le Thi B",
-    date: "Oct 24, 2023",
-    total: "550,000 VND",
-    status: "Shipped" as const,
-    avatar: AVATARS[1],
-  },
-  {
-    id: "#ORD-7350",
-    customer: "Tran Minh C",
-    date: "Oct 23, 2023",
-    total: "2,100,000 VND",
-    status: "Completed" as const,
-    avatar: AVATARS[2],
-  },
-  {
-    id: "#ORD-7349",
-    customer: "Sarah Jenkins",
-    date: "Oct 23, 2023",
-    total: "890,000 VND",
-    status: "Completed" as const,
-    avatar: AVATARS[3],
-  },
-];
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length >= 2)
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  if (parts[0]) return parts[0].slice(0, 2).toUpperCase();
+  return "??";
+}
 
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     Pending:
       "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400",
+    Confirmed:
+      "bg-sky-100 text-sky-800 dark:bg-sky-900/30 dark:text-sky-400",
     Shipped: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
     Completed:
       "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
@@ -64,7 +33,12 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-export default function AdminDashboardPage() {
+export default async function AdminDashboardPage() {
+  const [stats, recentOrders] = await Promise.all([
+    getDashboardStats(),
+    getDashboardRecentOrders(8),
+  ]);
+
   return (
     <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#f6f8f6] dark:bg-[#131f14] relative">
       {/* Top Header */}
@@ -134,13 +108,14 @@ export default function AdminDashboardPage() {
               </div>
               <div>
                 <p className="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">
-                  15.2M VND
+                  {stats.totalRevenue >= 1_000_000
+                    ? `${(stats.totalRevenue / 1_000_000).toFixed(1)}M đ`
+                    : stats.totalRevenue > 0
+                      ? `${Number(stats.totalRevenue).toLocaleString("vi-VN")} đ`
+                      : "0 đ"}
                 </p>
-                <p className="text-[#1c5f21] text-xs font-medium mt-1 flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">
-                    trending_up
-                  </span>
-                  +12% from last month
+                <p className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1">
+                  Doanh thu từ đơn Completed & Shipped
                 </p>
               </div>
             </div>
@@ -158,13 +133,12 @@ export default function AdminDashboardPage() {
               </div>
               <div>
                 <p className="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">
-                  24
+                  {stats.ordersCount}
                 </p>
                 <p className="text-[#1c5f21] text-xs font-medium mt-1 flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">
-                    trending_up
-                  </span>
-                  +5% new today
+                  {stats.ordersTodayCount > 0
+                    ? `+${stats.ordersTodayCount} đơn hôm nay`
+                    : "Tổng đơn hàng"}
                 </p>
               </div>
             </div>
@@ -182,13 +156,10 @@ export default function AdminDashboardPage() {
               </div>
               <div>
                 <p className="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">
-                  1,205
+                  {stats.customersCount.toLocaleString("vi-VN")}
                 </p>
-                <p className="text-[#1c5f21] text-xs font-medium mt-1 flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">
-                    trending_up
-                  </span>
-                  +8% retention
+                <p className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1">
+                  Khách hàng trong CRM
                 </p>
               </div>
             </div>
@@ -207,7 +178,7 @@ export default function AdminDashboardPage() {
               </div>
               <div>
                 <p className="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">
-                  3 Products
+                  {stats.lowStockCount} {stats.lowStockCount === 1 ? "Product" : "Products"}
                 </p>
                 <p className="text-red-600 text-xs font-medium mt-1 flex items-center gap-1">
                   Requires attention
@@ -328,60 +299,54 @@ export default function AdminDashboardPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                  {ORDERS.map((order) => (
-                    <tr
-                      key={order.id}
-                      className="hover:bg-slate-50 dark:hover:bg-[#252525] transition-colors group"
-                    >
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">
-                        {order.id}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center gap-3">
-                          <div className="relative size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden shrink-0">
-                            <Image
-                              src={order.avatar}
-                              alt=""
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <span className="text-sm font-medium text-slate-900 dark:text-white">
-                            {order.customer}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
-                        {order.date}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900 dark:text-white">
-                        {order.total}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <StatusBadge status={order.status} />
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button
-                          type="button"
-                          className="text-slate-400 hover:text-[#1c5f21] transition-colors p-1"
-                          aria-label="Sửa"
-                        >
-                          <span className="material-symbols-outlined text-[20px]">
-                            edit
-                          </span>
-                        </button>
-                        <button
-                          type="button"
-                          className="text-slate-400 hover:text-red-500 transition-colors p-1"
-                          aria-label="Xóa"
-                        >
-                          <span className="material-symbols-outlined text-[20px]">
-                            delete
-                          </span>
-                        </button>
+                  {recentOrders.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                        Chưa có đơn hàng
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    recentOrders.map((order) => (
+                      <tr
+                        key={order.id}
+                        className="hover:bg-slate-50 dark:hover:bg-[#252525] transition-colors group"
+                      >
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">
+                          {order.orderId}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center gap-3">
+                            <div className="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300 shrink-0">
+                              {getInitials(order.customer)}
+                            </div>
+                            <span className="text-sm font-medium text-slate-900 dark:text-white">
+                              {order.customer}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                          {order.date}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900 dark:text-white">
+                          {order.total}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <StatusBadge status={order.status} />
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <Link
+                            href={`/admin/orders/${order.id}`}
+                            className="inline-flex text-slate-400 hover:text-[#1c5f21] transition-colors p-1"
+                            aria-label="Xem đơn"
+                          >
+                            <span className="material-symbols-outlined text-[20px]">
+                              visibility
+                            </span>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
