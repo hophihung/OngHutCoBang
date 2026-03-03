@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState, useCallback, useRef, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export type ProductRow = {
   id: number;
@@ -25,9 +27,33 @@ type Props = {
 };
 
 export function ProductsTableClient({ products }: Props) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<FilterTab>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+
+  async function handleDelete(row: ProductRow) {
+    if (!confirm(`Xóa sản phẩm "${row.name}"? Các biến thể (variants) sẽ bị xóa theo.`)) return;
+    setDeletingId(row.id);
+    const supabase = createClient();
+    const { error: variantsError } = await supabase
+      .from("product_variants")
+      .delete()
+      .eq("product_id", row.id);
+    if (variantsError) {
+      setDeletingId(null);
+      alert("Không xóa được biến thể: " + variantsError.message);
+      return;
+    }
+    const { error: productError } = await supabase.from("products").delete().eq("id", row.id);
+    setDeletingId(null);
+    if (productError) {
+      alert("Không xóa được sản phẩm: " + productError.message);
+      return;
+    }
+    router.refresh();
+  }
 
   const filteredProducts = useMemo(() => {
     let list = products;
@@ -354,7 +380,9 @@ export function ProductsTableClient({ products }: Props) {
                         </Link>
                         <button
                           type="button"
-                          className="text-slate-500 dark:text-slate-400 hover:text-red-600 p-1 rounded-md hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors"
+                          onClick={() => handleDelete(row)}
+                          disabled={deletingId === row.id}
+                          className="text-slate-500 dark:text-slate-400 hover:text-red-600 p-1 rounded-md hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors disabled:opacity-50"
                           aria-label="Xóa"
                         >
                           <span className="material-symbols-outlined text-[20px]">delete</span>

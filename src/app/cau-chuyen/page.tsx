@@ -41,8 +41,7 @@ export default function CauChuyenPage() {
               From the Mekong Delta <br /> to your table.
             </h1>
             <p className="text-white/90 text-lg md:text-xl font-light max-w-2xl mx-auto">
-              Rooted in nature, crafted for the future. We transform wild grey
-              sedge grass into sustainable solutions.
+              Rooted in nature, crafted for the future.  
             </p>
             <div className="mt-4">
               <Link

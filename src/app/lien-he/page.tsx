@@ -1,11 +1,10 @@
-import Image from "next/image";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import Footer from "@/components/home/Footer";
 import ContactForm from "./ContactForm";
 
-const MAP_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDl0uhdqUmSa4IPS81unIPOVyX7Bi88uo6hX-9TMxp_vgijsfgY6LFXHVdZKHu6Z09ixXCYDk4Sll5szEVXkOsceLeumixlvsSmd0DjoahnbTWdY4BWTs8rKZXGP_MHXevfy1G02qRa4PFbIJmqK53bkzdY57OwMGFSBEWc9Z0FjJxCRIuqXY6al01KbvzfMiRGjpr9fj2vtogBlGApnVIr-qVMJ4RRn_SVSZVZxEJPyfFo7nG0smOy6Sj5eGSuB9fzGXu5GGQoego";
+const MAP_EMBED_URL =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14867.592738031139!2d109.22172968508823!3d13.794614470523584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f6bf778c80973%3A0x8a7d0b5aa0af29c7!2zxJDhuqFpIGjhu41jIEZQVCBRdXkgTmjGoW4!5e0!3m2!1svi!2s!4v1772522893261!5m2!1svi!2s";
 
 export default function LienHePage() {
   return (
@@ -20,15 +19,15 @@ export default function LienHePage() {
             <div className="flex-1 flex flex-col gap-10">
               <div className="flex flex-col gap-4">
                 <span className="text-[#2f7f34] font-bold tracking-wider text-sm uppercase">
-                  Contact Us
+                  Liên hệ
                 </span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1b4d2e] dark:text-white leading-tight">
-                  Get in touch with Green Joy
+                  Kết nối với ReenCo
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed max-w-md">
-                  We&apos;d love to hear from you. Whether you have a question
-                  about our grass straws, pricing, or anything else, our team
-                  is ready to answer all your questions.
+                  Chúng tôi rất mong nhận được phản hồi từ bạn. Dù bạn có câu hỏi
+                  về ống hút cỏ bàng, giá cả hay bất kỳ điều gì, đội ngũ ReenCo
+                  sẵn sàng hỗ trợ bạn.
                 </p>
               </div>
 
@@ -42,12 +41,10 @@ export default function LienHePage() {
                   </div>
                   <div className="flex flex-col">
                     <h3 className="font-bold text-[#111811] dark:text-white text-lg">
-                      Visit Us
+                      Địa chỉ
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      123 Grass Street, District 1,
-                      <br />
-                      Ho Chi Minh City, Vietnam
+                      Khu đô thị An Phú Thịnh – phường Quy Nhơn Đông – tỉnh Gia Lai
                     </p>
                   </div>
                 </div>
@@ -59,10 +56,10 @@ export default function LienHePage() {
                   </div>
                   <div className="flex flex-col">
                     <h3 className="font-bold text-[#111811] dark:text-white text-lg">
-                      Email Us
+                      Email
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      hello@greenjoystraw.com
+                      reenco18.official@gmail.com
                     </p>
                   </div>
                 </div>
@@ -74,31 +71,28 @@ export default function LienHePage() {
                   </div>
                   <div className="flex flex-col">
                     <h3 className="font-bold text-[#111811] dark:text-white text-lg">
-                      Call Us
+                      Hotline
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      +84 90 123 4567
+                      0328 356 577
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Map Placeholder */}
-              <div className="relative w-full aspect-[16/9] lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-sm mt-auto group">
-                <Image
-                  src={MAP_IMAGE}
-                  alt="Stylized map of Ho Chi Minh City showing location pin"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  style={{ filter: "grayscale(20%) contrast(90%)" }}
+              {/* Google Maps */}
+              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-sm mt-auto">
+                <iframe
+                  src={MAP_EMBED_URL}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Bản đồ - Khu đô thị An Phú Thịnh, Quy Nhơn Đông, Gia Lai"
+                  className="absolute inset-0 w-full h-full"
                 />
-                <div className="absolute inset-0 bg-[#1b4d2e]/10 pointer-events-none" />
-                <div className="absolute bottom-4 left-4 bg-white/90 dark:bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg shadow-sm">
-                  <span className="text-xs font-bold text-[#1b4d2e] dark:text-[#2f7f34] tracking-wide">
-                    HEADQUARTERS
-                  </span>
-                </div>
               </div>
             </div>
 
@@ -106,11 +100,10 @@ export default function LienHePage() {
             <div className="flex-1 lg:max-w-xl">
               <div className="bg-[#f5f3ef] dark:bg-[#1a2e1a] p-8 md:p-10 rounded-2xl shadow-sm border border-[#e6e2da] dark:border-white/5 h-full flex flex-col justify-center">
                 <h2 className="text-3xl font-bold text-[#1b4d2e] dark:text-white mb-2">
-                  Send us a message
+                  Gửi tin nhắn cho chúng tôi
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mb-8">
-                  Fill out the form below and we&apos;ll get back to you as soon
-                  as possible.
+                  Điền form bên dưới, chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất.
                 </p>
                 <ContactForm />
               </div>

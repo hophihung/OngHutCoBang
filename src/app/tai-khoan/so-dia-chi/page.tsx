@@ -9,7 +9,7 @@ export default async function SoDiaChiPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/tai-khoan");
 
-  const { data: profile } = await supabase
+  const { data: profile } = await supabase 
     .from("profiles")
     .select("full_name, avatar_url")
     .eq("id", user.id)
