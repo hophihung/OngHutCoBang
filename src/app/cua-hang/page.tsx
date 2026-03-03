@@ -26,8 +26,10 @@ function paramsToFilterOptions(params: ReturnType<typeof parseShopParams>) {
     params.sort === "price_asc" || params.sort === "price_desc" || params.sort === "newest"
       ? params.sort
       : "newest";
-  const minPrice = Number.isFinite(minPriceRaw) ? minPriceRaw * 1000 : undefined;
-  const maxPrice = Number.isFinite(maxPriceRaw) ? maxPriceRaw * 1000 : undefined;
+  const minPrice =
+    minPriceRaw !== undefined && Number.isFinite(minPriceRaw) ? minPriceRaw * 1000 : undefined;
+  const maxPrice =
+    maxPriceRaw !== undefined && Number.isFinite(maxPriceRaw) ? maxPriceRaw * 1000 : undefined;
   return {
     categorySlug: params.category,
     minPrice,
