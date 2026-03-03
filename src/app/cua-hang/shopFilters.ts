@@ -5,6 +5,8 @@ export type ShopParams = {
   inStock?: string;
   sort?: string;
   page?: string;
+  /** Từ khóa tìm kiếm (tên, mô tả sản phẩm) */
+  q?: string;
 };
 
 const SHOP_PARAM_KEYS: (keyof ShopParams)[] = [
@@ -14,6 +16,7 @@ const SHOP_PARAM_KEYS: (keyof ShopParams)[] = [
   "inStock",
   "sort",
   "page",
+  "q",
 ];
 
 /**
@@ -48,5 +51,6 @@ export function parseShopParams(
     inStock: get("inStock"),
     sort: get("sort"),
     page: get("page"),
+    q: get("q"),
   };
 }

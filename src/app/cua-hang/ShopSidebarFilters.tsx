@@ -49,7 +49,7 @@ export default function ShopSidebarFilters({ categories }: Props) {
     <>
       <div className="flex flex-col gap-4">
         <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-          Categories
+          Danh mục
         </h3>
         <nav className="flex flex-col gap-1">
           <Link
@@ -91,7 +91,7 @@ export default function ShopSidebarFilters({ categories }: Props) {
 
       <div className="flex flex-col gap-4">
         <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-          Price Range
+          Khoảng giá (nghìn đ)
         </h3>
         <form
           className="px-2 pt-2 pb-2"
@@ -103,7 +103,7 @@ export default function ShopSidebarFilters({ categories }: Props) {
             updateQuery({ minPrice: min || undefined, maxPrice: max || undefined, page: undefined });
           }}
         >
-          <div className="flex gap-2 items-center">
+          <div className="flex flex-wrap gap-2 items-center">
             <input
               type="number"
               name="minPrice"
@@ -119,7 +119,7 @@ export default function ShopSidebarFilters({ categories }: Props) {
               name="maxPrice"
               min={0}
               step={1}
-              placeholder="100"
+              placeholder="500"
               defaultValue={params.maxPrice}
               className="w-20 px-2 py-1.5 text-sm border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
             />
@@ -130,6 +130,9 @@ export default function ShopSidebarFilters({ categories }: Props) {
               Áp dụng
             </button>
           </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 px-0.5">
+            Nhập số nghìn đồng (vd: 19 = 19.000đ)
+          </p>
         </form>
       </div>
 
@@ -147,7 +150,7 @@ export default function ShopSidebarFilters({ categories }: Props) {
             className="h-5 w-5 rounded border-2 border-slate-300 dark:border-slate-600 text-[#1c5f21] focus:ring-[#1c5f21] focus:ring-offset-0 bg-white dark:bg-slate-800 transition-all"
           />
           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            In Stock Only
+            Chỉ còn hàng
           </span>
         </label>
       </div>

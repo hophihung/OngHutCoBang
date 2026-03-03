@@ -32,12 +32,12 @@ export default function StatsBar() {
           </div>
         </div>
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-          <div className="text-xl font-bold text-gray-400">VINPEARL</div>
-          <div className="text-xl font-bold text-gray-400">HIGHLANDS</div>
-          <div className="text-xl font-bold text-gray-400">
+          {/* <div className="text-xl font-bold text-gray-400">VINPEARL</div> */}
+          {/* <div className="text-xl font-bold text-gray-400">HIGHLANDS</div> */}
+          {/* <div className="text-xl font-bold text-gray-400">
             THE COFFEE HOUSE
-          </div>
-          <div className="text-xl font-bold text-gray-400">NOVOTEL</div>
+          </div> */}
+          {/* <div className="text-xl font-bold text-gray-400">NOVOTEL</div> */}
         </div>
       </div>
     </section>

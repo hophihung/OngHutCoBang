@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const HERO_IMG =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAKVfvVM6xqz8GDqGjt1VjI63YATbt3baYHAyGlJc1FfnaCYHyr3ZtCialnknRTYxIx2gwE9zuN-b09FQWL58qG6HMRnOXtNspXt1cDn5fExcwbCaxix4G0DZ9D8cwpFzLgqZnoPoOz7nex6iyTtzDKYbr1XFejaG8YzJ059SKOoFu0Nc94W_2g5vrnRx4OlKsma8bYzUl0nxjjejK9N7LeoV66U09iFeMLlsW3WCBeA9Y2L2RawpzLf6uWI20fSnqWz1sSa_BnjC4";
+const HERO_IMG = "/unnamed (2).jpg";
 
 export default function HomeHero() {
   return (

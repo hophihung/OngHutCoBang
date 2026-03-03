@@ -69,20 +69,20 @@ export default function Footer() {
                   location_on
                 </span>
                 <span>
-                  123 Đường Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh
+                  Khu đô thị An Phú Thịnh – phường Quy Nhơn Đông – tỉnh Gia Lai
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-lg shrink-0">
                   call
                 </span>
-                <span>+84 909 123 456</span>
+                <span>0328 356 577</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-lg shrink-0">
                   mail
                 </span>
-                <span>hello@greenjoy.vn</span>
+                <span>reenco18.official@gmail.com</span>
               </div>
             </div>
           </div>

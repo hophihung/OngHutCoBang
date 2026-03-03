@@ -4,14 +4,10 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import Footer from "@/components/home/Footer";
 
-const HERO_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAo25qRklbaTclImDfKFyi87wcJj30AtwmIFmyP_eWuUtcOb1s5qG6PjLfM0PrydPAPTLcH8gStcZY3s9R1sQPJhWy0zPlOuTwLSP5E0DJeHYVRvbH7rUUAmHnCQ2mijxGMi6D_I6WMDUtgiExvGuEAiOdE2mT5cz1Srl55Yy9y_xx7vToE_bfVSItF9q4Gq2V7ZJC8SyRCMzJCCzEA3s_jm4S3glal4Zc1m8OtvGzLPbCactZoly0iFgepPSaB6Axup9E9ogO0TYg";
-const MISSION_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDonHJ_n-lPZAxKoGiOsAFq2Br_x5Fawid3ijyEYL7ZJulEh5I-SkWLHF2qsTFIZ4YtsM9KbNPBZtpftYjq6Pjyvx-6hfUDxLsI88kSo1qb-Lk6n7-OUzambiyIbAcPdDxtk7tuN54V_QApSJzrrwCDWiY555mQsNmKuI7PexgdfafZeT1Trsab0imIfDsE4_NN3jbQDeoJgm5jL9R6ux3ew7Y8UnQK9gJC3F7VDeXrKhlbE2f_PaSlp7l0oKtO2lMBUERwuN4-6oM";
-const CIRCULAR_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuBY0d_geeinFi85gpS03TU0K4DRpZgiGKJ8LnmPkNQ7wv3zZteZKWqQMGS5sTDYLl9DGDFWaANIxk-XZTnSnf5pAcYI-CKh2GOaKoRlWxBY6SpsZ4vZRPVtfC0a-LRgH40YG7vIWPuTASMyfPHWMArDzd8ZATBwNWtAUKQRccqiX6jf9eN3BaCoi-9FRtrCZD2M72kPrbltNNrWeTP_B5wpcs_fhAha9ie69xO9182uG_GDUttFnji4JkcYklUmg7E0TMhGDum2VzU";
-const CTA_PATTERN =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAWlLF4GBtZz7vD3acFvl0vPqrH6xME0DQ-Vfb3oKkTX2xYCvhLLnLu0T4Md8S6egIP86sSMYZ1-1Lm-nM2VgfQvjmfQYDrH47KqEoMXkw_85Z2Ivf8AfXZlPjSy36FxDZUYC65ObKiZbLNd_GlsomQJ2l0zL-GFx_3d8nZigdmmzmB9CTTayY8e6xLrqeX3W4as3JgEfUBfSCBteP0B4zjCQjkG6v90UxWH6ZB1Ra1Co933IZwrqYTjR9pDithRsV5AaXorqHdxhA";
+const HERO_IMAGE = "/onghut.jpg";
+const MISSION_IMAGE = "/ong-hut-co-bang-1.webp";
+const CIRCULAR_IMAGE = "/unnamed (2).jpg";
+const CTA_PATTERN = "/Gemini_Generated_Image_ez6f36ez6f36ez6f copy.png";
 
 export default function VeChungToiPage() {
   return (
@@ -34,24 +30,19 @@ export default function VeChungToiPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50" />
           </div>
           <div className="relative z-10 text-center max-w-4xl px-4 flex flex-col items-center gap-6">
-            <span className="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs uppercase tracking-widest font-bold border border-white/30">
-              Est. 2018
-            </span>
-            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
-              From the Mekong Delta
-              <br />
-              to your table.
+            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight md:whitespace-nowrap">
+            ReenCo: Nguồn gốc từ thiên nhiên
             </h1>
             <p className="text-white/90 text-lg md:text-xl font-light max-w-2xl mx-auto">
-              Rooted in nature, crafted for the future. We transform wild grey
-              sedge grass into sustainable solutions.
+              Bắt nguồn từ thiên nhiên, kiến tạo cho tương lai xanh. Chúng tôi
+              biến cỏ bàng thành giải pháp bền vững.
             </p>
             <div className="mt-4">
               <Link
                 href="/cua-hang"
                 className="inline-block bg-[#1c5f21] hover:bg-[#164d1b] text-white px-8 py-3 rounded-lg text-base font-bold transition-transform hover:scale-105"
               >
-                Discover Our Journey
+                Khám phá hành trình của chúng tôi
               </Link>
             </div>
           </div>
@@ -62,7 +53,7 @@ export default function VeChungToiPage() {
           </div>
         </section>
 
-        {/* Mission Section */}
+        {/* Câu chuyện & Sứ mệnh */}
         <section className="py-16 lg:py-24 bg-[#f6f8f6] dark:bg-[#102210]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -71,7 +62,7 @@ export default function VeChungToiPage() {
                 <div className="relative h-[400px] lg:h-[500px] w-full rounded-xl overflow-hidden shadow-xl">
                   <Image
                     src={MISSION_IMAGE}
-                    alt="Local farmer"
+                    alt="Cỏ bàng vùng Đồng bằng sông Cửu Long"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -79,85 +70,104 @@ export default function VeChungToiPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-6 left-6 text-white">
                     <p className="text-sm font-medium uppercase tracking-wider mb-1 text-[#1c5f21]">
-                      Local Impact
+                      Tác động địa phương
                     </p>
                     <p className="font-bold text-xl">
-                      Supporting 500+ Farming Families
+                      Hỗ trợ nông dân vùng nguyên liệu
                     </p>
                   </div>
                 </div>
               </div>
               <div className="flex flex-col gap-8">
                 <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-                    Our Mission:{" "}
-                    <span className="text-[#1c5f21]">Empowerment</span> &
-                    Sustainability
+                  <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
+                    Câu chuyện của chúng tôi
                   </h2>
                   <p className="text-slate-500 dark:text-slate-300 text-lg leading-relaxed mb-6">
-                    The plastic crisis is real, but so is the power of nature. Our
-                    journey began with a simple observation in the wetlands of
-                    Vietnam: the Grey Sedge grass, known locally as &quot;Cỏ
-                    Bàng,&quot; is naturally hollow, durable, and abundant.
+                    Dự án ReenCo được ra đời tại Đại học FPT Quy Nhơn bởi một nhóm sinh viên đam mê công nghệ và lối sống xanh. Chứng kiến cuộc khủng hoảng rác thải nhựa đang trực tiếp đe dọa hệ sinh thái Việt Nam, chúng tôi nhận ra giải pháp hoàn hảo nhất nằm ngay ở những cánh đồng cỏ bàng (Grey Sedge) bạt ngàn của vùng Đồng bằng sông Cửu Long.
                   </p>
-                  <p className="text-slate-500 dark:text-slate-300 text-lg leading-relaxed">
-                    By harvesting this grass, we not only provide a 100%
-                    biodegradable alternative to plastic straws but also create
-                    stable jobs for local farmers, preserving traditional crafts
-                    while protecting our oceans.
+                  <h3 className="text-xl font-bold text-[#1c5f21] dark:text-[#2f7f34] mb-4">
+                    Sứ mệnh: Từ &quot;Cỏ dại&quot; đến &quot;Giải pháp bền vững&quot;
+                  </h3>
+                  <p className="text-slate-500 dark:text-slate-300 text-lg leading-relaxed mb-4">
+                    ReenCo không chỉ bán ống hút. Chúng tôi xây dựng một hệ sinh thái tiêu dùng không rác thải (Zero Waste).
                   </p>
+                  <ul className="space-y-3 text-slate-500 dark:text-slate-300">
+                    <li className="flex gap-2">
+                      <span className="text-[#1c5f21] shrink-0">•</span>
+                      <span><strong className="text-slate-700 dark:text-slate-200">Giải quyết rác thải:</strong> Thay thế hoàn toàn ống hút nhựa bằng sản phẩm 100% tự nhiên.</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-[#1c5f21] shrink-0">•</span>
+                      <span><strong className="text-slate-700 dark:text-slate-200">Hỗ trợ nông dân:</strong> Kết nối trực tiếp với các hộ dân vùng nguyên liệu, góp phần bảo tồn nghề thủ công truyền thống.</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-[#1c5f21] shrink-0">•</span>
+                      <span><strong className="text-slate-700 dark:text-slate-200">Số hóa lối sống xanh:</strong> Ứng dụng nền tảng TMĐT để đưa sản phẩm xanh đến gần hơn với các doanh nghiệp F&B và cá nhân một cách tiện lợi nhất.</span>
+                    </li>
+                  </ul>
                 </div>
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="p-4 rounded-lg bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 shadow-sm">
-                    <span className="material-symbols-outlined text-3xl text-[#1c5f21] mb-2">
-                      recycling
-                    </span>
-                    <h3 className="font-bold text-lg dark:text-white">
-                      Zero Waste
-                    </h3>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      100% Compostable products
-                    </p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 shadow-sm">
-                    <span className="material-symbols-outlined text-3xl text-[#1c5f21] mb-2">
-                      diversity_1
-                    </span>
-                    <h3 className="font-bold text-lg dark:text-white">
-                      Fair Trade
-                    </h3>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Ethical wages for artisans
-                    </p>
-                  </div>
-                </div>
-                <Link
-                  href="#"
-                  className="self-start flex items-center gap-2 text-slate-900 dark:text-white font-bold border-b-2 border-[#1c5f21] pb-1 hover:text-[#1c5f21] transition-colors"
-                >
-                  <span>Read Our Full Impact Report</span>
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward
-                  </span>
-                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Process Timeline Section */}
-        <section className="py-16 lg:py-24 bg-white dark:bg-[#0a160a]">
+        {/* Giá trị cốt lõi */}
+        <section className="py-16 lg:py-20 bg-white dark:bg-[#0a160a]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-10 text-center">
+              Giá trị cốt lõi của ReenCo
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-xl bg-[#f6f8f6] dark:bg-white/5 border border-slate-100 dark:border-white/10 shadow-sm">
+                <span className="material-symbols-outlined text-3xl text-[#1c5f21] mb-3">
+                  recycling
+                </span>
+                <h3 className="font-bold text-lg dark:text-white mb-2">
+                  100% Phân hủy sinh học
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Sản phẩm quay trở lại đất mẹ như phân bón sau khi sử dụng.
+                </p>
+              </div>
+              <div className="p-6 rounded-xl bg-[#f6f8f6] dark:bg-white/5 border border-slate-100 dark:border-white/10 shadow-sm">
+                <span className="material-symbols-outlined text-3xl text-[#1c5f21] mb-3">
+                  eco
+                </span>
+                <h3 className="font-bold text-lg dark:text-white mb-2">
+                  Không hóa chất
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Quy trình xử lý hoàn toàn tự nhiên, an toàn tuyệt đối cho sức khỏe.
+                </p>
+              </div>
+              <div className="p-6 rounded-xl bg-[#f6f8f6] dark:bg-white/5 border border-slate-100 dark:border-white/10 shadow-sm">
+                <span className="material-symbols-outlined text-3xl text-[#1c5f21] mb-3">
+                  diversity_1
+                </span>
+                <h3 className="font-bold text-lg dark:text-white mb-2">
+                  Công bằng (Fair Trade)
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Đảm bảo thu nhập xứng đáng cho những nghệ nhân và nông dân Việt.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quy trình sản xuất minh bạch (Farm to Table) */}
+        <section className="py-16 lg:py-24 bg-[#f6f8f6] dark:bg-[#102210]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
               <span className="text-[#1c5f21] font-bold tracking-wider uppercase text-sm">
-                Our Process
+                Quy trình
               </span>
               <h2 className="text-3xl lg:text-4xl font-bold mt-2 mb-4 dark:text-white">
-                Farm to Table Transparency
+                Quy trình sản xuất minh bạch (Farm to Table)
               </h2>
               <p className="text-slate-500 dark:text-slate-400">
-                Every straw tells a story of careful selection and natural
-                processing. No chemicals, just nature.
+                Mỗi chiếc ống hút ReenCo là một câu chuyện về sự tỉ mỉ.
               </p>
             </div>
             {/* Desktop Horizontal Timeline */}
@@ -166,23 +176,23 @@ export default function VeChungToiPage() {
               {[
                 {
                   icon: "agriculture",
-                  title: "Harvesting",
-                  desc: "Hand-picking the finest grey sedge grass from the Delta wetlands.",
+                  title: "Thu hoạch",
+                  desc: "Tuyển chọn những cây cỏ bàng đạt độ chín và độ bền tốt nhất tại vùng đất ngập nước.",
                 },
                 {
                   icon: "water_drop",
-                  title: "Cleaning & Cutting",
-                  desc: "Thorough washing with fresh water and cutting to precise lengths.",
+                  title: "Làm sạch & Cắt",
+                  desc: "Rửa sạch bằng nước tự nhiên và cắt theo kích thước tiêu chuẩn (20cm cho café, 15cm cho cocktail).",
                 },
                 {
-                  icon: "wb_sunny",
-                  title: "Sunlight Drying",
-                  desc: "Naturally baked under the tropical sun to remove moisture and harden.",
+                  icon: "ac_unit",
+                  title: "Sấy lạnh & Khử trùng",
+                  desc: "Ứng dụng công nghệ để đảm bảo độ bền, màu sắc tự nhiên và diệt khuẩn hoàn toàn.",
                 },
                 {
                   icon: "verified_user",
-                  title: "Quality Control",
-                  desc: "Rigorous inspection and sterilization before packaging for you.",
+                  title: "Kiểm soát chất lượng",
+                  desc: "Từng chiếc ống được kiểm tra nghiêm ngặt trước khi đóng gói gửi đến tay bạn.",
                 },
               ].map((step) => (
                 <div
@@ -206,22 +216,10 @@ export default function VeChungToiPage() {
             {/* Mobile Vertical Timeline */}
             <div className="lg:hidden flex flex-col gap-8">
               {[
-                {
-                  title: "Harvesting",
-                  desc: "Hand-picking the finest grey sedge grass from the Delta wetlands.",
-                },
-                {
-                  title: "Cleaning & Cutting",
-                  desc: "Thorough washing with fresh water and cutting to precise lengths.",
-                },
-                {
-                  title: "Sunlight Drying",
-                  desc: "Naturally baked under the tropical sun to remove moisture and harden.",
-                },
-                {
-                  title: "Quality Control",
-                  desc: "Rigorous inspection and sterilization before packaging for you.",
-                },
+                { title: "Thu hoạch", desc: "Tuyển chọn những cây cỏ bàng đạt độ chín và độ bền tốt nhất tại vùng đất ngập nước." },
+                { title: "Làm sạch & Cắt", desc: "Rửa sạch bằng nước tự nhiên và cắt theo kích thước tiêu chuẩn (20cm cho café, 15cm cho cocktail)." },
+                { title: "Sấy lạnh & Khử trùng", desc: "Ứng dụng công nghệ để đảm bảo độ bền, màu sắc tự nhiên và diệt khuẩn hoàn toàn." },
+                { title: "Kiểm soát chất lượng", desc: "Từng chiếc ống được kiểm tra nghiêm ngặt trước khi đóng gói gửi đến tay bạn." },
               ].map((step, i) => (
                 <div key={step.title} className="flex gap-4">
                   <div className="flex flex-col items-center">
@@ -246,7 +244,7 @@ export default function VeChungToiPage() {
           </div>
         </section>
 
-        {/* Circular Economy Section */}
+        {/* Kinh tế tuần hoàn */}
         <section className="py-16 lg:py-24 bg-[#e8efe8] dark:bg-[#102210]/50 relative overflow-hidden">
           <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#1c5f21]/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#1c5f21]/10 rounded-full blur-3xl" />
@@ -254,28 +252,27 @@ export default function VeChungToiPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1 flex flex-col gap-6">
                 <h2 className="text-3xl lg:text-4xl font-bold dark:text-white">
-                  Circular Economy: Nothing Wasted
+                  Kinh tế tuần hoàn: Không gì bị lãng phí
                 </h2>
                 <p className="text-lg text-slate-500 dark:text-slate-300">
-                  We believe in the wisdom of nature where waste does not exist.
-                  The Lepironia grass is a gift that keeps giving.
+                  Chúng tôi học tập sự thông thái của thiên nhiên, nơi không có khái niệm &quot;rác thải&quot;:
                 </p>
                 <div className="flex flex-col gap-4 mt-4">
                   {[
                     {
                       icon: "grass",
-                      title: "The Stems",
-                      desc: "The hollow stems are perfectly shaped by nature to become durable, heat-resistant straws.",
+                      title: "Thân cỏ",
+                      desc: "Trở thành ống hút bền bỉ, chịu được cả nước nóng và lạnh trong 6-12 tiếng.",
                     },
                     {
                       icon: "shopping_bag",
-                      title: "The Leaves",
-                      desc: "Remaining leaves and fibers are woven by skilled artisans into bags, hats, and mats.",
+                      title: "Sợi cỏ & Lá",
+                      desc: "Được tận dụng để đan thành túi, thảm và các sản phẩm thủ công nghệ thuật khác.",
                     },
                     {
                       icon: "compost",
-                      title: "End of Life",
-                      desc: "After use, our products return to the earth as compost, nourishing the soil for future growth.",
+                      title: "Sau sử dụng",
+                      desc: "Sản phẩm ReenCo có thể dùng để ủ phân hữu cơ, tiếp tục nuôi dưỡng đất cho những mùa màng sau.",
                     },
                   ].map((item) => (
                     <div
@@ -304,7 +301,7 @@ export default function VeChungToiPage() {
                   <div className="relative z-10 w-48 h-48 rounded-full overflow-hidden border-4 border-[#1c5f21]/20 shrink-0">
                     <Image
                       src={CIRCULAR_IMAGE}
-                      alt=""
+                      alt="Cỏ bàng và sản phẩm thủ công"
                       fill
                       className="object-cover"
                       sizes="192px"
@@ -312,12 +309,12 @@ export default function VeChungToiPage() {
                   </div>
                   <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 px-4 py-2 rounded-lg shadow-lg border border-[#1c5f21]/20">
                     <span className="text-sm font-bold text-[#1c5f21]">
-                      Handicrafts
+                      Thủ công
                     </span>
                   </div>
-                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 px-4 py-2 rounded-lg shadow-lg border border-[#1c5f21]/20">
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 px-4 py-2 rounded-lg border border-[#1c5f21]/20">
                     <span className="text-sm font-bold text-[#1c5f21]">
-                      Straws
+                      Ống hút
                     </span>
                   </div>
                 </div>
@@ -335,24 +332,27 @@ export default function VeChungToiPage() {
           />
           <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Ready to make the switch?
+              Bạn đã sẵn sàng cùng ReenCo thay đổi?
             </h2>
-            <p className="text-lg text-slate-300 mb-10 max-w-2xl mx-auto">
-              Join thousands of conscious businesses and individuals reducing
-              their plastic footprint today.
+            <p className="text-lg text-slate-300 mb-4 max-w-2xl mx-auto">
+              Đừng để rác thải nhựa là gánh nặng cho tương lai. Hãy bắt đầu từ hành động nhỏ nhất ngay hôm nay.
             </p>
+            <ul className="text-left max-w-md mx-auto mb-10 space-y-2 text-slate-300">
+              <li><strong className="text-white">Dành cho cá nhân:</strong> Trải nghiệm bộ dùng thử (Trial Kit) để cảm nhận sự khác biệt của cỏ bàng.</li>
+              <li><strong className="text-white">Dành cho doanh nghiệp:</strong> Trở thành đối tác của ReenCo để nhận chính sách giá sỉ ưu đãi và chứng nhận &quot;Doanh nghiệp Xanh&quot;.</li>
+            </ul>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/cua-hang"
                 className="inline-flex items-center justify-center bg-[#1c5f21] hover:bg-[#164d1b] text-white px-8 py-4 rounded-lg text-base font-bold transition-all hover:-translate-y-1 shadow-lg shadow-[#1c5f21]/25"
               >
-                Shop ReenCo
+                Mua ngay tại ReenCo
               </Link>
               <Link
-                href="/#contact"
+                href="/lien-he"
                 className="inline-flex items-center justify-center bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-lg text-base font-bold transition-all"
               >
-                Partner With Us
+                Hợp tác B2B
               </Link>
             </div>
           </div>

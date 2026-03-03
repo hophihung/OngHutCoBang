@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const STORY_IMG =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAwJ59EU8MmZvUDrMY4sxHcdOAjGwqhr_kKgtcf-Ujkq1S1d7ITXihRP7d5cbripisO947-VacCIQErajYNvBo0fHDldbRsgYyhZjNiimnULBSA721dufv7GJfFYjEClBtDhALlI-v7Xwi7R6C6fizpJm-aE5VKSE_3DgpaEaud3D2TIWUR5rBjTQ3rNWnVFSZ65qEkaSZS8SoocgJFd2at05HxSnYN09vvWhFEdpFl_kterTTVsESdYl1N13aluXmWwBZT5i6DSg0";
+const STORY_IMG = "/onghut.jpg";
 
 export default function StoryTeaser() {
   return (

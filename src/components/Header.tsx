@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
@@ -10,8 +11,8 @@ import { useCart } from "@/contexts/CartContext";
 
 const SHOP_LINKS = [
   { label: "Ống hút cỏ", href: "/cua-hang?category=ong-hut-co" },
-  { label: "Sản phẩm thủ công (Túi, nón...)", href: "/cua-hang?category=thu-cong" },
-  { label: "Dụng cụ ăn uống", href: "/cua-hang?category=dung-cu-an-uong" },
+  // { label: "Sản phẩm thủ công (Túi, nón...)", href: "/cua-hang?category=thu-cong" },
+  // { label: "Dụng cụ ăn uống", href: "/cua-hang?category=dung-cu-an-uong" },
 ];
 
 export default function Header() {
@@ -20,10 +21,21 @@ export default function Header() {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const shopRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const { cartCount } = useCart();
+
+  function handleSearchSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    setSearchOpen(false);
+    setSearchQuery("");
+    if (q) router.push(`/cua-hang?q=${encodeURIComponent(q)}`);
+    else router.push("/cua-hang");
+  }
 
   const displayName =
     user?.user_metadata?.full_name ||
@@ -259,14 +271,6 @@ export default function Header() {
               </Link>
             )}
 
-            {/* Ngôn ngữ VN | EN - desktop */}
-            <button
-              type="button"
-              className="hidden sm:flex h-9 items-center justify-center rounded-full bg-[#eaf0ea] dark:bg-white/10 px-3 text-xs font-bold text-[#111811] dark:text-gray-200 hover:bg-[#d5e0d5] dark:hover:bg-white/20 transition-colors"
-            >
-              VN | EN
-            </button>
-
             {/* Hamburger - chỉ mobile: gom menu, Cart đã ở ngoài */}
             <button
               type="button"
@@ -420,39 +424,57 @@ export default function Header() {
                     Tài khoản
                   </Link>
                 )}
-                <button
-                  type="button"
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-[#111811] dark:text-gray-200 hover:bg-[#eaf0ea] dark:hover:bg-white/10"
-                >
-                  VN | EN
-                </button>
               </div>
             </nav>
           </div>
         </div>
       )}
 
-      {/* Search overlay - giai đoạn 1: modal đơn giản */}
+      {/* Search overlay: nhập từ khóa → Enter hoặc Tìm → chuyển /cua-hang?q=... */}
       {searchOpen && (
         <div
           className="fixed inset-0 z-[60] bg-black/50 flex items-start justify-center pt-20 px-4"
           aria-modal
           role="dialog"
+          onClick={() => setSearchOpen(false)}
         >
-          <div className="w-full max-w-xl bg-white dark:bg-[#1a261b] rounded-xl shadow-xl p-4 relative">
-            <div className="flex items-center gap-2 border border-[#eaf0ea] dark:border-white/10 rounded-lg px-3 py-2">
-              <span className="material-symbols-outlined text-[#4c9a66]">search</span>
-              <input
-                type="search"
-                placeholder="Tìm kiếm (vd: ống hút size lớn)..."
-                className="flex-1 bg-transparent text-[#111811] dark:text-white placeholder:text-gray-500 focus:outline-none text-sm"
-                autoFocus
-              />
-            </div>
+          <div
+            className="w-full max-w-xl bg-white dark:bg-[#1a261b] rounded-xl shadow-xl p-4 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <form onSubmit={handleSearchSubmit} className="flex flex-col gap-3">
+              <div className="flex items-center gap-2 border border-[#eaf0ea] dark:border-white/10 rounded-lg px-3 py-2">
+                <span className="material-symbols-outlined text-[#4c9a66]">search</span>
+                <input
+                  type="search"
+                  placeholder="Tìm kiếm (vd: ống hút, cỏ bàng)..."
+                  className="flex-1 bg-transparent text-[#111811] dark:text-white placeholder:text-gray-500 focus:outline-none text-sm"
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  aria-label="Từ khóa tìm kiếm"
+                />
+              </div>
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(false)}
+                  className="px-4 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10"
+                >
+                  Hủy
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-lg bg-[#1c5f21] hover:bg-[#164d1b] text-white font-medium"
+                >
+                  Tìm kiếm
+                </button>
+              </div>
+            </form>
             <button
               type="button"
               onClick={() => setSearchOpen(false)}
-              className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full hover:bg-[#eaf0ea] dark:hover:bg-white/10"
+              className="absolute top-2 right-2 flex h-8 w-8 items-center justify-center rounded-full hover:bg-[#eaf0ea] dark:hover:bg-white/10"
               aria-label="Đóng"
             >
               <span className="material-symbols-outlined text-lg">close</span>

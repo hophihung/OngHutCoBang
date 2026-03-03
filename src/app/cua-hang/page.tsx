@@ -17,22 +17,26 @@ type Props = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
+/** Giá trong URL là đơn vị nghìn đồng (vd: 19 = 19.000đ). Chuyển sang VND khi gọi API. */
 function paramsToFilterOptions(params: ReturnType<typeof parseShopParams>) {
   const page = Math.max(1, parseInt(params.page ?? "1", 10) || 1);
-  const minPrice = params.minPrice != null && params.minPrice !== "" ? Number(params.minPrice) : undefined;
-  const maxPrice = params.maxPrice != null && params.maxPrice !== "" ? Number(params.maxPrice) : undefined;
+  const minPriceRaw = params.minPrice != null && params.minPrice !== "" ? Number(params.minPrice) : undefined;
+  const maxPriceRaw = params.maxPrice != null && params.maxPrice !== "" ? Number(params.maxPrice) : undefined;
   const sort: "newest" | "price_asc" | "price_desc" =
     params.sort === "price_asc" || params.sort === "price_desc" || params.sort === "newest"
       ? params.sort
       : "newest";
+  const minPrice = Number.isFinite(minPriceRaw) ? minPriceRaw * 1000 : undefined;
+  const maxPrice = Number.isFinite(maxPriceRaw) ? maxPriceRaw * 1000 : undefined;
   return {
     categorySlug: params.category,
-    minPrice: Number.isFinite(minPrice) ? minPrice : undefined,
-    maxPrice: Number.isFinite(maxPrice) ? maxPrice : undefined,
+    minPrice,
+    maxPrice,
     inStockOnly: params.inStock === "1",
     sort,
     page,
     limit: LIMIT,
+    searchQuery: params.q && params.q.trim() ? params.q.trim() : undefined,
   };
 }
 
@@ -62,21 +66,28 @@ export default async function CuaHangPage({ searchParams }: Props) {
           <div className="mt-4 p-4 rounded-xl bg-[#1c5f21]/5 border border-[#1c5f21]/10">
             <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
               <span className="font-bold text-[#1c5f21] block mb-1">
-                Impact Driven
+                Mua sắm có ý nghĩa
               </span>
-              Every purchase contributes to our mission of reducing ocean
-              plastic by 1 million tons by 2030.
+              Mỗi đơn hàng góp phần vào mục tiêu giảm rác thải nhựa đại dương
+              1 triệu tấn vào năm 2030.
             </p>
           </div>
         </aside>
 
         <section className="flex-1 flex flex-col gap-6 min-w-0">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-              {total === 0
-                ? "Không có sản phẩm"
-                : `Hiển thị ${start}–${end} trong ${total} sản phẩm`}
-            </h2>
+            <div className="flex flex-col gap-1">
+              {params.q && (
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Kết quả tìm kiếm cho &quot;{params.q}&quot;
+                </p>
+              )}
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                {total === 0
+                  ? "Không có sản phẩm"
+                  : `Hiển thị ${start}–${end} trong ${total} sản phẩm`}
+              </h2>
+            </div>
             <ShopSortSelect />
           </div>
 

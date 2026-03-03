@@ -222,6 +222,8 @@ export type StoreProductsFilterOptions = {
   sort?: 'newest' | 'price_asc' | 'price_desc';
   page?: number;
   limit?: number;
+  /** Từ khóa tìm trong tên và mô tả sản phẩm */
+  searchQuery?: string;
 };
 
 /**
@@ -238,6 +240,7 @@ export async function getStoreProductsFiltered(
     sort = 'newest',
     page = 1,
     limit = 12,
+    searchQuery,
   } = options
 
   try {
@@ -299,6 +302,14 @@ export async function getStoreProductsFiltered(
 
     type ProductRow = (typeof products)[0] & { category_id?: number }
     let filtered = products as ProductRow[]
+    if (searchQuery && searchQuery.trim()) {
+      const term = searchQuery.trim().toLowerCase()
+      filtered = filtered.filter(
+        (p) =>
+          (p.name && p.name.toLowerCase().includes(term)) ||
+          (p.description && p.description.toLowerCase().includes(term))
+      )
+    }
     filtered = filtered.filter((p) => {
       const minP = minPriceByProduct[p.id] ?? 0
       if (minPrice != null && minP < minPrice) return false
